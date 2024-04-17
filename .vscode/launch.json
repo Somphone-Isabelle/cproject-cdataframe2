@@ -8,8 +8,10 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/ambre/cproject-cdataframe2/cproject-cdataframe2",
-      "program": "c:/Users/ambre/cproject-cdataframe2/cproject-cdataframe2/build/Debug/outDebug",
+//      "cwd": "c:/Users/Isa2.0/Documents/GitHub/cproject-cdataframe2/cproject-cdataframe2",
+//"program": "c:/Users/Isa2.0/Documents/GitHub/cproject-cdataframe2/cproject-cdataframe2/build/Debug/outDebug",
+  "cwd": "C:/Users/Isa 2.0/Documents/GitHub/cproject-cdataframe2",
+        "program": "C:/Users/Isa 2.0/Documents/GitHub/cproject-cdataframe2/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

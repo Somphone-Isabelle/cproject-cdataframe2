@@ -1,12 +1,13 @@
 #include "column.h"
+#include <string.h>
 #include <stdio.h>
-#include <stdlib.f>
+#include <stdlib.h>
 #define REALLOC_SIZE 256
 
 COLUMN *create_column(char* title){
     COLUMN* column = (COLUMN*)malloc(sizeof(COLUMN)); 
     column->title=(char*)malloc(strlen(title)+1);
-    strcopy(column->title, title);
+    strcpy(column->title, title);
     column->value = NULL; //initialization of the attributes
     column->phy_size = 0;
     column->log_size = 0;
@@ -17,7 +18,7 @@ int insert_value(COLUMN* col, int value){
     int* new_val = (int*)realloc(col->value,(col->phy_size + REALLOC_SIZE));
     col->value = new_val;
     col->phy_size += REALLOC_SIZE;
-    col->data[col->log_size] = value;
+    col->value[col->log_size] = value;
     col->log_size++;
     return 0;
 
