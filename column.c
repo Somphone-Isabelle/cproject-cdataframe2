@@ -4,6 +4,8 @@
 #define REALLOC_SIZE 256
 #define TITLE_MAX_LENGTH 50
 
+//BASICS FUNCTIONS
+
 COLUMN *create_column(char* title){
     COLUMN* column = (COLUMN*)malloc(sizeof(COLUMN));
     if (column == NULL){
@@ -45,6 +47,64 @@ int insert_value(COLUMN* col, int value){
     return 1;
 }
 
-void delete_column(COLUMN **col);
-void print_col(COLUMN* col);
+void delete_column(COLUMN **col){
+    free((*col)->title);
+    free((*col)->value);
+    free(*col);
+}
 
+void print_col(COLUMN* col){
+    printf("Content of column '%s' : \n", col->title);
+    for(int i = 0;i<col->log_size;i++){
+        printf("[%d] %d\n", i, col->value[i]);
+    }
+}
+
+//ANALYSIS FUNCTIONS
+
+int count_occ(COLUMN* col, int x){
+    int count = 0;
+    for (int i = 0; i<col->log_size;i++){
+        if (col->value[i] == x){
+            count++;
+        }
+    }
+    return count;
+}
+
+
+int pos_val(COLUMN* col, int pos){
+    if(pos < 0 || pos >= col->log_size){
+        printf("ERROR");
+        return 99;
+    }
+    return col->value[pos];
+}
+
+int great_val(COLUMN* col, int x){
+    int count = 0;
+    for(int i = 0; i < col->log_size;i++){
+        if(col->value[i] > x){
+            count++;
+        }
+    }
+    return count;
+}
+int less_val(COLUMN* col, int x){
+    int count = 0;
+    for(int i = 0; i < col->log_size;i++){
+        if(col->value[i] < x){
+            count++;
+        }
+    }
+    return count;
+}
+int equal_val(COLUMN* col, int x){
+    int count = 0;
+    for(int i = 0; i < col->log_size;i++){
+        if(col->value[i] == x){
+            count++;
+        }
+    }
+    return count;
+}
