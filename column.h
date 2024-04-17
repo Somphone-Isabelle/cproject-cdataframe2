@@ -1,6 +1,6 @@
-#define REALOC_SIZE 256
-#include <stdio.h>
-#include <stdlib.h>
+#ifndef COLUMN_H
+#define COLUMN_H
+#define REALLOC_SIZE 256
 
 
 typedef struct{
@@ -15,4 +15,4 @@ int insert_value(COLUMN* col, int value);
 void delete_column(COLUMN **col);
 void print_col(COLUMN* col);
 
-
+#endif 
