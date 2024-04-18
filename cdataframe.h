@@ -4,12 +4,12 @@
 
 typedef struct{
     COLUMN** columns;
-    int nbcol;
-    int maxcol;
+    int nbrows;
+    int nbcols;
 }CDATAFRAME;
 
 //FILLING FUNCTIONS
-CDATAFRAME* create_cdf();
+CDATAFRAME* create_cdf(int nbcols);
 void user_imput(CDATAFRAME* dataf);
 void hardfill_df(CDATAFRAME* dataf);
 

@@ -1,11 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "cdataframe.h"
+#include "column.h"
 
 //FILLING FUNCTIONS
-CDATAFRAME* create_cdf();
-void user_imput(CDATAFRAME* dataf);
-void hardfill_df(CDATAFRAME* dataf);
+CDATAFRAME* create_cdf(int nbcols, char** title){
+    CDATAFRAME* dataf = (CDATAFRAME*)malloc(sizeof(CDATAFRAME));
+   /* if (dataf == NULL){
+        printf("ERROR\n");
+        exit(1);
+    }*/ 
+    dataf->columns=(COLUMN**)malloc(nbcols * sizeof(COLUMN*));
+    dataf-> nbrows = 0;
+    dataf-> nbcols = nbcols;
+    for (int i = 0; i<nbcols;i++){
+        dataf->columns[i]= create_column(title[i]);
+    }
+    return dataf;
+}
+void user_imput(CDATAFRAME* dataf){
+    for(int i = 0; i<dataf->nbcols;i++){
+        printf("Enter values for %s column: \n", dataf->columns[i]->title);
+        for(int j = 0; j<dataf->nbrows; j++){
+            int val;
+            printf("Enter value for row %d: ", j+1);
+            scan("%d", &val);
+            insert_value(dataf->columns[i], val); //call function from column.c
+        }
+    }
+}
+void hardfill_df(CDATAFRAME* dataf){
+    for(int i = 0; i<dataf->nbrows; i++){
+        for(int j=0; j<dataf->nbcols; j++){
+            int val = rand()%50; //choose 50 for a test
+            insert_value(dataframe->columns[j], val);
+        }
+    }
+}
 
 //DISPLAYING FUNCTIONS
 void display_df(CDATAFRAME* dataf);
