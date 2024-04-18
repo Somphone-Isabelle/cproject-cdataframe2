@@ -24,25 +24,55 @@ void user_imput(CDATAFRAME* dataf){
         for(int j = 0; j<dataf->nbrows; j++){
             int val;
             printf("Enter value for row %d: ", j+1);
-            scan("%d", &val);
+            scanf("%d", &val);
             insert_value(dataf->columns[i], val); //call function from column.c
         }
+        dataf->nbrows++;
     }
 }
 void hardfill_df(CDATAFRAME* dataf){
     for(int i = 0; i<dataf->nbrows; i++){
         for(int j=0; j<dataf->nbcols; j++){
             int val = rand()%50; //choose 50 for a test
-            insert_value(dataframe->columns[j], val);
+            insert_value(dataf->columns[j], val);
         }
     }
 }
 
 //DISPLAYING FUNCTIONS
-void display_df(CDATAFRAME* dataf);
-void disp_part_row(CDATAFRAME* dataf, int start, int end);
-void disp_part_col(CDATAFRAME* dataf, int start, int end);
+void display_df(CDATAFRAME* dataf){
+    for (int i = 0; i<dataf->nbcols;i++){
+        printf("%s\t", dataf->columns[i]->title);
+    }
+    printf("\n");
+    for (int i = 0; i<dataf->nbrows;i++){
+        for (int j = 0; j<dataf->nbcols; j++){
+            printf("%d\t", dataf->columns[j]->value[i]);
+        }
+        printf("\n");
+    }
+}
+void disp_part_row(CDATAFRAME* dataf, int start, int end){
+    printf("Select rows from %d to %d: \n", start,end);
+     for (int i = start; i <= end; i++) {
+        for (int j = 0; j < dataf->nbcols; j++) {
+            printf("%d\t", dataf->columns[j]->value[i]);
+        }
+        printf("\n");
+    }
+}
 
+void disp_part_col(CDATAFRAME* dataf, int start, int end){
+    printf("Select rows from %d to %d: \n", start,end);
+     for (int i = start; i <= end; i++) {
+        for (int j = 0; j < dataf->nbrows; j++) {
+            printf("%d\t", dataf->columns[j]->value[i]);
+        }
+        printf("\n");
+     }
+}
+
+/*
 //OPERATIONS FUNCTIONS
 void add_row(CDATAFRAME* dataf, int* vals);
 void del_row(CDATAFRAME* dataf, int i); //i = index
@@ -59,4 +89,4 @@ int display_nbrows(CDATAFRAME* dataf);
 int display_nbcols(CDATAFRAME* dataf);
 int disp_cell_equal(CDATAFRAME* dataf, int x);
 int disp_cell_great(CDATAFRAME* dataf, int x);
-int disp_cell_lower(CDATAFRAME* dataf,  int x);
+int disp_cell_lower(CDATAFRAME* dataf,  int x);   */
