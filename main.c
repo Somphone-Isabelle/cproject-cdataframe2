@@ -1,22 +1,31 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include "cdataframe.h"
+#include "column.h"
 
-void display_menu() {
-    printf("\nMenu:\n");
-    printf("1. Fill the CDATAFRAME\n");
-    printf("2. Add a row\n");
-    printf("3. Delete a row\n");
-    printf("4. Add a column\n");
-    printf("5. Delete a column\n");
-    printf("6. Rename the title of a column\n");
-    printf("7. Check the existence of a value\n");
-    printf("8. Access/replace the value in a cell\n");
-    printf("9. Display column names\n");
-    printf("10. Display number of rows\n");
-    printf("11. Display number of columns\n");
-    printf("12. Display number of cells equal to x\n");
-    printf("13. Display number of cells containing a value greater than x\n");
-    printf("14. Display number of cells containing a value less than x\n");
-    printf("15. Exit\n");
+int main() {
+    // Create a column
+    COLUMN* mycol = create_column("My column");
+
+    // Insert values into the column
+    insert_value(mycol, 52);
+    insert_value(mycol, 44);
+    insert_value(mycol, 15);
+
+    // Print the content of the column
+    print_col(mycol);
+
+    // Test other functions
+    int value_to_find = 44;
+    printf("Number of occurrences of %d: %d\n", value_to_find, count_occ(mycol, value_to_find));
+
+    int position_to_get = 1;
+    printf("Value at position %d: %d\n", position_to_get, pos_val(mycol, position_to_get));
+
+    int x = 20;
+    printf("Number of values greater than %d: %d\n", x, great_val(mycol, x));
+    printf("Number of values less than %d: %d\n", x, less_val(mycol, x));
+    printf("Number of values equal to %d: %d\n", x, equal_val(mycol, x));
+
+    // Delete the column to free memory
+    delete_column(&mycol);
+
 }
