@@ -1,13 +1,6 @@
-<<<<<<< HEAD
-#define REALOC_SIZE 256
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-=======
 #ifndef COLUMN_H
 #define COLUMN_H
 #define REALLOC_SIZE 256
->>>>>>> f1d4cfb6fa3ab2c3647ab07f5bf7e0d96f29d6a8
 
 
 typedef struct{

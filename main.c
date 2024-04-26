@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-#include <stdio.h>
-#include <stdlib.h>
-
-int main()
-{
-    COLUMN *mycol = create_column("My column");
-
-    return 0;
-=======
-
-=======
->>>>>>> 20c18e2dca8b6efe5423ac2fb5706b90411572f1
 #include <stdio.h>
 #include "column.h"
 
@@ -42,5 +28,4 @@ int main() {
     // Delete the column to free memory
     delete_column(&mycol);
 
->>>>>>> f1d4cfb6fa3ab2c3647ab07f5bf7e0d96f29d6a8
 }

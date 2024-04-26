@@ -4,7 +4,6 @@
 #define REALLOC_SIZE 256
 #define TITLE_MAX_LENGTH 50
 
-=======
 //BASICS FUNCTIONS
 
 COLUMN *create_column(char* title){
