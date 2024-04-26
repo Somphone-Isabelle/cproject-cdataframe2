@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -9,6 +10,8 @@ int main()
     return 0;
 =======
 
+=======
+>>>>>>> 20c18e2dca8b6efe5423ac2fb5706b90411572f1
 #include <stdio.h>
 #include "column.h"
 
