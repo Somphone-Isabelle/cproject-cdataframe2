@@ -31,7 +31,7 @@ COLUMN *create_column(char* title){
 
     return column;
 }
-
+//inserting a new value in the column
 int insert_value(COLUMN* col, int value){
     if (col->log_size >= col->phy_size){
         int* new_val = (int*)realloc(col->value,(col->phy_size + REALLOC_SIZE)*sizeof(int));
@@ -46,13 +46,13 @@ int insert_value(COLUMN* col, int value){
     col->log_size++;
     return 1;
 }
-
+//deleting a column
 void delete_column(COLUMN **col){
     free((*col)->title);
     free((*col)->value);
     free(*col);
 }
-
+//display of the content of a column
 void print_col(COLUMN* col){
     printf("Content of column '%s' : \n", col->title);
     for(int i = 0;i<col->log_size;i++){
@@ -62,6 +62,7 @@ void print_col(COLUMN* col){
 
 //ANALYSIS FUNCTIONS
 
+//Counting the occurences in a column of a given integer
 int count_occ(COLUMN* col, int x){
     int count = 0;
     for (int i = 0; i<col->log_size;i++){
@@ -72,7 +73,7 @@ int count_occ(COLUMN* col, int x){
     return count;
 }
 
-
+//Giving the position of a value in the column
 int pos_val(COLUMN* col, int pos){
     if(pos < 0 || pos >= col->log_size){
         printf("ERROR");
@@ -81,6 +82,7 @@ int pos_val(COLUMN* col, int pos){
     return col->value[pos];
 }
 
+//Counting the values that are greater than a given integer
 int great_val(COLUMN* col, int x){
     int count = 0;
     for(int i = 0; i < col->log_size;i++){
@@ -90,6 +92,8 @@ int great_val(COLUMN* col, int x){
     }
     return count;
 }
+
+//Counting the values in the column that are less than a given integer
 int less_val(COLUMN* col, int x){
     int count = 0;
     for(int i = 0; i < col->log_size;i++){
@@ -99,6 +103,8 @@ int less_val(COLUMN* col, int x){
     }
     return count;
 }
+
+//Counting the values in the columns that are equal to a given integer
 int equal_val(COLUMN* col, int x){
     int count = 0;
     for(int i = 0; i < col->log_size;i++){
@@ -108,3 +114,4 @@ int equal_val(COLUMN* col, int x){
     }
     return count;
 }
+
