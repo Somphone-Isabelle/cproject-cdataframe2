@@ -2,6 +2,7 @@
 
 For windows user:
     Install Cygwin64 Terminal in order to compile and execute the code.
+    Go to the finder of your project then:
         To compile it:
             -$ gcc *.c -o main.exe
         To execute it:
