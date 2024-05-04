@@ -1,68 +1,162 @@
 #include "column.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define REALLOC_SIZE 256
 #define TITLE_MAX_LENGTH 50
 
 //BASICS FUNCTIONS
 
-COLUMN *create_column(char* title){
-    COLUMN* column = (COLUMN*)malloc(sizeof(COLUMN));
-    if (column == NULL){
-        printf("ERROR");
-        exit(1);
+COLUMN *create_column(ENUM_TYPE type, char *title){
+    COLUMN *column = (COLUMN *)malloc(sizeof(COLUMN));
+    if (column == NULL) {
+        printf("Memory allocation failed.\n");
+        return NULL;
     }
-    int title_len = 0;
-    while (title[title_len] != '\0' && title_len <TITLE_MAX_LENGTH -1){
-        title_len++;
-    }
-    column->title = (char*)malloc((title_len + 1)*sizeof(char));
-    if(column->title == NULL){
-        printf("ERROR");
-        exit(1);
-    }
-    for (int i = 0; i<title_len;i++){
-        column->title[i] = title[i];
-    } 
-    column->title[title_len]='\0';
-    column->value = NULL;
-    column->phy_size = 0;
-    column->log_size = 0;
+
+    column->title = title;
+    column->size = 0;
+    column->max_size = 0;
+    column->column_type = type;
+    column->data = NULL;
+    column->index = NULL;
 
     return column;
 }
-//inserting a new value in the column
-int insert_value(COLUMN* col, int value){
-    if (col->log_size >= col->phy_size){
-        int* new_val = (int*)realloc(col->value,(col->phy_size + REALLOC_SIZE)*sizeof(int));
-        if (new_val == NULL){
-            printf("ERROR");
-            return 0;
-        }
-        col->value = new_val;
-        col->phy_size += REALLOC_SIZE;
+
+int insert_value(COLUMN *col, void *value) {
+    if (!col || col->size >= col->max_size) {
+        return 0; // Invalid column or insufficient memory
     }
-    col->value[col->log_size] = value;
-    col->log_size++;
-    return 1;
+
+    // Allocate memory for the new data element
+    col->data[col->size] = (COL_TYPE *)malloc(sizeof(COL_TYPE));
+    if (!col->data[col->size]) {
+        return 0; // Memory allocation failed
+    }
+
+    // Copy the value based on the column type
+    switch (col->column_type) {
+        case UINT:
+            col->data[col->size]->uint_value = *((unsigned int *)value);
+            break;
+        case INT:
+            col->data[col->size]->int_value = *((signed int *)value);
+            break;
+        case CHAR:
+            col->data[col->size]->char_value = *((char *)value);
+            break;
+        case FLOAT:
+            col->data[col->size]->float_value = *((float *)value);
+            break;
+        case DOUBLE:
+            col->data[col->size]->double_value = *((double *)value);
+            break;
+        case STRING:
+            col->data[col->size]->string_value = strdup((char *)value);
+            if (!col->data[col->size]->string_value) {
+                free(col->data[col->size]);
+                return 0; // Memory allocation failed
+            }
+            break;
+        case STRUCTURE:
+            // Handle structure insertion
+            break;
+        default:
+            return 0; // Invalid column type
+    }
+
+    col->size++;
+    return 1; // Successful insertion
 }
-//deleting a column
-void delete_column(COLUMN **col){
+
+
+void delete_column(COLUMN **col) {
+    if (!col || !*col) {
+        return; // Nothing to delete
+    }
+
+    // Free memory for title
     free((*col)->title);
-    free((*col)->value);
+
+    // Free memory for data elements
+    for (int i = 0; i < (*col)->size; i++) {
+        switch ((*col)->column_type) {
+            case STRING:
+                free((*col)->data[i]->string_value);
+                break;
+            case STRUCTURE:
+                // Free memory for structure data
+                break;
+            default:
+                // No additional memory to free
+                break;
+        }
+        free((*col)->data[i]);
+    }
+
+    // Free memory for data array and index
+    free((*col)->data);
+    free((*col)->index);
+
+    // Free memory for column structure
     free(*col);
+    *col = NULL;
 }
-//display of the content of a column
-void print_col(COLUMN* col){
-    printf("Content of column '%s' : \n", col->title);
-    for(int i = 0;i<col->log_size;i++){
-        printf("[%d] %d\n", i, col->value[i]);
+
+void convert_value(COLUMN *col, unsigned long long int i, char *str, int size) {
+    if (!col || !str || i >= col->size) {
+        snprintf(str, size, "ERROR");
+        return;
+    }
+
+    switch (col->column_type) {
+        case INT:
+            snprintf(str, size, "%d", col->data[i]->int_value);
+            break;
+        case UINT:
+            snprintf(str, size, "%u", col->data[i]->uint_value);
+            break;
+        case CHAR:
+            snprintf(str, size, "%c", col->data[i]->char_value);
+            break;
+        case FLOAT:
+            snprintf(str, size, "%f", col->data[i]->float_value);
+            break;
+        case DOUBLE:
+            snprintf(str, size, "%lf", col->data[i]->double_value);
+            break;
+        case STRING:
+            snprintf(str, size, "%s", col->data[i]->string_value);
+            break;
+        case STRUCTURE:
+            snprintf(str, size, "Structure to design");
+            break;
+        default:
+            snprintf(str, size, "ERROR");
+            break;
     }
 }
+
+
+void print_col(COLUMN *col) {
+    if (!col) {
+        printf("Column is NULL\n");
+        return;
+    }
+
+    printf("Content of column '%s' :\n", col->title);
+    for (unsigned int i = 0; i < col->size; ++i) {
+        char value_str[256];
+        convert_value(col, i, value_str, sizeof(value_str));
+        printf("[%u] %s\n", i, value_str);
+    }
+}
+
+/*
 
 //ANALYSIS FUNCTIONS
 
-//Counting the occurences in a column of a given integer
 int count_occ(COLUMN* col, int x){
     int count = 0;
     for (int i = 0; i<col->log_size;i++){
@@ -73,16 +167,14 @@ int count_occ(COLUMN* col, int x){
     return count;
 }
 
-//Giving the position of a value in the column
+
 int pos_val(COLUMN* col, int pos){
-    if(pos < 0 || pos >= col->log_size){
+    /*if(pos < 0 || pos >= col->log_size){
         printf("ERROR");
         return 99;
-    }
-    return col->value[pos];
-}
-
-//Counting the values that are greater than a given integer
+    }*/
+   
+/*
 int great_val(COLUMN* col, int x){
     int count = 0;
     for(int i = 0; i < col->log_size;i++){
@@ -92,8 +184,6 @@ int great_val(COLUMN* col, int x){
     }
     return count;
 }
-
-//Counting the values in the column that are less than a given integer
 int less_val(COLUMN* col, int x){
     int count = 0;
     for(int i = 0; i < col->log_size;i++){
@@ -103,8 +193,6 @@ int less_val(COLUMN* col, int x){
     }
     return count;
 }
-
-//Counting the values in the columns that are equal to a given integer
 int equal_val(COLUMN* col, int x){
     int count = 0;
     for(int i = 0; i < col->log_size;i++){
@@ -113,5 +201,4 @@ int equal_val(COLUMN* col, int x){
         }
     }
     return count;
-}
-
+}*/
