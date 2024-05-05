@@ -1,41 +1,45 @@
 #ifndef CDATAFRAME_H
 #define CDATAFRAME_H
 #include "column.h"
+#include "list.h"
 
 typedef struct{
     COLUMN** columns;
     int nbrows;
-    int nbcols;
+    list *rows;
 }CDATAFRAME;
 
-//FILLING FUNCTIONS
-CDATAFRAME* create_cdf(int nbcols, char** title);
-void user_imput(CDATAFRAME* dataf);
-void hardfill_df(CDATAFRAME* dataf);
+//BASICS
+CDATAFRAME *create_cdataframe(ENUM_TYPE *cdftype, int size);
+void delete_cdataframe(CDATAFRAME **cdf);
+
+//FILLING
+CDATAFRAME *create_empty_cdf();
+CDATAFRAME *user_imput_df(CDATAFRAME *cdf);
+CDATAFRAME *hardfill_df(CDATAFRAME *cdf, void **data, int rows, int cols);
 
 //DISPLAYING FUNCTIONS
-void display_df(CDATAFRAME* dataf);
-void disp_part_row(CDATAFRAME* dataf, int start, int end);
-void disp_part_col(CDATAFRAME* dataf, int start, int end);
+void display_cdf(CDATAFRAME* cdf);
+void disp_part_row(CDATAFRAME* dataf, int lim);
+void disp_part_col(CDATAFRAME* dataf, int lim);
 
 
 //OPERATIONS FUNCTIONS
-void add_row(CDATAFRAME* dataf, int* vals);
-void del_row(CDATAFRAME* dataf, int i); //i = index
-void add_col(CDATAFRAME* dataf, COLUMN* column);
-void del_col(CDATAFRAME* dataf, int i);
-void rename_col(CDATAFRAME* dataf, int j, char* new_title);
-int search_val(CDATAFRAME* dataf, int val);
-int get_cell(CDATAFRAME* dataf, int i, int j);
-void replace_vals(CDATAFRAME* dataf,int i, int j, int new_val);
-void disp_col_names(CDATAFRAME* dataf);
+void add_row(CDATAFRAME *cdf, void **new_row, int nbcols);
+void del_row(CDATAFRAME *cdf, int i); //i = row index
+void add_col(CDATAFRAME *dataf, COLUMN* column);
+void delete_column(CDATAFRAME *cdf, char *col_name);
+void rename_column_in_cdataframe(CDATAFRAME *cdf, char *old_name, char *new_name);
+int search_val(CDATAFRAME *cdf, char *old_name, char *new_name);
+void *replace_val(CDATAFRAME *cdf, int row_index, int col_index, void *new_value);
+void display_column_names(CDATAFRAME *cdf);
 
-/*
 //ANALYSIS FUNCTIONS
-int display_nbrows(CDATAFRAME* dataf);
-int display_nbcols(CDATAFRAME* dataf);
-int disp_cell_equal(CDATAFRAME* dataf, int x);
-int disp_cell_great(CDATAFRAME* dataf, int x);
-int disp_cell_lower(CDATAFRAME* dataf, int x); */
+
+int get_nbrows(CDATAFRAME* dataf);
+int get_nbrows(CDATAFRAME *cdf);
+int disp_cell_equal(CDATAFRAME* cdf, void *x);
+int disp_cell_great(CDATAFRAME* cdf, void *x);
+int disp_cell_lower(CDATAFRAME* cdf, void *x);
 
 #endif 

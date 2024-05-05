@@ -34,7 +34,7 @@ int insert_value(COLUMN *col, void *value){
     }
     
     col->data[col->size] = (COL_TYPE *)malloc(sizeof(COL_TYPE));
-    
+
     if (value == NULL){
 
         col->data[col->size] = NULL;
@@ -133,52 +133,207 @@ void print_col(COLUMN *col){
     }
 }
 
-/*
-
 //ANALYSIS FUNCTIONS
 
-int count_occ(COLUMN* col, int x){
+int count_occ(COLUMN *col, void *x){
     int count = 0;
-    for (int i = 0; i<col->log_size;i++){
-        if (col->value[i] == x){
-            count++;
+    if (x == NULL){
+        for (int i = 0; i < col->size; i++){
+            if (col->data[i] == NULL) {
+                count++;
+            }
+        }
+    } else {
+        switch (col->column_type){
+            case UINT:
+                for (int i = 0; i < col->size; i++){
+                    if (*((unsigned int *)(col->data[i])) == *((unsigned int *)x)){
+                        count++;
+                    }
+                }
+                break;
+            case INT:
+                for (int i = 0; i < col->size; i++){
+                    if (*((int *)(col->data[i])) == *((int *)x)){
+                        count++;
+                    }
+                }
+                break;
+            case CHAR:
+                for (int i = 0; i < col->size; i++) {
+                    if (*((char *)(col->data[i])) == *((char *)x)){
+                        count++;
+                    }
+                }
+                break;
+            case FLOAT:
+                for (int i = 0; i < col->size; i++){
+                    if (*((float *)(col->data[i])) == *((float *)x)){
+                        count++;
+                    }
+                }
+                break;
+            case DOUBLE:
+                for (int i = 0; i < col->size; i++){
+                    if (*((double *)(col->data[i])) == *((double *)x)){
+                        count++;
+                    }
+                }
+                break;
+            case STRING:
+                for (int i = 0; i < col->size; i++){
+                    if (strcmp((char *)(col->data[i]), (char *)x) == 0){
+                        count++;
+                    }
+                }
+                break;
+            case STRUCTURE:
+                break;
+            default:
+                break;
         }
     }
     return count;
 }
 
+void *pos_val(COLUMN* col, unsigned long long int x){
+    if (x >= col->size){
+        return NULL;
+    }
+    return col->data[x];
+}
 
-int pos_val(COLUMN* col, int pos){
-    /*if(pos < 0 || pos >= col->log_size){
-        printf("ERROR");
-        return 99;
-    }*/
-   
-/*
-int great_val(COLUMN* col, int x){
+int great_val(COLUMN* col, void* x) {
     int count = 0;
-    for(int i = 0; i < col->log_size;i++){
-        if(col->value[i] > x){
-            count++;
+    for (int i = 0; i < col->size; i++) {
+        switch (col->column_type) {
+            case UINT:
+                if (*((unsigned int*)col->data[i]) > *((unsigned int*)x)) {
+                    count++;
+                }
+                break;
+            case INT:
+                if (*((int*)col->data[i]) > *((int*)x)) {
+                    count++;
+                }
+                break;
+            case CHAR:
+                if (*((char*)col->data[i]) > *((char*)x)) {
+                    count++;
+                }
+                break;
+            case FLOAT:
+                if (*((float*)col->data[i]) > *((float*)x)) {
+                    count++;
+                }
+                break;
+            case DOUBLE:
+                if (*((double*)col->data[i]) > *((double*)x)) {
+                    count++;
+                }
+                break;
+            case STRING:
+                if (col->data[i] != NULL && strcmp((char*)col->data[i], (char*)x) > 0) {
+                    count++;
+                }
+                break;
+            case STRUCTURE:
+                // TO WORK AGAIN
+                break;
+            default:
+                // TO WORK AGAIN
+                break;
         }
     }
     return count;
 }
-int less_val(COLUMN* col, int x){
+
+int less_val(COLUMN* col, void* x){
     int count = 0;
-    for(int i = 0; i < col->log_size;i++){
-        if(col->value[i] < x){
-            count++;
+    for (int i = 0; i < col->size; i++) {
+        switch (col->column_type) {
+            case UINT:
+                if (*((unsigned int*)col->data[i]) < *((unsigned int*)x)) {
+                    count++;
+                }
+                break;
+            case INT:
+                if (*((int*)col->data[i]) < *((int*)x)) {
+                    count++;
+                }
+                break;
+            case CHAR:
+                if (*((char*)col->data[i]) < *((char*)x)) {
+                    count++;
+                }
+                break;
+            case FLOAT:
+                if (*((float*)col->data[i]) < *((float*)x)) {
+                    count++;
+                }
+                break;
+            case DOUBLE:
+                if (*((double*)col->data[i]) < *((double*)x)) {
+                    count++;
+                }
+                break;
+            case STRING:
+                if (col->data[i] != NULL && strcmp((char*)col->data[i], (char*)x) < 0) {
+                    count++;
+                }
+                break;
+            case STRUCTURE:
+                // TO WORK AGAIN
+                break;
+            default:
+                // TO WORK AGAIN
+                break;
         }
     }
     return count;
 }
-int equal_val(COLUMN* col, int x){
-    int count = 0;
-    for(int i = 0; i < col->log_size;i++){
-        if(col->value[i] == x){
-            count++;
+
+int equal_val(COLUMN* col, void* x){
+int count = 0;
+    for (int i = 0; i < col->size; i++) {
+        switch (col->column_type) {
+            case UINT:
+                if (*((unsigned int*)col->data[i]) == *((unsigned int*)x)) {
+                    count++;
+                }
+                break;
+            case INT:
+                if (*((int*)col->data[i]) == *((int*)x)) {
+                    count++;
+                }
+                break;
+            case CHAR:
+                if (*((char*)col->data[i]) == *((char*)x)) {
+                    count++;
+                }
+                break;
+            case FLOAT:
+                if (*((float*)col->data[i]) == *((float*)x)) {
+                    count++;
+                }
+                break;
+            case DOUBLE:
+                if (*((double*)col->data[i]) == *((double*)x)) {
+                    count++;
+                }
+                break;
+            case STRING:
+                if (col->data[i] != NULL && strcmp((char*)col->data[i], (char*)x) == 0) {
+                    count++;
+                }
+                break;
+            case STRUCTURE:
+                // TO WORK AGAIN
+                break;
+            default:
+                // TO WORK AGAIN
+                break;
         }
     }
     return count;
-}*/
+}

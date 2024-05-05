@@ -36,13 +36,12 @@ void delete_column(COLUMN **col);
 void convert_value(COLUMN *col, unsigned long long int i, char *str, int size);
 void print_col(COLUMN* col);
 
-/*
+
 //ANALYSIS FUNCTIONS
-int count_occ(COLUMN* col, int x);
-int pos_val(COLUMN* col, int pos);
-int great_val(COLUMN* col, int x);
-int less_val(COLUMN* col, int x);
-int equal_val(COLUMN* col, int x);
-*/
+int count_occ(COLUMN* col, void* x);
+void* pos_val(COLUMN* col, unsigned long long x);
+int great_val(COLUMN* col, void* x);
+int less_val(COLUMN* col, void* x);
+int equal_val(COLUMN* col, void* x);
 
 #endif 
