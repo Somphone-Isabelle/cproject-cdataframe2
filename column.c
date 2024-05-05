@@ -10,11 +10,10 @@
 COLUMN *create_column(ENUM_TYPE type, char *title){
     COLUMN *column = (COLUMN *)malloc(sizeof(COLUMN));
     if (column == NULL) {
-        printf("Memory allocation failed.\n");
         return NULL;
     }
 
-    column->title = title;
+    column->title = strdup(title);
     column->size = 0;
     column->max_size = 0;
     column->column_type = type;
@@ -24,129 +23,110 @@ COLUMN *create_column(ENUM_TYPE type, char *title){
     return column;
 }
 
-int insert_value(COLUMN *col, void *value) {
-    if (!col || col->size >= col->max_size) {
-        return 0; // Invalid column or insufficient memory
+int insert_value(COLUMN *col, void *value){
+    if (col->size >= col->max_size){
+        COL_TYPE **new_data = (COL_TYPE **)realloc(col->data, (col->max_size + REALLOC_SIZE) * sizeof(COL_TYPE *));
+        if (new_data == NULL){
+            return 0;
+        }
+        col->data = new_data;
+        col->max_size += REALLOC_SIZE;
     }
-
-    // Allocate memory for the new data element
+    
     col->data[col->size] = (COL_TYPE *)malloc(sizeof(COL_TYPE));
-    if (!col->data[col->size]) {
-        return 0; // Memory allocation failed
-    }
+    
+    if (value == NULL){
 
-    // Copy the value based on the column type
-    switch (col->column_type) {
+        col->data[col->size] = NULL;
+    }
+    else {
+    switch (col->column_type){
         case UINT:
-            col->data[col->size]->uint_value = *((unsigned int *)value);
+            *((unsigned int *)(col->data[col->size])) = *((unsigned int *)value);
             break;
         case INT:
-            col->data[col->size]->int_value = *((signed int *)value);
+            *((signed int *)(col->data[col->size])) = *((signed int *)value);
             break;
         case CHAR:
-            col->data[col->size]->char_value = *((char *)value);
+            *((char *)(col->data[col->size])) = *((char *)value);
             break;
         case FLOAT:
-            col->data[col->size]->float_value = *((float *)value);
+            *((float *)(col->data[col->size])) = *((float *)value);
             break;
         case DOUBLE:
-            col->data[col->size]->double_value = *((double *)value);
+            *((double *)(col->data[col->size])) = *((double *)value);
             break;
-        case STRING:
-            col->data[col->size]->string_value = strdup((char *)value);
-            if (!col->data[col->size]->string_value) {
+        case STRING:{
+            char *str_value = (char *)value;
+            col->data[col->size]->string_value = (char *)malloc(strlen(str_value) + 1);
+            if (col->data[col->size]->string_value == NULL) {
                 free(col->data[col->size]);
-                return 0; // Memory allocation failed
+                return 0;
             }
+            strcpy(col->data[col->size]->string_value, str_value);
             break;
+        }
         case STRUCTURE:
-            // Handle structure insertion
             break;
         default:
-            return 0; // Invalid column type
-    }
-
+            return 0;
+    }}
     col->size++;
-    return 1; // Successful insertion
+    return 1;
 }
 
-
-void delete_column(COLUMN **col) {
-    if (!col || !*col) {
-        return; // Nothing to delete
-    }
-
-    // Free memory for title
-    free((*col)->title);
-
-    // Free memory for data elements
-    for (int i = 0; i < (*col)->size; i++) {
-        switch ((*col)->column_type) {
-            case STRING:
+void delete_column(COLUMN **col){
+    if (*col != NULL){
+        free((*col)->title);
+        for (unsigned int i = 0; i < (*col)->size; ++i){
+            if ((*col)->column_type == STRING){
                 free((*col)->data[i]->string_value);
+            }
+            free((*col)->data[i]);
+        }
+        free((*col)->data);
+        free((*col)->index);
+        free(*col);
+        *col = NULL;
+    }
+}
+
+void convert_value(COLUMN *col, unsigned long long int i, char *str, int size){
+    if (col->data[i] == NULL){
+        snprintf(str, size, "%s", "NULL");
+    }
+    else{
+        switch(col->column_type){
+            case UINT:
+                snprintf(str, size, "%u", *((unsigned int *)col->data[i]));
+                break;
+            case INT:
+                snprintf(str, size, "%d", *((int *)col->data[i]));
+                break;
+            case CHAR:
+                snprintf(str, size, "%c", *((char *)col->data[i]));
+                break;
+            case FLOAT:
+                snprintf(str, size, "%f", *((float *)col->data[i]));
+                break;
+            case DOUBLE:
+                snprintf(str, size, "%lf", *((double *)col->data[i]));
+                break;
+            case STRING:
+                snprintf(str, size, "%s", (char *)col->data[i]);
                 break;
             case STRUCTURE:
-                // Free memory for structure data
                 break;
             default:
-                // No additional memory to free
+                snprintf(str, size, "ERROR");
                 break;
-        }
-        free((*col)->data[i]);
-    }
-
-    // Free memory for data array and index
-    free((*col)->data);
-    free((*col)->index);
-
-    // Free memory for column structure
-    free(*col);
-    *col = NULL;
-}
-
-void convert_value(COLUMN *col, unsigned long long int i, char *str, int size) {
-    if (!col || !str || i >= col->size) {
-        snprintf(str, size, "ERROR");
-        return;
-    }
-
-    switch (col->column_type) {
-        case INT:
-            snprintf(str, size, "%d", col->data[i]->int_value);
-            break;
-        case UINT:
-            snprintf(str, size, "%u", col->data[i]->uint_value);
-            break;
-        case CHAR:
-            snprintf(str, size, "%c", col->data[i]->char_value);
-            break;
-        case FLOAT:
-            snprintf(str, size, "%f", col->data[i]->float_value);
-            break;
-        case DOUBLE:
-            snprintf(str, size, "%lf", col->data[i]->double_value);
-            break;
-        case STRING:
-            snprintf(str, size, "%s", col->data[i]->string_value);
-            break;
-        case STRUCTURE:
-            snprintf(str, size, "Structure to design");
-            break;
-        default:
-            snprintf(str, size, "ERROR");
-            break;
     }
 }
+}
 
-
-void print_col(COLUMN *col) {
-    if (!col) {
-        printf("Column is NULL\n");
-        return;
-    }
-
-    printf("Content of column '%s' :\n", col->title);
-    for (unsigned int i = 0; i < col->size; ++i) {
+void print_col(COLUMN *col){
+    printf("Column '%s' :\n", col->title);
+    for (unsigned int i = 0; i < col->size; ++i){
         char value_str[256];
         convert_value(col, i, value_str, sizeof(value_str));
         printf("[%u] %s\n", i, value_str);
