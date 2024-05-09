@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "column.h"
+#include "cdataframe.h"
+#include "list.h"
 
 int main() {
+    /*
     // Create a column of type STRING
     COLUMN *mycol = create_column(STRING, "Column 1");
 
@@ -38,4 +41,18 @@ int main() {
     delete_column(&mycol);
 
     return 0;
+}*/
+
+ENUM_TYPE cdftype[] = {INT, CHAR, INT};
+    CDATAFRAME *cdf = create_cdataframe(cdftype, 3);
+
+    // Display the entire dataframe
+    printf("Displaying the entire CDataframe:\n");
+    display_cdf(cdf);
+
+    // Delete the dataframe to free memory
+    delete_cdataframe(&cdf);
+
+    return 0;
 }
+    

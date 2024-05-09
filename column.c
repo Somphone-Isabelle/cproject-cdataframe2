@@ -75,7 +75,7 @@ int insert_value(COLUMN *col, void *value){
     return 1;
 }
 
-void delete_column(COLUMN **col){
+void del_column(COLUMN **col){
     if (*col != NULL){
         free((*col)->title);
         for (unsigned int i = 0; i < (*col)->size; ++i){
