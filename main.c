@@ -1,31 +1,41 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "column.h"
 
 int main() {
-    // Create a column
-    COLUMN* mycol = create_column("My column");
+    // Create a column of type STRING
+    COLUMN *mycol = create_column(STRING, "Column 1");
 
-    // Insert values into the column
-    insert_value(mycol, 52);
-    insert_value(mycol, 44);
-    insert_value(mycol, 15);
+    // Insert some string values into the column
+    char str1[] = "apple";
+    char str2[] = "banana";
+    char str3[] = "orange";
+    char str4[] = "apple";
 
-    // Print the content of the column
+    insert_value(mycol, str1);
+    insert_value(mycol, str2);
+    insert_value(mycol, str3);
+    insert_value(mycol, str4);
+
+    // Print the contents of the column
+    printf("Contents of the column:\n");
     print_col(mycol);
 
-    // Test other functions
-    int value_to_find = 44;
-    printf("Number of occurrences of %d: %d\n", value_to_find, count_occ(mycol, value_to_find));
+    // Test the great_val function
+    char *compare_str = "banana";
+    int greater_count = great_val(mycol, compare_str);
+    printf("Number of strings greater than '%s': %d\n", compare_str, greater_count);
 
-    int position_to_get = 1;
-    printf("Value at position %d: %d\n", position_to_get, pos_val(mycol, position_to_get));
+    // Test the less_val function
+    int less_count = less_val(mycol, compare_str);
+    printf("Number of strings less than '%s': %d\n", compare_str, less_count);
 
-    int x = 20;
-    printf("Number of values greater than %d: %d\n", x, great_val(mycol, x));
-    printf("Number of values less than %d: %d\n", x, less_val(mycol, x));
-    printf("Number of values equal to %d: %d\n", x, equal_val(mycol, x));
+    // Test the equal_val function
+    int equal_count = equal_val(mycol, compare_str);
+    printf("Number of strings equal to '%s': %d\n", compare_str, equal_count);
 
-    // Delete the column to free memory
+    // Free the memory allocated for the column
     delete_column(&mycol);
 
+    return 0;
 }
