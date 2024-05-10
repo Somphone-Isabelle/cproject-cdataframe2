@@ -1,5 +1,9 @@
 # cproject-cdataframe2
 
+'CDataframe' project for EFREI Algorithmmics and Data Structure Course
+
+SOMPHONE Isabelle - BERDERY Ambre test
+
 For windows user:
     Install Cygwin64 Terminal in order to compile and execute the code.
         To compile it:
@@ -17,3 +21,5 @@ For an intermediate filling, we choose to focus on the basics functions in order
 So in order to do, we first create an colomn.c and colomn.h file that allow us to manage the functions around the column thanks to the structure of the column.
 
 Then next, we created a cdataframe.c and a cdataframe.h that will have all the main functions that are the fondation of the project and that will be use for the functionalities that will called in main.c thanks to a menu.
+
+Thank you for reading ! :)
