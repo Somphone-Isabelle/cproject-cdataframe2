@@ -142,8 +142,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/ambre/cproject-cdataframe2/cproject-cdataframe2",
-      "program": "c:/Users/ambre/cproject-cdataframe2/cproject-cdataframe2/build/Debug/outDebug",
+      "cwd": "c:/Users/Documents/GitHub/cproject-cdataframe2/cproject-cdataframe2",
+      "program": "c:/Users/Documents/GitHub/cproject-cdataframe2/cproject-cdataframe2",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
