@@ -1,28 +1,16 @@
-<<<<<<< HEAD
-
-#include <stdio.h>
-#include <stdlib.h>
-
-int main()
-{
-    COLUMN *mycol = create_column("My column");
-
-    return 0;
-
-}
-=======
-
-=======
-#include <stdio.h>
-=======
-#include <stdio.h>
-#include <stdlib.h>
->>>>>>> d50816eaa3b32a36197cc5b3b2a867cbb23f5620
-#include "column.h"
+#include <string.h>
+#include <ctype.h>
 #include "cdataframe.h"
+#include "column.h"
 #include "list.h"
+#include "tools.h"
 
 int main() {
+    cmd_run();
+    return 0;
+}
+
+int main_old() {
     /*
     // Create a column of type STRING
     COLUMN *mycol = create_column(STRING, "Column 1");
