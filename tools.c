@@ -64,7 +64,7 @@ int read_exec_command(Command* cmd) {
         printf("- col_show : usage >col_show\n");
         printf("- col_del  : usage >col_del nom_colonne\n");
         printf("- col_sort : ...\n");
-        printf("- import   : usage >import fichier_donnees.csv")
+        printf("- import   : usage >import fichier_donnees.csv");
         printf("...\n");
         printf("________________________________________________________________________________\n");
     } else {
