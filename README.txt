@@ -2,9 +2,9 @@
 
 'CDataframe' project for EFREI Algorithmmics and Data Structure Course
 
-SOMPHONE Isabelle - BERDERY Ambre 
+SOMPHONE Isabelle - BERDERY Ambre test
 
-For windows user:git 
+For windows user:
     Install Cygwin64 Terminal in order to compile and execute the code.
     Go to the finder of your project then:
         To compile it:
