@@ -11,3 +11,5 @@
 
 ## 
 
+# si problème avec git pull, executer la cmd ci-dessous pour forcer la conf a partir du serveur. (attention risque de perte de modification locale)
+git config --global pull.rebase true
