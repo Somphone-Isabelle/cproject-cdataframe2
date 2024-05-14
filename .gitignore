@@ -4,3 +4,4 @@
 !*.h
 !.gitignore
 !.git
+!run.sh
