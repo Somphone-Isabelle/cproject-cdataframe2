@@ -7,6 +7,7 @@
 
 //BASICS FUNCTIONS
 
+//Creating a new column
 COLUMN *create_column(ENUM_TYPE type, char *title){
     COLUMN *column = (COLUMN *)malloc(sizeof(COLUMN));
     if (column == NULL) {
@@ -23,6 +24,7 @@ COLUMN *create_column(ENUM_TYPE type, char *title){
     return column;
 }
 
+//Inserting a new value in a column
 int insert_value(COLUMN *col, void *value){
     if (col->size >= col->max_size){
         COL_TYPE **new_data = (COL_TYPE **)realloc(col->data, (col->max_size + REALLOC_SIZE) * sizeof(COL_TYPE *));
@@ -84,6 +86,7 @@ int insert_value(COLUMN *col, void *value){
     return 1;
 }
 
+//Deleting a column: first removing the title then data from the column
 void del_column(COLUMN **col){
     if (*col != NULL){
         free((*col)->title);
@@ -100,6 +103,7 @@ void del_column(COLUMN **col){
     }
 }
 
+//Converting the value in function of the type of the column
 void convert_value(COLUMN *col, unsigned int i, char *str, int size){
     if (col->data[i] == NULL){
         snprintf(str, size, "%s", "NULL");
@@ -133,6 +137,7 @@ void convert_value(COLUMN *col, unsigned int i, char *str, int size){
     }
 }
 
+//Displaying a chosen column and its content
 void print_col(COLUMN *col){
     printf("Column '%s' :\n", col->title);
     for (unsigned int i = 0; i < col->size; ++i){
@@ -143,6 +148,7 @@ void print_col(COLUMN *col){
 }
 
 //ANALYSIS FUNCTIONS
+
 
 int count_occ(COLUMN *col, void *x){
     int count = 0;
