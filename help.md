@@ -1,22 +1,22 @@
 # GIT
 
-## processus
+## Processus
 
-[] git pull
+### PULL
 ...
 git pull
 ...
 
 [] Modifier vos fichiers
 
-[] STATUS
+### STATUS
 ...
 git status (facultatif, permet d'affichier le status)
 ...
 
 Pour ajouter tous les fichiers
 
-[] ADD
+### ADD
 ...
 git add .
 ...
@@ -26,18 +26,18 @@ Pour ajouter un ou plusieurs fichiers
 git add nom_du_fichier.c
 ...
 
-[] COMMIT
+### COMMIT
 ...
 git commit -m "Commentaire"
 ...
 
-[] PUSH
+### PUSH
 ...
 git push
 ...
 
-
-# si problème avec git pull, executer la cmd ci-dessous pour forcer la conf a partir du serveur. (attention risque de perte de modification locale)
+# Annexe
+si problème avec git pull, executer la cmd ci-dessous pour forcer la conf a partir du serveur. (attention risque de perte de modification locale)
 ...
 git config --global pull.rebase true
 ...
