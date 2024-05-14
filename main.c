@@ -9,6 +9,7 @@
 
 int main() {
     cmd_run();
+    int a = 0;
     return 0;
 }
 
