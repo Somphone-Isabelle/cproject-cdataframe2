@@ -404,3 +404,5 @@ int run_column_test() {
     insert_value(colFloat, &f3);
     print_col(colFloat);
 }
+
+test
