@@ -52,18 +52,27 @@ int insert_value(COLUMN *col, void *value){
             break;
         case FLOAT:
             *((float *)(col->data[col->size])) = *((float *)value);
+	    //            printf("> FLOAT : %f\n", col->data[col->size]);
             break;
         case DOUBLE:
             *((double *)(col->data[col->size])) = *((double *)value);
+            //col->data[col->size]->double_value = ;
+            //printf("> DOUBLE : %f\n", col->data[col->size]);
             break;
         case STRING:{
+//            char * _buffer = malloc(ssizeof(char))
+//            
+//            col->data[col->size]->string_value = (char *)malloc(strlen(value) * sizeof(char));
+            /*
             char *str_value = (char *)value;
-            col->data[col->size]->string_value = (char *)malloc(strlen(str_value) + 1);
             if (col->data[col->size]->string_value == NULL) {
                 free(col->data[col->size]);
                 return 0;
-            }
-            strcpy(col->data[col->size]->string_value, str_value);
+            }            
+            strcpy(col->data[col->size]->string_value, value);
+            */          
+            col->data[col->size]->string_value = value;
+ //           printf("> %s\n", col->data[col->size]->string_value);
             break;
         }
         case STRUCTURE:
@@ -91,7 +100,7 @@ void del_column(COLUMN **col){
     }
 }
 
-void convert_value(COLUMN *col, unsigned long long int i, char *str, int size){
+void convert_value(COLUMN *col, unsigned int i, char *str, int size){
     if (col->data[i] == NULL){
         snprintf(str, size, "%s", "NULL");
     }
@@ -113,15 +122,15 @@ void convert_value(COLUMN *col, unsigned long long int i, char *str, int size){
                 snprintf(str, size, "%lf", *((double *)col->data[i]));
                 break;
             case STRING:
-                snprintf(str, size, "%s", (char *)col->data[i]);
+                snprintf(str, size, "%s", (char *)(col->data[i]->string_value));
                 break;
             case STRUCTURE:
                 break;
             default:
                 snprintf(str, size, "ERROR");
                 break;
+        }
     }
-}
 }
 
 void print_col(COLUMN *col){
@@ -336,4 +345,62 @@ int count = 0;
         }
     }
     return count;
+}
+
+int run_column_test() {
+    printf("\nTEST STRING");
+    COLUMN *colString = create_column(STRING, "String");
+    char *s1 = "Toto est 1";
+    char *s2 = "Titi est 2";
+    char *s3 = "Tutu est 3";
+    printf(" : %s, %s, %s\n", s1, s2, s3);
+    insert_value(colString, s1);
+    insert_value(colString, s2);
+    insert_value(colString, s3);
+    print_col(colString);
+
+    printf("\nTEST INT");
+    COLUMN *colInt = create_column(INT, "INT");
+    int i1 = 999, i2 = -12345, i3 = 42;
+    printf(" : %i, %i, %i\n", i1, i2, i3);
+    insert_value(colInt, &i1);
+    insert_value(colInt, &i2);
+    insert_value(colInt, &i3);
+    print_col(colInt);
+
+    printf("\nTEST UNIT");
+    COLUMN *colUInt = create_column(UINT, "UINT");
+    unsigned int u1 = 42, u2 = 0, u3 = 123456789;
+    printf(" : %u, %u, %u\n", u1, u2, u3);
+    insert_value(colUInt, &u1);
+    insert_value(colUInt, &u2);
+    insert_value(colUInt, &u3);
+    print_col(colUInt);
+
+    printf("\nTEST CHAR");
+    COLUMN *colChar = create_column(CHAR, "CHAR");
+    char c1 = 'a', c2 = 'b', c3 = 'z';
+    printf(" : %c, %c, %c\n", c1, c2, c3);
+    insert_value(colChar, &c1);
+    insert_value(colChar, &c2);
+    insert_value(colChar, &c3);
+    print_col(colChar);
+
+    printf("\nTEST DOUBLE");
+    COLUMN *colDouble = create_column(DOUBLE, "DOUBLE");
+    double d1 = 1.23, d2 = 0.9999, d3 = 0.0;
+    printf(" : %f, %f, %f\n", d1, d2, d3);
+    insert_value(colDouble, &d1);
+    insert_value(colDouble, &d2);
+    insert_value(colDouble, &d3);
+    print_col(colDouble);
+
+    printf("\nTEST FLOAT");
+    COLUMN *colFloat = create_column(FLOAT, "FLOAT");
+    double f1 = 1.23, f2 = 0.99, f3 = 0.0;
+    printf(" : %f, %f, %f\n", f1, f2, f3);
+    insert_value(colFloat, &f1);
+    insert_value(colFloat, &f2);
+    insert_value(colFloat, &f3);
+    print_col(colFloat);
 }

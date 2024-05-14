@@ -33,7 +33,7 @@ typedef struct column COLUMN;
 COLUMN *create_column(ENUM_TYPE type, char* title);
 int insert_value(COLUMN* col, void *value);
 void del_column(COLUMN **col);
-void convert_value(COLUMN *col, unsigned long long int i, char *str, int size);
+void convert_value(COLUMN *col, unsigned int i, char *str, int size);
 void print_col(COLUMN* col);
 
 
@@ -43,5 +43,7 @@ void* pos_val(COLUMN* col, unsigned long long x);
 int great_val(COLUMN* col, void* x);
 int less_val(COLUMN* col, void* x);
 int equal_val(COLUMN* col, void* x);
+
+int run_column_test();
 
 #endif 

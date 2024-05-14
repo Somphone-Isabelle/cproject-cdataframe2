@@ -23,36 +23,30 @@ void free_cmd(Command* cmd) {
     free(cmd);
 }
 
-int read_exec_command(Command* cmd) {
-
-    if (strlen(cmd->name) == 0) {
+void print_header(char *title) {
+        printf("\033[2J\033[1;1H"); // clean screen
+        printf("%s\n", title); // title
+        printf("help to list command\n");
         printf("________________________________________________________________________________\n");
-        printf("\n");
+}
+
+int read_exec_command(Command* cmd) {
+    if (strlen(cmd->name) == 0) {
+        print_header("");
         return 0;
     }
     if (strcmp(cmd->name, "exit") == 0) {
-        printf("\033[2J\033[1;1H");
-        printf("exit\n");
-        printf("________________________________________________________________________________\n");
+        print_header("exit");
         exit(0);
     } else if (strcmp(cmd->name, "clear") == 0) {
-        printf("\033[2J\033[1;1H");
-        printf("clear\n");
-        printf("________________________________________________________________________________\n");
+        print_header("clear");
     } else if (strcmp(cmd->name, "test") == 0) {
-        printf("\033[2J\033[1;1H");
-        printf("test : run default test\n");
-        printf("________________________________________________________________________________\n");
-        // run test
+        print_header("test : run default test");
         cmd_test();
     } else if (strcmp(cmd->name, "cdf_new") == 0) {
-        printf("\033[2J\033[1;1H");
-        printf("cdf_new\n");
-        printf("________________________________________________________________________________\n");
+        print_header("cdf_new");
     } else if (strcmp(cmd->name, "col_new") == 0) {
-        printf("\033[2J\033[1;1H");
-        printf("col_new\n");
-        printf("________________________________________________________________________________\n");
+        print_header("col_new");
     } else if (strcmp(cmd->name, "help") == 0) {
         printf("\033[2J\033[1;1H");
         printf("Application HELP\n");
@@ -68,9 +62,7 @@ int read_exec_command(Command* cmd) {
         printf("...\n");
         printf("________________________________________________________________________________\n");
     } else {
-        printf("\033[2J\033[1;1H");
-        printf("________________________________________________________________________________\n");
-        printf("command not found\n");
+        print_header("Command not found");
     }
     return 0;
 }
@@ -130,7 +122,8 @@ int isChar(char* str) {
 }
 
 int cmd_test() {
-
+    run_column_test();
+/*
     ENUM_TYPE cdftype[] = {INT, CHAR, INT};
     CDATAFRAME *cdf = create_cdataframe(cdftype, 3);
 
@@ -140,10 +133,11 @@ int cmd_test() {
 
     // Delete the dataframe to free memory
     delete_cdataframe(&cdf);
+*/
 }
 
 void cmd_run() {
-    printf("Enter a command : ");
+    print_header("Enter a command :");
     while (1) {
         Command* cmd = create_commande();
         read_from_stdin(cmd);

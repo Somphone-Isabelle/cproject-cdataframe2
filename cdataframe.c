@@ -6,7 +6,6 @@
 
 #define TITLE_MAX_LENGTH 50
 
-
 //FILLING FUNCTIONS
 CDATAFRAME *create_cdataframe(ENUM_TYPE *cdftype, int size) {
     CDATAFRAME *cdf = (CDATAFRAME *)malloc(sizeof(CDATAFRAME));
@@ -101,7 +100,7 @@ void display_cdf(CDATAFRAME *cdf) {
     for (lnode *cur_row = get_first_node(cdf->rows); cur_row != NULL; cur_row = get_next_node(cdf->rows, cur_row)) {
         for (int i = 0; i < get_nbcols(cdf); i++) {
             char value_str[256];
-            convert_value(cdf->columns[i], (unsigned long long int)cur_row->data, value_str, sizeof(value_str));
+            convert_value(cdf->columns[i], (unsigned int)cur_row->data, value_str, sizeof(value_str));
             printf("%s\t", value_str);
         }
         printf("\n");
