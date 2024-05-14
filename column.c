@@ -149,7 +149,7 @@ void print_col(COLUMN *col){
 
 //ANALYSIS FUNCTIONS
 
-
+//This function takes as argument a given type of data 'x', and will count the occurrences of any data of this type in the column
 int count_occ(COLUMN *col, void *x){
     int count = 0;
     if (x == NULL){
@@ -211,6 +211,7 @@ int count_occ(COLUMN *col, void *x){
     return count;
 }
 
+//This function returns the position of a given value in the column
 void *pos_val(COLUMN* col, unsigned long long int x){
     if (x >= col->size){
         return NULL;
@@ -218,6 +219,7 @@ void *pos_val(COLUMN* col, unsigned long long int x){
     return col->data[x];
 }
 
+//This function gives the value contained in the column that is greater than the given one 'x' in function of its type
 int great_val(COLUMN* col, void* x) {
     int count = 0;
     for (int i = 0; i < col->size; i++) {
@@ -263,6 +265,7 @@ int great_val(COLUMN* col, void* x) {
     return count;
 }
 
+//This function gives the value contained in the column that is less than the given one 'x' in function of its type
 int less_val(COLUMN* col, void* x){
     int count = 0;
     for (int i = 0; i < col->size; i++) {
@@ -308,6 +311,7 @@ int less_val(COLUMN* col, void* x){
     return count;
 }
 
+//This function gives the value contained in the column that is equal to the given one 'x' in function of its type
 int equal_val(COLUMN* col, void* x){
 int count = 0;
     for (int i = 0; i < col->size; i++) {
@@ -353,6 +357,7 @@ int count = 0;
     return count;
 }
 
+//Function to test the functions for the columns with different types of input data
 int run_column_test() {
     printf("\nTEST STRING");
     COLUMN *colString = create_column(STRING, "String");
@@ -411,4 +416,4 @@ int run_column_test() {
     print_col(colFloat);
 }
 
-test
+
