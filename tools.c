@@ -7,6 +7,9 @@
 #include "list.h"
 #include "tools.h"
 
+void cdf_log(char *str) {
+    puts(str);
+}
 
 Command* create_commande() {
     Command* cmd = (Command*)malloc(sizeof(Command));    
@@ -122,7 +125,8 @@ int isChar(char* str) {
 }
 
 int cmd_test() {
-    run_column_test();
+//    run_column_test();
+    run_cdf_test();
 /*
     ENUM_TYPE cdftype[] = {INT, CHAR, INT};
     CDATAFRAME *cdf = create_cdataframe(cdftype, 3);

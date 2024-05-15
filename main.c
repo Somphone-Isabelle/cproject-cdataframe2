@@ -6,7 +6,6 @@
 #include "list.h"
 #include "tools.h"
 
-
 int main() {
     cmd_run();
     //test 1

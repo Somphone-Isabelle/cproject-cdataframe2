@@ -29,5 +29,6 @@ void read_from_stdin(Command* cmd);
 
 int cmd_test();
 void cmd_run();
+void cdf_log(char *str);
 
 #endif 

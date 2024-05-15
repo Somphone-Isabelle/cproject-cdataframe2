@@ -1,17 +1,15 @@
 #ifndef CDATAFRAME_H
 #define CDATAFRAME_H
+
 #include "column.h"
 #include "list.h"
 
-typedef struct{
-    COLUMN** columns;
-    int nbrows;
-    list *rows;
-}CDATAFRAME;
+typedef list CDATAFRAME;
 
 //BASICS
 CDATAFRAME *create_cdataframe(ENUM_TYPE *cdftype, int size); //done
 void delete_cdataframe(CDATAFRAME **cdf);
+void run_cdf_test();
 
 //FILLING
 
