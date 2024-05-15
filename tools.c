@@ -51,8 +51,6 @@ int read_exec_command(Command* cmd) {
     } else if (strcmp(cmd->name, "cdf_col_del") == 0) {
         print_header("cdf_col_del");
 
-        delete_column(cdf, "col2");
-
     } else if (strcmp(cmd->name, "cdf_col_nb") == 0) {
         print_header("delete_cdataframe");
     } else if (strcmp(cmd->name, "help") == 0) {

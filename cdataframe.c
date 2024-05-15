@@ -27,33 +27,20 @@ void delete_cdataframe(CDATAFRAME **cdf) {
     free(cdf);
 }
 
-CDATAFRAME* load_from_csv(char *file_name, ENUM_TYPE *dftype, int size);
-    /*
-        if (*cdf != NULL) {
-        for (int i = 0; i < get_nbcols(*cdf); i++) {
-            del_column(&((*cdf)->columns[i]));
-        }
-        free((*cdf)->columns);
-        lst_delete_list((*cdf)->rows);
-        free(*cdf);
-        *cdf = NULL;
-    }
-    */
-}
-
 void delete_column(CDATAFRAME *cdf, char *col_name) {
     cdf_log("delete_column");
     if (cdf != NULL) {        
         lnode *node = (lnode *)get_first_node(cdf);
         node = (lnode *)get_first_node(cdf);
         while (node != NULL) {
-            node = (lnode *)get_next_node(cdf, node);
             COLUMN *col = (COLUMN *)node->data;
             if (strcmp(col_name, col->title) == 0) {
                 lst_delete_lnode(cdf, node);
                 cdf_log("lst_delete_lnode");
                 return;
             }
+            node = (lnode *)get_next_node(cdf, node);
+
         }
     }
 }

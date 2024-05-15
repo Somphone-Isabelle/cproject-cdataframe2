@@ -6,7 +6,7 @@
 
 struct command {
     char name[BUFFER_SIZE];
-    int size = 0;
+    int size;
     char* params[MAX_PARAMS];
 };
 
