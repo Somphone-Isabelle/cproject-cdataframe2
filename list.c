@@ -3,6 +3,7 @@
 #include <string.h>
 #include "list.h"
 
+//Creating a new node
 lnode *lst_create_lnode(void *dat) {
     lnode *ptmp = (lnode *) malloc(sizeof(lnode));
     ptmp->data = dat;
@@ -11,6 +12,7 @@ lnode *lst_create_lnode(void *dat) {
     return ptmp;
 }
 
+//Creating a list
 list *lst_create_list() {
     list *lst = (list *) malloc(sizeof(list));
     lst->head = NULL;
@@ -18,11 +20,13 @@ list *lst_create_list() {
     return lst;
 }
 
+//Deleting the list
 void lst_delete_list(list * lst) {
     lst_erase(lst);
     free(lst);
 }
 
+//Inserting a new node at the head of the list
 void lst_insert_head(list * lst, lnode * pnew) {
     if (lst->head == NULL) {
         lst->head = pnew;
@@ -35,6 +39,7 @@ void lst_insert_head(list * lst, lnode * pnew) {
     pnew->next->prev = pnew;
 }
 
+//Insterting a node at the tail of the list
 void lst_insert_tail(list * lst, lnode * pnew) {
     if (lst->head == NULL) {
         lst->head = pnew;
@@ -66,6 +71,7 @@ void lst_insert_after(list * lst, lnode * pnew, lnode * ptr) {
     }
 }
 
+//Deleting the head of the list
 void lst_delete_head(list * lst) {
     if (lst->head->next == NULL) {
         free(lst->head);
@@ -78,6 +84,7 @@ void lst_delete_head(list * lst) {
     lst->head->prev = NULL;
 }
 
+//Deleting the tail of the list
 void lst_delete_tail(list * lst) {
     if (lst->tail->prev == NULL) {
         free(lst->tail);
@@ -90,6 +97,7 @@ void lst_delete_tail(list * lst) {
     lst->tail->next = NULL;
 }
 
+//Deleting a node
 void lst_delete_lnode(list * lst, lnode * ptr) {
     if (ptr == NULL)
         return;
@@ -105,6 +113,7 @@ void lst_delete_lnode(list * lst, lnode * ptr) {
     ptr->prev->next = ptr->next;
     free(ptr);
 }
+
 
 void lst_erase(list * lst) {
     if (lst->head == NULL)
