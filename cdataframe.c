@@ -24,6 +24,10 @@ CDATAFRAME *create_cdataframe(ENUM_TYPE *cdftype, int size) {
 }
 
 void delete_cdataframe(CDATAFRAME **cdf) {
+    free(cdf);
+}
+
+CDATAFRAME* load_from_csv(char *file_name, ENUM_TYPE *dftype, int size);
     /*
         if (*cdf != NULL) {
         for (int i = 0; i < get_nbcols(*cdf); i++) {
@@ -35,6 +39,23 @@ void delete_cdataframe(CDATAFRAME **cdf) {
         *cdf = NULL;
     }
     */
+}
+
+void delete_column(CDATAFRAME *cdf, char *col_name) {
+    cdf_log("delete_column");
+    if (cdf != NULL) {        
+        lnode *node = (lnode *)get_first_node(cdf);
+        node = (lnode *)get_first_node(cdf);
+        while (node != NULL) {
+            node = (lnode *)get_next_node(cdf, node);
+            COLUMN *col = (COLUMN *)node->data;
+            if (strcmp(col_name, col->title) == 0) {
+                lst_delete_lnode(cdf, node);
+                cdf_log("lst_delete_lnode");
+                return;
+            }
+        }
+    }
 }
 
 void display_cdf(CDATAFRAME *cdf) {
@@ -50,9 +71,8 @@ void display_cdf(CDATAFRAME *cdf) {
         }
     }
 }
-
-int get_nbcols(CDATAFRAME *cdf){
-    cdf_log("get_nbcols");
+int get_cdataframe_cols_size(CDATAFRAME *cdf) {
+    cdf_log("get_cdataframe_cols_size()");
     int count = 0;
 
     if (cdf != NULL) {        
@@ -78,18 +98,21 @@ void    run_cdf_test() {
         if (i == 1) {
             int v11 = 11, v12 = -12, v13 = 13;
             printf("col[%i] load : %i, %i, %i \n", i, v11, v12, v13);
+            col->title = "col1";
             insert_value(col, &v11);
             insert_value(col, &v12);
             insert_value(col, &v13);
         } else if (i == 2) {
             char v21 = 'a', v22 = 'b', v23 = 'z';
             printf("col[%i] load : %c, %c, %c \n", i, v21, v22, v23);
+            col->title = "col2";
             insert_value(col, &v21);
             insert_value(col, &v22);
             insert_value(col, &v23);
         } else if (i == 3) {
             int v31 = 3333333, v32 = -987654321, v33 = 0;
             printf("col[%i] load : %i, %i, %i \n", i, v31, v32, v33);
+            col->title = "col3";
             insert_value(col, &v31);
             insert_value(col, &v32);
             insert_value(col, &v33);
@@ -97,7 +120,27 @@ void    run_cdf_test() {
         node = (lnode *)get_next_node(cdf, node);
         i++;
     }
-
+    delete_column(cdf, "col2");
     printf("\n\n");
     display_cdf(cdf);
+}
+
+
+void csv_to_cdataframe(CDATAFRAME *cdf, char *filename) {
+
+FILE *fptr;
+
+// Open a file in read mode
+fptr = fopen("data.csv", "r");
+
+// Store the content of the file
+char myString[100];
+
+while(fgets(myString, 100, fptr)) {
+  printf("%s", myString);
+}
+
+// Close the file
+fclose(fptr); 
+
 }

@@ -48,8 +48,13 @@ int read_exec_command(Command* cmd) {
         cmd_test();
     } else if (strcmp(cmd->name, "cdf_new") == 0) {
         print_header("cdf_new");
-    } else if (strcmp(cmd->name, "col_new") == 0) {
-        print_header("col_new");
+    } else if (strcmp(cmd->name, "cdf_col_del") == 0) {
+        print_header("cdf_col_del");
+
+        delete_column(cdf, "col2");
+
+    } else if (strcmp(cmd->name, "cdf_col_nb") == 0) {
+        print_header("delete_cdataframe");
     } else if (strcmp(cmd->name, "help") == 0) {
         printf("\033[2J\033[1;1H");
         printf("Application HELP\n");

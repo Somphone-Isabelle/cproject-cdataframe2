@@ -2,12 +2,11 @@
 #define TOOLS_H
 
 #define BUFFER_SIZE 255
-#define FCT_SIZE 30
-#define MAX_PARAMS 10
+#define MAX_PARAMS 100
 
 struct command {
-    char name[FCT_SIZE];
-    int size;
+    char name[BUFFER_SIZE];
+    int size = 0;
     char* params[MAX_PARAMS];
 };
 
