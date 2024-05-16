@@ -19,7 +19,11 @@ Command* create_commande() {
 }
 
 void add_param(Command* cmd, char* p) {
-    cmd->params[cmd->size++] = p;
+    printf("arg : %s\n", p);
+    char *str = malloc(BUFFER_SIZE);
+    stpcpy(str, p);
+    cmd->params[cmd->size] = str;
+    cmd->size++;
 }
 
 void free_cmd(Command* cmd) {
@@ -77,20 +81,19 @@ int read_exec_command(Command* cmd) {
 }
 
 void read_from_stdin(Command* cmd) {
-    char texte[255];
+    char texte[1000];
     printf("\n>");
     fgets(texte, sizeof(texte), stdin);
     texte[strcspn(texte, "\n")] = '\0';
     if (strlen(texte) == 0) {
         return;
     }
-
+    printf("> cmd : %s\n", texte);
     char* token = strtok(texte, " ");
     strcpy(cmd->name, token);
     while (token != NULL) {
         token = (char *)strtok(NULL, " ");
         if (token != NULL) {
-            int test = (int)isInt(token);
             add_param(cmd, token);
         }
     }
@@ -136,6 +139,12 @@ int cmd_exit(Command* cmd) {
     exit(0);
 }
 
+int cmd_error(char *msg) {
+    cdf_log("error");
+    print_header(msg);
+    return 0;
+}
+
 int cmd_clear(Command* cmd) {
     cdf_log("cmd_clear()");
     print_header("clear");
@@ -145,6 +154,7 @@ int cmd_clear(Command* cmd) {
 int cmd_test(Command* cmd) {
     cdf_log("cmd_test()");
     print_header("test : run default test");
+    
     run_cdf_test();
     return 0;
 }
@@ -186,103 +196,144 @@ int cmd_help(Command* cmd) {
 
 int cmd_cdf_new(Command* cmd) {
     cdf_log("cmd_cdf_new()");
-    print_header("cmd_cdf_new");
+//    print_header("cmd_cdf_new");
+    char *usage = "cdf_new INT CHAR STRING DOUBLE INT";
+    ENUM_TYPE *cdftype = malloc(cmd->size * sizeof(ENUM_TYPE));
+    for (int i = 0; i < cmd->size; i++) {
+        char *param = cmd->params[i];
+        printf("exec cdf_new with %s\n", param);
+        if (strcmp(param, "INT") == 0) {
+            cdftype[i] = INT;
+        } else if (strcmp(param, "UINT") == 0) {
+            cdftype[i] = UINT;
+        } else if (strcmp(param, "DOUBLE") == 0) {
+            cdftype[i] = DOUBLE;
+        } else if (strcmp(param, "FLOAT") == 0) {
+            cdftype[i] = FLOAT;
+        } else if (strcmp(param, "CHAR") == 0) {
+            cdftype[i] = CHAR;
+        } else if (strcmp(param, "STRING") == 0) {
+            cdftype[i] = STRING;
+        } else {
+            cmd_error("Error parametre incorrect !");
+        }
+    }
+    CDF = create_cdataframe(cdftype, cmd->size);
     return 0;
 }
 
 int cmd_cdf_display(Command* cmd) {
     cdf_log("cmd_cdf_display()");
     print_header("cmd_cdf_display");
+
+    display_cdf(CDF);
+
     return 0;
 }
 
 int cmd_cdf_delete(Command* cmd) {
     cdf_log("cmd_cdf_delete()");
     print_header("cmd_cdf_delete");
+    printf("TODO\n");
     return 0;
 }
 
 int cmd_row_new(Command* cmd) {
     cdf_log("cmd_row_new()");
     print_header("cmd_row_new");
+    printf("TODO\n");
     return 0;
 }
 
 int cmd_row_delete(Command* cmd) {
     cdf_log("cmd_row_delete()");
     print_header("cmd_row_delete");
+    printf("TODO\n");
     return 0;
 }
 
 int cmd_row_display(Command* cmd) {
     cdf_log("cmd_row_display()");
     print_header("cmd_row_display");
+    printf("TODO\n");
     return 0;
 }
 
 int cmd_col_new(Command* cmd) {
     cdf_log("cmd_col_new()");
     print_header("cmd_col_new");
+    printf("TODO\n");
     return 0;
 }
 
 int cmd_col_delete(Command* cmd) {
     cdf_log("cmd_col_delete()");
     print_header("cmd_col_delete");
+    printf("TODO\n");
     return 0;
 }
 
 int cmd_col_display(Command* cmd) {
     cdf_log("cmd_col_display()");
     print_header("cmd_col_display");
+    printf("TODO\n");
     return 0;
 }
 
 int cmd_col_insert(Command* cmd) {
     cdf_log("cmd_col_insert()");
     print_header("cmd_col_insert");
+    printf("TODO\n");
     return 0;
 }
 
 int cmd_col_title(Command* cmd) {
     cdf_log("cmd_col_title()");
     print_header("cmd_col_title");
+    printf("TODO\n");
     return 0;
 }
 
 int cmd_col_edit(Command* cmd) {
     cdf_log("cmd_col_edit()");
     print_header("cmd_col_edit");
+    printf("TODO\n");
     return 0;
 }
 int cmd_col_test(Command* cmd) {
     cdf_log("cmd_col_test()");
     print_header("cmd_col_test");
+    printf("TODO\n");
     return 0;
 }
 int cmd_col_sort(Command* cmd) {
     cdf_log("cmd_col_sort()");
     print_header("cmd_col_sort");
+    printf("TODO\n");
     return 0;
 }
 int cmd_col_list(Command* cmd) {
     cdf_log("cmd_col_list()");
     print_header("cmd_col_list");
+    printf("TODO\n");
     return 0;
 }
 int cmd_csv_import(Command* cmd) {
     cdf_log("cmd_csv_import()");
     print_header("cmd_csv_import");
+    printf("TODO\n");
     return 0;
 }
 int cmd_csv_export(Command* cmd) {
     cdf_log("cmd_csv_export()");
     print_header("cmd_csv_export");
+    printf("TODO\n");
     return 0;
 }
 int cmd_search(Command* cmd) {
     cdf_log("cmd_search()");
     print_header("cmd_search");
+    printf("TODO\n");
     return 0;
 }
 

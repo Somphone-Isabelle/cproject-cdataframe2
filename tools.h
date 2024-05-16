@@ -30,6 +30,8 @@ int cmd_test();
 void cmd_run();
 void cdf_log(char *str);
 
+int cmd_error(char *msg);
+
 /* LIST COMMAND */
 int cmd_exit(Command* cmd);
 int cmd_clear(Command* cmd);
