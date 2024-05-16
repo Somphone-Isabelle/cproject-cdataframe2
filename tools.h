@@ -5,7 +5,7 @@
 #define MAX_PARAMS 100
 
 static CDATAFRAME   *CDF;
-static COLUMN       *COL;
+static unsigned int INDEX = 0; // TODO controle de la taille de colone < index
 
 struct command {
     char name[BUFFER_SIZE];
@@ -49,9 +49,12 @@ int cmd_col_delete(Command* cmd);
 int cmd_col_insert(Command* cmd);
 int cmd_col_title(Command* cmd);
 int cmd_col_edit(Command* cmd);
+int cmd_col_list(Command* cmd);
 int cmd_col_test(Command* cmd);
 int cmd_col_sort(Command* cmd);
 int cmd_csv_import(Command* cmd);
 int cmd_csv_export(Command* cmd);
+
+ENUM_TYPE string_to_enumtype(char *_str);
 
 #endif 

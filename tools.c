@@ -196,3 +196,25 @@ void cmd_run() {
     }
 }
 
+ENUM_TYPE string_to_enumtype(char *_str) {
+    cdf_log("string_to_enumtype()");
+
+    ENUM_TYPE type;
+    if (strcmp(_str, "INT") == 0) {
+        type = INT;
+    } else if (strcmp(_str, "UINT") == 0) {
+        type = UINT;
+    } else if (strcmp(_str, "DOUBLE") == 0) {
+        type = DOUBLE;
+    } else if (strcmp(_str, "FLOAT") == 0) {
+        type = FLOAT;
+    } else if (strcmp(_str, "CHAR") == 0) {
+        type = CHAR;
+    } else if (strcmp(_str, "STRING") == 0) {
+        type = STRING;
+    } else {
+        type = NULLVAL;
+    }
+    return type;
+}
+

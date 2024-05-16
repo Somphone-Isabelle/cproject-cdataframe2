@@ -90,22 +90,10 @@ int cmd_col_new(Command* cmd) {
     if (cmd->size != 2) {
         return cmd_error("Error parametre incorrect !");
     }
-    ENUM_TYPE type;    
     char *title = cmd->params[1];
     char *param = cmd->params[0];
-    if (strcmp(param, "INT") == 0) {
-        type = INT;
-    } else if (strcmp(param, "UINT") == 0) {
-        type = UINT;
-    } else if (strcmp(param, "DOUBLE") == 0) {
-        type = DOUBLE;
-    } else if (strcmp(param, "FLOAT") == 0) {
-        type = FLOAT;
-    } else if (strcmp(param, "CHAR") == 0) {
-        type = CHAR;
-    } else if (strcmp(param, "STRING") == 0) {
-        type = STRING;
-    } else {
+    ENUM_TYPE type = string_to_enumtype(param);
+    if (type == NULLVAL) {
         return cmd_error("Error parametre incorrect !");
     }
     COLUMN *col = create_column(type, title);
@@ -152,7 +140,10 @@ int cmd_col_title(Command* cmd) {
 int cmd_col_edit(Command* cmd) {
     cdf_log("cmd_col_edit()");
     print_header("cmd_col_edit");
-    printf("TODO\n");
+    char *usage = "col_edit colomn_id colomn_place value";
+        cmd_error("Error edit colomn.\n usage : col_edit colomn_id colomn_place value");
+
+
     return 0;
 }
 int cmd_col_test(Command* cmd) {
@@ -170,7 +161,8 @@ int cmd_col_sort(Command* cmd) {
 int cmd_col_list(Command* cmd) {
     cdf_log("cmd_col_list()");
     print_header("cmd_col_list");
-    printf("TODO\n");
+ 
+        printf("TODO\n");
     return 0;
 }
 int cmd_csv_import(Command* cmd) {

@@ -58,6 +58,24 @@ void display_cdf(CDATAFRAME *cdf) {
         }
     }
 }
+
+char **display_cdf_titles(CDATAFRAME *cdf) {
+    cdf_log("display_cdf");
+    char **titles;
+    if (cdf != NULL) {        
+        lnode *node = (lnode *)get_first_node(cdf);
+        node = (lnode *)get_first_node(cdf);
+        while (node != NULL) {
+            COLUMN *col = (COLUMN *)node->data;
+//            titles[i   
+            print_col(col);
+            node = (lnode *)get_next_node(cdf, node);
+        }
+    }
+}
+
+
+
 int get_cdataframe_cols_size(CDATAFRAME *cdf) {
     cdf_log("get_cdataframe_cols_size()");
     int count = 0;

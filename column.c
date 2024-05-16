@@ -58,23 +58,9 @@ int insert_value(COLUMN *col, void *value){
             break;
         case DOUBLE:
             *((double *)(col->data[col->size])) = *((double *)value);
-            //col->data[col->size]->double_value = ;
-            //printf("> DOUBLE : %f\n", col->data[col->size]);
             break;
         case STRING:{
-//            char * _buffer = malloc(ssizeof(char))
-//            
-//            col->data[col->size]->string_value = (char *)malloc(strlen(value) * sizeof(char));
-            /*
-            char *str_value = (char *)value;
-            if (col->data[col->size]->string_value == NULL) {
-                free(col->data[col->size]);
-                return 0;
-            }            
-            strcpy(col->data[col->size]->string_value, value);
-            */          
             col->data[col->size]->string_value = value;
- //           printf("> %s\n", col->data[col->size]->string_value);
             break;
         }
         case STRUCTURE:
@@ -416,4 +402,18 @@ int run_column_test() {
     print_col(colFloat);
 }
 
+/*
+void col_title(COLUMN *_col, char *_title) {
+    if (_col != NULL && _title != NULL){
+        _col->title = _title;
+    }
+}
 
+void col_value(COLUMN *_col, unsigned int _index, void *_data) {
+    if (_col != NULL && _data != NULL && _index < _col->size) {
+        _col->data[_index - 1] = _data;
+    } else {
+        cmd_error("Error update colomn value");
+    }
+}
+*/
