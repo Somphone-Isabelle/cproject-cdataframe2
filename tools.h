@@ -4,6 +4,9 @@
 #define BUFFER_SIZE 255
 #define MAX_PARAMS 100
 
+static CDATAFRAME   *CDF;
+static COLUMN       *COL;
+
 struct command {
     char name[BUFFER_SIZE];
     int size;
@@ -19,6 +22,7 @@ int isFloat(char* str);
 int isChar(char* str);
 int isString(char* str);
 int isStruct(char* str);
+void print_header(char *title);
 
 Command* create_commande();
 void add_param(Command* cmd, char* p);
