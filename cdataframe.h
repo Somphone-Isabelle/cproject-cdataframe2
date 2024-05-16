@@ -6,6 +6,8 @@
 
 typedef list CDATAFRAME;
 
+extern CDATAFRAME **CDFS;
+
 //BASICS
 CDATAFRAME *create_cdataframe(ENUM_TYPE *cdftype, int size); //done
 void delete_cdataframe(CDATAFRAME **cdf);

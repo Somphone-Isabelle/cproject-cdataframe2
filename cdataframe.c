@@ -78,27 +78,27 @@ void    run_cdf_test() {
     CDATAFRAME *cdf = create_cdataframe(cdftype, 3);
     
     int i = 1;
-    printf("\n\n");
+    printf("\n\nINSERT DATA\n\n");
     lnode *node = (lnode *)get_first_node(cdf);
     while (node != NULL) {
         COLUMN *col = (COLUMN *)node->data;
         if (i == 1) {
             int v11 = 11, v12 = -12, v13 = 13;
-            printf("col[%i] load : %i, %i, %i \n", i, v11, v12, v13);
+            printf("INSERT col[%i] load : %i, %i, %i \n", i, v11, v12, v13);
             col->title = "col1";
             insert_value(col, &v11);
             insert_value(col, &v12);
             insert_value(col, &v13);
         } else if (i == 2) {
             char v21 = 'a', v22 = 'b', v23 = 'z';
-            printf("col[%i] load : %c, %c, %c \n", i, v21, v22, v23);
+            printf("INSERT col[%i] load : %c, %c, %c \n", i, v21, v22, v23);
             col->title = "col2";
             insert_value(col, &v21);
             insert_value(col, &v22);
             insert_value(col, &v23);
         } else if (i == 3) {
             int v31 = 3333333, v32 = -987654321, v33 = 0;
-            printf("col[%i] load : %i, %i, %i \n", i, v31, v32, v33);
+            printf("INSERT col[%i] load : %i, %i, %i \n", i, v31, v32, v33);
             col->title = "col3";
             insert_value(col, &v31);
             insert_value(col, &v32);
@@ -107,8 +107,14 @@ void    run_cdf_test() {
         node = (lnode *)get_next_node(cdf, node);
         i++;
     }
+
+    printf("\n\nDISPLAY\n");
+    display_cdf(cdf);
+
+    printf("\n\nDELETE col2\n");
     delete_column(cdf, "col2");
-    printf("\n\n");
+    
+    printf("\n\nDISPLAY\n");    
     display_cdf(cdf);
 }
 

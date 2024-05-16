@@ -30,4 +30,22 @@ int cmd_test();
 void cmd_run();
 void cdf_log(char *str);
 
+/* LIST COMMAND */
+int cmd_exit(Command* cmd);
+int cmd_clear(Command* cmd);
+int cmd_test(Command* cmd);
+int cmd_help(Command* cmd);
+int cmd_cdf_new(Command* cmd);
+int cmd_cdf_display(Command* cmd); 
+int cmd_cdf_delete(Command* cmd);
+int cmd_col_new(Command* cmd);
+int cmd_col_delete(Command* cmd);
+int cmd_col_insert(Command* cmd);
+int cmd_col_title(Command* cmd);
+int cmd_col_edit(Command* cmd);
+int cmd_col_test(Command* cmd);
+int cmd_col_sort(Command* cmd);
+int cmd_csv_import(Command* cmd);
+int cmd_csv_export(Command* cmd);
+
 #endif 
