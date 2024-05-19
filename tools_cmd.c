@@ -47,7 +47,8 @@ int cmd_cdf_display(Command* cmd) {
     cdf_log("cmd_cdf_display()");
     print_header("cmd_cdf_display");
 
-    display_cdf(CDF);
+    cdf_print_line(CDF, 0);
+//    display_cdf(CDF);
 
     return 0;
 }
@@ -62,10 +63,20 @@ int cmd_cdf_delete(Command* cmd) {
     return 0;
 }
 
-int cmd_row_new(Command* cmd) {
+int cmd_row_insert(Command* cmd) {
     cdf_log("cmd_row_new()");
     print_header("cmd_row_new");
-    printf("TODO\n");
+
+    if (CDF != NULL) {
+        lnode *node = (lnode *)get_first_node(CDF);
+        int i = 0;
+        while (node != NULL) {
+            COLUMN *col = (COLUMN *)node->data;
+            insert_value(col, cmd->params[i++]);
+            node = (lnode *)get_next_node(CDF, node);
+        }
+    }
+
     return 0;
 }
 
@@ -97,6 +108,9 @@ int cmd_col_new(Command* cmd) {
         return cmd_error("Error parametre incorrect !");
     }
     COLUMN *col = create_column(type, title);
+    for (int i = 0; i < cdf_line_size(CDF); i++) {
+        insert_value(col, NULL);
+    }
     if (col != NULL) {
         lnode *node = lst_create_lnode(col);
         if (node != NULL) {
@@ -119,6 +133,8 @@ int cmd_col_delete(Command* cmd) {
 int cmd_col_display(Command* cmd) {
     cdf_log("cmd_col_display()");
     print_header("cmd_col_display");
+    char *usage = "cmd_col_display numero_colonne";
+
     printf("TODO\n");
     return 0;
 }
@@ -126,14 +142,25 @@ int cmd_col_display(Command* cmd) {
 int cmd_col_insert(Command* cmd) {
     cdf_log("cmd_col_insert()");
     print_header("cmd_col_insert");
-    printf("TODO\n");
+
+    if (cmd != NULL && cmd->size == 2) {
+
+    }
     return 0;
 }
 
 int cmd_col_title(Command* cmd) {
     cdf_log("cmd_col_title()");
     print_header("cmd_col_title");
-    printf("TODO\n");
+    char *usage = "col_title col_pos title";
+
+    if (cmd != NULL && cmd->size == 2) {
+        int x;
+        sscanf(cmd->params[0], "%d", &x);
+        cdf_col_title(CDF, x, cmd->params[1]);
+    } else {
+        printf("ERROR : %s", usage);
+    }
     return 0;
 }
 
@@ -141,8 +168,7 @@ int cmd_col_edit(Command* cmd) {
     cdf_log("cmd_col_edit()");
     print_header("cmd_col_edit");
     char *usage = "col_edit colomn_id colomn_place value";
-        cmd_error("Error edit colomn.\n usage : col_edit colomn_id colomn_place value");
-
+    cmd_error("Error edit colomn.\n usage : col_edit colomn_id colomn_place value");
 
     return 0;
 }

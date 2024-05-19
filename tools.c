@@ -31,7 +31,7 @@ void free_cmd(Command* cmd) {
 }
 
 void print_header(char *title) {
-    printf("\033[2J\033[1;1H"); // clean screen
+//    printf("\033[2J\033[1;1H"); // clean screen
     printf("%s\n", title); // title
     printf("help to list command\n");
     printf("________________________________________________________________________________\n");
@@ -50,7 +50,7 @@ int read_exec_command(Command* cmd) {
         cmd_test(cmd);
     } else if (strcmp(cmd->name, "cdf_new") == 0) {
         cmd_cdf_new(cmd);
-    } else if (strcmp(cmd->name, "cdf_display") == 0) {
+    } else if (strcmp(cmd->name, "cdf_display") == 0 || strcmp(cmd->name, "display") == 0) {
         cmd_cdf_display(cmd);
     } else if (strcmp(cmd->name, "cdf_delete") == 0) {
         cmd_cdf_delete(cmd);
@@ -70,6 +70,12 @@ int read_exec_command(Command* cmd) {
         cmd_col_sort(cmd);
     } else if (strcmp(cmd->name, "csv_import") == 0) {
         cmd_csv_import(cmd);
+    } else if (strcmp(cmd->name, "row_insert") == 0) {
+        cmd_row_insert(cmd);
+    } else if (strcmp(cmd->name, "row_delete") == 0) {
+        cmd_row_delete(cmd);
+    } else if (strcmp(cmd->name, "row_display") == 0) {
+        cmd_row_display(cmd);
     } else if (strcmp(cmd->name, "csv_export") == 0) {
         cmd_csv_export(cmd);
     } else if (strcmp(cmd->name, "help") == 0) {
@@ -157,32 +163,22 @@ int cmd_help(Command* cmd) {
     printf("HELP\n");
     printf("\n");
     printf("List of commands\n");
-    printf("- test : run test\n");
-    printf("- cdf_new  : usage >col_new type_colonne titre_colonne\n");
-    printf("- col_add  : usage >col_add value1 value2 value3...\n");
-    printf("- col_show : usage >col_show\n");
-    printf("- col_del  : usage >col_del nom_colonne\n");
-    printf("- col_sort : ...\n");
-    printf("- import   : usage >import fichier_donnees.csv");
-    printf("...\n");
-
-    printf("- exit : \n");
-    printf("- clear : \n");
-    printf("- test : \n");
-    printf("- help : \n");
-    printf("- cdf_new : \n");
-    printf("- cdf_display : \n"); 
-    printf("- cdf_delete : \n");
-    printf("- col_new : \n");
-    printf("- col_delete : \n");
-    printf("- col_insert : \n");
-    printf("- col_title : \n");
-    printf("- col_edit : \n");
-    printf("- col_test : \n");
+    printf("- clear : clear screen\n");
+    printf("- test : load test data\n");
+    printf("- cdf_new : usage : >cdf_new INT CHAR STRING DOUBLE INT\n");
+    printf("- cdf_display : display cdataframe\n"); 
+    printf("- cdf_delete : delete\n");
+    printf("- col_new : add new column, usage >col_new TYPE title\n");
+    printf("- col_delete : delete colomn at POS, usage >col_delete POS\n");
+    printf("- col_insert : insert new column at POS, usage >col_insert POS TYPE tile\n");
+    printf("- col_title : replace title, usage >col_tile POS new_title\n");
+    printf("- col_edit : replace data at column et line\n");
     printf("- col_sort : \n");
     printf("- csv_import : \n");
     printf("- csv_export : \n");
-
+    printf("- help : \n");
+    printf("- exit : exit\n");
+    
     printf("________________________________________________________________________________\n");
 }
 
@@ -217,4 +213,5 @@ ENUM_TYPE string_to_enumtype(char *_str) {
     }
     return type;
 }
+
 

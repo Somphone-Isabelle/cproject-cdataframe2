@@ -58,7 +58,15 @@ int get_nbcols(CDATAFRAME *cdf);
 int disp_cell_equal(CDATAFRAME* cdf, void *x);
 int disp_cell_great(CDATAFRAME* cdf, void *x);
 int disp_cell_lower(CDATAFRAME* cdf, void *x);
-
 */
+
+/*
+void print_col_data_by_index(COLUMN *_col, unsigned int _index);
+void print_data_by_enum(ENUM_TYPE _type, void *_data);
+*/
+
+void cdf_print_line(CDATAFRAME *_cdf, int _line);
+void cdf_col_title(CDATAFRAME *_cdf, unsigned int _pos, char *_title);
+int cdf_line_size(CDATAFRAME *_cdf);
 
 #endif 

@@ -40,7 +40,6 @@ void delete_column(CDATAFRAME *cdf, char *col_name) {
                 return;
             }
             node = (lnode *)get_next_node(cdf, node);
-
         }
     }
 }
@@ -67,14 +66,11 @@ char **display_cdf_titles(CDATAFRAME *cdf) {
         node = (lnode *)get_first_node(cdf);
         while (node != NULL) {
             COLUMN *col = (COLUMN *)node->data;
-//            titles[i   
             print_col(col);
             node = (lnode *)get_next_node(cdf, node);
         }
     }
 }
-
-
 
 int get_cdataframe_cols_size(CDATAFRAME *cdf) {
     cdf_log("get_cdataframe_cols_size()");
@@ -92,12 +88,15 @@ int get_cdataframe_cols_size(CDATAFRAME *cdf) {
 }
 
 void    run_cdf_test() {
+    cdf_log("run_cdf_test()");
+
     ENUM_TYPE cdftype [] = {INT,CHAR,INT};
-    CDATAFRAME *cdf = create_cdataframe(cdftype, 3);
+    // CDATAFRAME *cdf = create_cdataframe(cdftype, 3);
+    CDF = create_cdataframe(cdftype, 3);
     
     int i = 1;
     printf("\n\nINSERT DATA\n\n");
-    lnode *node = (lnode *)get_first_node(cdf);
+    lnode *node = (lnode *)get_first_node(CDF);
     while (node != NULL) {
         COLUMN *col = (COLUMN *)node->data;
         if (i == 1) {
@@ -122,10 +121,11 @@ void    run_cdf_test() {
             insert_value(col, &v32);
             insert_value(col, &v33);
         }
-        node = (lnode *)get_next_node(cdf, node);
+        node = (lnode *)get_next_node(CDF, node);
         i++;
     }
 
+/*
     printf("\n\nDISPLAY\n");
     display_cdf(cdf);
 
@@ -134,24 +134,170 @@ void    run_cdf_test() {
     
     printf("\n\nDISPLAY\n");    
     display_cdf(cdf);
-}
+    cdf_print_line(2);
 
+*/
+    cdf_print_line(CDF, 0);
+    printf("\n");
+
+    cdf_print_line(CDF, 3);
+    printf("\n");
+
+    cdf_col_title(CDF, 2, "XXX");
+    printf("\n");
+
+    cdf_print_line(CDF, 1);
+    printf("\n");
+
+    cdf_print_line(CDF, 2);
+    printf("\n");
+
+    cdf_print_line(CDF, 4);
+    printf("\n");
+
+    //    display_cdf(CDF);
+}
 
 void csv_to_cdataframe(CDATAFRAME *cdf, char *filename) {
+    cdf_log("csv_to_cdataframe");
 
-FILE *fptr;
-
-// Open a file in read mode
-fptr = fopen("data.csv", "r");
-
-// Store the content of the file
-char myString[100];
-
-while(fgets(myString, 100, fptr)) {
-  printf("%s", myString);
+    FILE *fptr;
+    // Open a file in read mode
+    fptr = fopen("data.csv", "r");
+    // Store the content of the file
+    char myString[100];
+    while(fgets(myString, 100, fptr)) {
+        printf("%s", myString);
+    }
+    // Close the file
+    fclose(fptr); 
 }
 
-// Close the file
-fclose(fptr); 
-
+void cdf_col_title(CDATAFRAME *_cdf, unsigned int _pos, char *_title) {
+    if (_cdf != NULL) {
+        int pos = _pos - 1;
+        int i = 0;
+        lnode *node = (lnode *)get_first_node(_cdf);
+        while (node != NULL) {
+            COLUMN *col = (COLUMN *)node->data;
+            if (i == pos) {
+                col->title = _title;
+                return;
+            }        
+            node = (lnode *)get_next_node(_cdf, node);
+            i++;
+        }
+    }
 }
+
+void cdf_print_line(CDATAFRAME *_cdf, int _line) {
+    cdf_log("cdf_print_line()");
+
+    if (_cdf != NULL) {
+
+        lnode *node = (lnode *)get_first_node(_cdf);
+        while (node != NULL) {
+            COLUMN *col = (COLUMN *)node->data;
+            printf("|\t%s\t", col->title);
+            node = (lnode *)get_next_node(_cdf, node);
+        }
+        printf("|\n");
+
+        if (_line != 0){
+            int pos = _line - 1;
+            int col_pos = 0;
+            printf("|");
+            lnode *node = (lnode *)get_first_node(_cdf);
+            while (node != NULL) {
+                COLUMN *col = (COLUMN *)node->data;
+                if (col != NULL) {
+                    if (col->index[pos] == pos) {
+                        char str[BUFFER_SIZE];
+                        convert_value(col, pos, str, BUFFER_SIZE);
+                        printf("|\t%s\t", str);
+                    }
+                }
+                node = (lnode *)get_next_node(_cdf, node);
+                col_pos++;
+            }
+            printf("|\n");
+        } else {
+            lnode *node = (lnode *)get_first_node(_cdf);
+            COLUMN *col = (COLUMN *)node->data;
+            for (int i = 0; i < col->size; i++) {
+                node = (lnode *)get_first_node(_cdf);
+                while (node != NULL) {
+                    col = (COLUMN *)node->data;
+                    if (col != NULL) {
+                        char str[BUFFER_SIZE];
+                        convert_value(col, i, str, BUFFER_SIZE);
+                        printf("|\t%s\t", str);
+                    }
+                    node = (lnode *)get_next_node(_cdf, node);
+                }
+            printf("|\n");
+            }
+        }
+    }
+}
+ 
+int cdf_line_size(CDATAFRAME *_cdf) {
+    if (_cdf != NULL) {
+        lnode *node = (lnode *)get_first_node(_cdf);
+        COLUMN *col = (COLUMN *)node->data;        
+        return col->size;
+    }
+    return 0;
+}
+
+/*
+void print_col_data_by_index(COLUMN *_col, unsigned int _index) {
+    cdf_log("print_col_data_by_index()");
+    if (_col != NULL && _col->column_type != NULLVAL) {
+        convert_value();
+        print_data_by_enum(_col->column_type, _col->data[_index]);
+        printf("\t|\t");
+    }
+}
+char *print_data_by_enum(ENUM_TYPE _type, void *_data) {
+    if (_data != NULL && _type != NULLVAL) {
+        if (_type == INT) {
+            cdf_log("INT");
+            printf("%i", _data);
+        } else if (_type == UINT) {
+            cdf_log("UINT");
+            printf("%u", _data);
+        } else if (_type == FLOAT) {
+            cdf_log("FLOAT");
+            printf("%f", _data);
+        } else if (_type == DOUBLE) {
+            cdf_log("DOUBLE");
+            printf("%f", _data);
+        } else if (_type == CHAR) {
+            cdf_log("CHAR");
+            printf("%c", _data);
+        } else if (_type == STRING) {
+            cdf_log("STRING");
+            printf("%s", _data);
+        } else if (_type == STRUCTURE) {
+            cdf_log("STRUCTURE");
+            printf("TODO", _data);
+        } 
+    }
+}
+
+*/
+
+
+/*
+
+    if (_cdf != null) {
+        lnode *node = (lnode *)get_first_node(_cdf);
+        while (node != NULL) {
+            COLUMN *col = (COLUMN *)node->data;        
+            node = (lnode *)get_next_node(_cdf, node);
+        }
+    }
+
+
+*/
