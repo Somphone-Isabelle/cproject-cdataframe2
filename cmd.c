@@ -12,8 +12,6 @@
 #include "cmd_col.h"
 #include "cmd_row.h"
 
-CDATAFRAME   *CDF;
-
 //Command to run a test 
 int cmd_test(Command* cmd) {
     cdf_log("cmd_test()");
@@ -62,7 +60,7 @@ int read_exec_command(Command* cmd) {
         cmd_clear(cmd);
     } else if (strcmp(cmd->name, "test") == 0) {
         cmd_test(cmd);
-    } else if (strcmp(cmd->name, "cdf_new") == 0 || strcmp(cmd->name, "new") == 0) {
+    } else if (strcmp(cmd->name, "cdf_new") == 0) {
         cmd_cdf_new(cmd);
     } else if (strcmp(cmd->name, "cdf_display") == 0 || strcmp(cmd->name, "display") == 0) {
         cmd_cdf_display(cmd);
@@ -72,6 +70,8 @@ int read_exec_command(Command* cmd) {
         cmd_col_new(cmd);
     } else if (strcmp(cmd->name, "col_delete") == 0) {
         cmd_col_delete(cmd);
+    } else if (strcmp(cmd->name, "col_insert") == 0) {
+        cmd_col_insert(cmd);
     } else if (strcmp(cmd->name, "col_title") == 0) {
         cmd_col_title(cmd);
     } else if (strcmp(cmd->name, "col_edit") == 0) {
@@ -82,7 +82,7 @@ int read_exec_command(Command* cmd) {
         cmd_col_sort(cmd);
     } else if (strcmp(cmd->name, "csv_import") == 0) {
         cmd_csv_import(cmd);
-    } else if (strcmp(cmd->name, "row_insert") == 0 || strcmp(cmd->name, "row_new") == 0) {
+    } else if (strcmp(cmd->name, "row_insert") == 0) {
         cmd_row_insert(cmd);
     } else if (strcmp(cmd->name, "row_delete") == 0) {
         cmd_row_delete(cmd);
@@ -124,25 +124,26 @@ int cmd_help(Command* cmd) {
     printf("\n");
     printf("List of commands\n");
     printf("General commands\n");
-    printf("\t- To clear the screem : type 'clear' \n");
-    printf("\t- To load a random test : type 'test' \n");
+    printf("\t- clear : To clear the screem > type 'clear' \n");
+    printf("\t- test : To load a random test > type 'test' \n");
     printf("\t- csv_import : \n");
     printf("\t- csv_export : \n");
     printf("\t- help : \n");
     printf("\t- exit : exit\n");
     printf("Cdataframe's commands\n");
-    printf("\t- To create a cdataframe: type 'cdf_new TYPE TYPE ...'\n");
+    printf("\t- cdf_new : to create a cdataframe: type 'cdf_new TYPE TYPE ...'\n");
     printf("\t- cdf_display : display cdataframe\n"); 
     printf("\t- cdf_delete : delete\n");
     printf("Column's commands\n");
-    printf("\t- col_new : add new column, usage >col_new TYPE title\n");
-    printf("\t- col_delete : delete colomn at POS, usage >col_delete POS\n");
-    printf("\t- col_insert : insert new column at POS, usage >col_insert POS TYPE tile\n");
-    printf("\t- col_title : replace title, usage >col_tile POS new_title\n");
-    printf("\t- col_edit : replace data at column et line\n");
-    printf("\t- col_sort : \n");
+    printf("\t- col_new : to add a column > type 'col_new TYPE title'\n");
+    printf("\t- col_delete : to delete column > type 'col_delete POS'\n");
+    printf("\t- col_title : to replace a title > type 'col_title POS new_title'\n");
+    printf("\t- cdf_edit : to replace a data at col and line > type 'cdf_edit data posx posy\n");
+    printf("\t- col_sort : to sort a column > type 'col_sort colnb asc/desc\n");
     printf("Row's commands\n");
-    printf("\t- row display :\n");    
+    printf("\t- row_display : to display a row > type 'row_display pos'\n"); 
+    printf("\t- row_new : to add a row > type 'row_new val1 val2 ...'\n");
+    printf("\t- row_delete : to delete a row > type 'row_delete pos'\n")   
     printf("________________________________________________________________________________\n");
 }
 
@@ -157,4 +158,3 @@ void cmd_run() {
         free_cmd(cmd);
     }
 }
-
