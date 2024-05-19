@@ -250,7 +250,8 @@ void cdf_print_line(CDATAFRAME *_cdf, int _line) {
         }
     }
 }
- 
+
+//Returning the size of a line in the cdataframe
 int cdf_line_size(CDATAFRAME *_cdf) {
     if (_cdf != NULL) {
         lnode *node = (lnode *)get_first_node(_cdf);
