@@ -489,4 +489,3 @@ int insert_value2(COLUMN *col, char *value){
 }
 
 
-

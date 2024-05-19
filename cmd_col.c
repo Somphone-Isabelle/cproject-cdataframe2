@@ -13,7 +13,7 @@
 #include "cmd_row.h"
  
  //Command to initialize a new column
-int cmd_col_new(Command* cmd) {
+int cmd_col_add(Command* cmd) {
     cdf_log("cmd_col_new()");
     print_header("cmd_col_new");
 
@@ -46,7 +46,12 @@ int cmd_col_new(Command* cmd) {
 int cmd_col_delete(Command* cmd) {
     cdf_log("cmd_col_delete()");
     print_header("cmd_col_delete");
-    printf("TODO\n");
+
+    if (cmd != NULL && cmd->size == 1) {
+        delete_column(CDF, cmd->params[0]);
+    } else {
+        return cmd_error("Error bad params. Usage : col_delete COL_NAME");
+    }
     return 0;
 }
 
@@ -57,17 +62,6 @@ int cmd_col_display(Command* cmd) {
     char *usage = "cmd_col_display numero_colonne";
 
     printf("TODO\n");
-    return 0;
-}
-
-//Command to insert a column in the cdataframe
-int cmd_col_insert(Command* cmd) {
-    cdf_log("cmd_col_insert()");
-    print_header("cmd_col_insert");
-
-    if (cmd != NULL && cmd->size == 2) {
-
-    }
     return 0;
 }
 
@@ -96,15 +90,6 @@ int cmd_col_edit(Command* cmd) {
 
     return 0;
 }
-
-//Command to test the columns
-int cmd_col_test(Command* cmd) {
-    cdf_log("cmd_col_test()");
-    print_header("cmd_col_test");
-    printf("TODO\n");
-    return 0;
-}
-
 
 //Command to sort the columns of the cdataframe
 int cmd_col_sort(Command* cmd) {

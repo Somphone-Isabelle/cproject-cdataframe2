@@ -68,5 +68,6 @@ void print_data_by_enum(ENUM_TYPE _type, void *_data);
 void cdf_print_line(CDATAFRAME *_cdf, int _line);
 void cdf_col_title(CDATAFRAME *_cdf, unsigned int _pos, char *_title);
 int cdf_line_size(CDATAFRAME *_cdf);
+void display_cdf_titles(CDATAFRAME *cdf);
 
 #endif 

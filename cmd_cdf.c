@@ -53,8 +53,8 @@ int cmd_cdf_display(Command* cmd) {
     cdf_log("cmd_cdf_display()");
     print_header("cmd_cdf_display");
 
+    /* Display all lines */
     cdf_print_line(CDF, 0);
-//    display_cdf(CDF);
     return 0;
 }
 
@@ -65,5 +65,13 @@ int cmd_cdf_delete(Command* cmd) {
 
 //    lst_delete_list
 //    delete_cdataframe(*CDF);
+    return 0;
+}
+
+int cmd_cdf_colums(Command* cmd) {
+    cdf_log("cmd_cdf_colums()");
+    print_header("cmd_cdf_colums");
+
+    display_cdf_titles(CDF);
     return 0;
 }

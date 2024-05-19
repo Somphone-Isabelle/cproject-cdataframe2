@@ -13,7 +13,7 @@
 #include "cmd_row.h"
 
 //Command to insert a row
-int cmd_row_insert(Command* cmd) {
+int cmd_row_add(Command* cmd) {
     cdf_log("cmd_row_new()");
     print_header("cmd_row_new");
 
@@ -22,11 +22,10 @@ int cmd_row_insert(Command* cmd) {
         int i = 0;
         while (node != NULL) {
             COLUMN *col = (COLUMN *)node->data;
-            insert_value(col, cmd->params[i++]);
+            insert_value2(col, cmd->params[i++]);
             node = (lnode *)get_next_node(CDF, node);
         }
     }
-
     return 0;
 }
 

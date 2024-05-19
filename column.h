@@ -32,6 +32,7 @@ typedef struct column COLUMN;
 
 COLUMN *create_column(ENUM_TYPE type, char* title);
 int insert_value(COLUMN* col, void *value);
+int insert_value2(COLUMN* col, char *value);
 void del_column(COLUMN **col);
 void convert_value(COLUMN *col, unsigned int i, char *str, int size);
 void print_col(COLUMN* col);
