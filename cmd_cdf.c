@@ -1,3 +1,4 @@
+//Cdataframe project led by Isabelle and Ambre - Commands for the cdataframe
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -11,6 +12,7 @@
 #include "cmd_col.h"
 #include "cmd_row.h"
 
+//Command to initialize a new cdataframe
 int cmd_cdf_new(Command* cmd) {
     cdf_log("cmd_cdf_new()");
 //    print_header("cmd_cdf_new");
@@ -46,6 +48,7 @@ int cmd_cdf_new(Command* cmd) {
     return 0;
 }
 
+//Command to display the cdataframe
 int cmd_cdf_display(Command* cmd) {
     cdf_log("cmd_cdf_display()");
     print_header("cmd_cdf_display");
@@ -56,6 +59,7 @@ int cmd_cdf_display(Command* cmd) {
     return 0;
 }
 
+//Command to delete the cdataframe
 int cmd_cdf_delete(Command* cmd) {
     cdf_log("cmd_cdf_delete()");
     print_header("cmd_cdf_delete");
