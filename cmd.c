@@ -115,26 +115,31 @@ int cmd_help(Command* cmd) {
     printf("HELP\n");
     printf("\n");
     printf("List of commands\n");
-    printf("- clear : clear screen\n");
-    printf("- test : load test data\n");
-    printf("- cdf_new : usage : >cdf_new INT CHAR STRING DOUBLE INT\n");
-    printf("- cdf_display : display cdataframe\n"); 
-    printf("- cdf_delete : delete\n");
-    printf("- col_new : add new column, usage >col_new TYPE title\n");
-    printf("- col_delete : delete colomn at POS, usage >col_delete POS\n");
-    printf("- col_insert : insert new column at POS, usage >col_insert POS TYPE tile\n");
-    printf("- col_title : replace title, usage >col_tile POS new_title\n");
-    printf("- col_edit : replace data at column et line\n");
-    printf("- col_sort : \n");
-    printf("- csv_import : \n");
-    printf("- csv_export : \n");
-    printf("- help : \n");
-    printf("- exit : exit\n");
-    
+    printf("General commands\n");
+    printf("\t- To clear the screem : type 'clear' \n");
+    printf("\t- To load a random test : type 'test' \n");
+    printf("\t- csv_import : \n");
+    printf("\t- csv_export : \n");
+    printf("\t- help : \n");
+    printf("\t- exit : exit\n");
+    printf("Cdataframe's commands\n");
+    printf("\t- To create a cdataframe: type 'cdf_new TYPE TYPE ...'\n");
+    printf("\t- cdf_display : display cdataframe\n"); 
+    printf("\t- cdf_delete : delete\n");
+    printf("Column's commands\n");
+    printf("\t- col_new : add new column, usage >col_new TYPE title\n");
+    printf("\t- col_delete : delete colomn at POS, usage >col_delete POS\n");
+    printf("\t- col_insert : insert new column at POS, usage >col_insert POS TYPE tile\n");
+    printf("\t- col_title : replace title, usage >col_tile POS new_title\n");
+    printf("\t- col_edit : replace data at column et line\n");
+    printf("\t- col_sort : \n");
+    printf("Row's commands\n");
+    printf("\t- row display :\n");    
     printf("________________________________________________________________________________\n");
 }
 
 void cmd_run() {
+    printf("\n");
     print_header("Enter a command :");
     while (1) {
         Command* cmd = create_commande();

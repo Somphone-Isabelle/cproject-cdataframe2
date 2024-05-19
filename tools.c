@@ -29,7 +29,7 @@ void add_param(Command* cmd, char* p) {
 void print_header(char *title) {
 //    printf("\033[2J\033[1;1H"); // clean screen
     printf("%s\n", title); // title
-    printf("help to list command\n");
+    printf("Type 'help' to list all the commands\n");
     printf("________________________________________________________________________________\n");
 }
 
