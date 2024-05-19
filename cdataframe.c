@@ -7,6 +7,7 @@
 
 #define TITLE_MAX_LENGTH 50
 
+//Creating the cdataframe in function of the type of data and the size we want
 CDATAFRAME *create_cdataframe(ENUM_TYPE *cdftype, int size) {
     CDATAFRAME *cdf = (CDATAFRAME *)lst_create_list();
     for (int i = 0; i < size; i++) {
@@ -23,10 +24,12 @@ CDATAFRAME *create_cdataframe(ENUM_TYPE *cdftype, int size) {
     return cdf;
 }
 
+//Delete the cdatafrme
 void delete_cdataframe(CDATAFRAME **cdf) {
     free(cdf);
 }
 
+//Delete a coulumn in the cdataframe
 void delete_column(CDATAFRAME *cdf, char *col_name) {
     cdf_log("delete_column");
     if (cdf != NULL) {        
@@ -44,6 +47,7 @@ void delete_column(CDATAFRAME *cdf, char *col_name) {
     }
 }
 
+//Display the cdataframe
 void display_cdf(CDATAFRAME *cdf) {
     cdf_log("display_cdf");
 
@@ -58,6 +62,7 @@ void display_cdf(CDATAFRAME *cdf) {
     }
 }
 
+//Display the titles of cdataframe's columns
 char **display_cdf_titles(CDATAFRAME *cdf) {
     cdf_log("display_cdf");
     char **titles;
@@ -72,6 +77,7 @@ char **display_cdf_titles(CDATAFRAME *cdf) {
     }
 }
 
+//Returning the size of the cdataframe's columns
 int get_cdataframe_cols_size(CDATAFRAME *cdf) {
     cdf_log("get_cdataframe_cols_size()");
     int count = 0;
@@ -87,6 +93,7 @@ int get_cdataframe_cols_size(CDATAFRAME *cdf) {
     return count;
 }
 
+//Function to test all commands and other functions linked to the cdtaframe
 void    run_cdf_test() {
     cdf_log("run_cdf_test()");
 
@@ -158,6 +165,7 @@ void    run_cdf_test() {
     //    display_cdf(CDF);
 }
 
+//Taking the content of a 'csv' file to store its data in the cdataframe
 void csv_to_cdataframe(CDATAFRAME *cdf, char *filename) {
     cdf_log("csv_to_cdataframe");
 
@@ -173,6 +181,7 @@ void csv_to_cdataframe(CDATAFRAME *cdf, char *filename) {
     fclose(fptr); 
 }
 
+//Define a title for a specific column in the cdataframe
 void cdf_col_title(CDATAFRAME *_cdf, unsigned int _pos, char *_title) {
     if (_cdf != NULL) {
         int pos = _pos - 1;
@@ -190,6 +199,7 @@ void cdf_col_title(CDATAFRAME *_cdf, unsigned int _pos, char *_title) {
     }
 }
 
+//Display one or several lines of the cdataframe
 void cdf_print_line(CDATAFRAME *_cdf, int _line) {
     cdf_log("cdf_print_line()");
 
