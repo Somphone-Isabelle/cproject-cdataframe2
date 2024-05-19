@@ -1,4 +1,5 @@
-#include "tools.h"
+#ifndef CMD_H
+#define CMD_H
 
 int cmd_test(Command* cmd);
 
@@ -21,3 +22,5 @@ int cmd_clear(Command* cmd);
 int cmd_help(Command* cmd);
 
 void cmd_run();
+
+#endif 

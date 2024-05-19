@@ -1,8 +1,15 @@
-#include "cmd_cdf.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include "cdataframe.h"
+#include "column.h"
+#include "list.h"
+#include "tools.h"
 #include "cmd.h"
+#include "cmd_cdf.h"
 #include "cmd_col.h"
 #include "cmd_row.h"
-#include "tools.h"
 
 int cmd_row_insert(Command* cmd) {
     cdf_log("cmd_row_new()");

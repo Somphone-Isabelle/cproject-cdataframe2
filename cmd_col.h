@@ -1,6 +1,5 @@
 #ifndef CMD_COL_H
 #define CMD_COL_H
-#include "tools.h"
 
 int cmd_col_new(Command* cmd);
 int cmd_col_delete(Command* cmd);
