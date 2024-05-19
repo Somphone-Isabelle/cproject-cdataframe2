@@ -1,3 +1,4 @@
+//Cdataframe project led by Isabelle and Ambre - Commands for the columns of the cdataframe
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -10,7 +11,8 @@
 #include "cmd_cdf.h"
 #include "cmd_col.h"
 #include "cmd_row.h"
-
+ 
+ //Command to initialize a new column
 int cmd_col_new(Command* cmd) {
     cdf_log("cmd_col_new()");
     print_header("cmd_col_new");
@@ -40,6 +42,7 @@ int cmd_col_new(Command* cmd) {
     return 0;
 }
 
+//Command to delete a column
 int cmd_col_delete(Command* cmd) {
     cdf_log("cmd_col_delete()");
     print_header("cmd_col_delete");
@@ -47,6 +50,7 @@ int cmd_col_delete(Command* cmd) {
     return 0;
 }
 
+//Command to display columns
 int cmd_col_display(Command* cmd) {
     cdf_log("cmd_col_display()");
     print_header("cmd_col_display");
@@ -56,6 +60,7 @@ int cmd_col_display(Command* cmd) {
     return 0;
 }
 
+//Command to insert a column in the cdataframe
 int cmd_col_insert(Command* cmd) {
     cdf_log("cmd_col_insert()");
     print_header("cmd_col_insert");
@@ -66,6 +71,7 @@ int cmd_col_insert(Command* cmd) {
     return 0;
 }
 
+//Command to define a title for a specific column
 int cmd_col_title(Command* cmd) {
     cdf_log("cmd_col_title()");
     print_header("cmd_col_title");
@@ -81,6 +87,7 @@ int cmd_col_title(Command* cmd) {
     return 0;
 }
 
+//Command to edit a column
 int cmd_col_edit(Command* cmd) {
     cdf_log("cmd_col_edit()");
     print_header("cmd_col_edit");
@@ -89,18 +96,25 @@ int cmd_col_edit(Command* cmd) {
 
     return 0;
 }
+
+//Command to test the columns
 int cmd_col_test(Command* cmd) {
     cdf_log("cmd_col_test()");
     print_header("cmd_col_test");
     printf("TODO\n");
     return 0;
 }
+
+
+//Command to sort the columns of the cdataframe
 int cmd_col_sort(Command* cmd) {
     cdf_log("cmd_col_sort()");
     print_header("cmd_col_sort");
     printf("TODO\n");
     return 0;
 }
+
+//Command to list the columns
 int cmd_col_list(Command* cmd) {
     cdf_log("cmd_col_list()");
     print_header("cmd_col_list");
