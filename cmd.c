@@ -1,3 +1,4 @@
+//Cdataframe project led by Isabelle and Ambre - Commands functions for the cdataframe
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -11,6 +12,7 @@
 #include "cmd_col.h"
 #include "cmd_row.h"
 
+//Command to run a test 
 int cmd_test(Command* cmd) {
     cdf_log("cmd_test()");
     print_header("test : run default test");
@@ -19,18 +21,23 @@ int cmd_test(Command* cmd) {
     return 0;
 }
 
+//command to import data from a csv format
 int cmd_csv_import(Command* cmd) {
     cdf_log("cmd_csv_import()");
     print_header("cmd_csv_import");
     printf("TODO\n");
     return 0;
 }
+
+//Command to export data into a csv format
 int cmd_csv_export(Command* cmd) {
     cdf_log("cmd_csv_export()");
     print_header("cmd_csv_export");
     printf("TODO\n");
     return 0;
 }
+
+//Command to search a certain value 
 int cmd_search(Command* cmd) {
     cdf_log("cmd_search()");
     print_header("cmd_search");
@@ -109,6 +116,7 @@ int cmd_clear(Command* cmd) {
     return 0;
 }
 
+//Display of the list of all the commands to exploit the cdataframe
 int cmd_help(Command* cmd) {
     cdf_log("cmd_help()");
     printf("\033[2J\033[1;1H");
@@ -138,6 +146,7 @@ int cmd_help(Command* cmd) {
     printf("________________________________________________________________________________\n");
 }
 
+//Command to run the code
 void cmd_run() {
     printf("\n");
     print_header("Enter a command :");
