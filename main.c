@@ -12,7 +12,6 @@
 
 int main() {
     cmd_run();
-    //test 1
     return 0;
 }
 
