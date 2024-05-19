@@ -18,6 +18,7 @@ Command* create_commande() {
     return cmd;
 }
 
+//Add a parameter
 void add_param(Command* cmd, char* p) {
     printf("arg : %s\n", p);
     char *str = malloc(BUFFER_SIZE);
@@ -29,7 +30,7 @@ void add_param(Command* cmd, char* p) {
 void print_header(char *title) {
 //    printf("\033[2J\033[1;1H"); // clean screen
     printf("%s\n", title); // title
-    printf("Type 'help' to list all the commands\n");
+    printf("help to list command\n");
     printf("________________________________________________________________________________\n");
 }
 
