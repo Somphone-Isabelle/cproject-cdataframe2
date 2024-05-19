@@ -143,7 +143,7 @@ int cmd_help(Command* cmd) {
     printf("Row's commands\n");
     printf("\t- row_display : to display a row > type 'row_display pos'\n"); 
     printf("\t- row_new : to add a row > type 'row_new val1 val2 ...'\n");
-    printf("\t- row_delete : to delete a row > type 'row_delete pos'\n")   
+    printf("\t- row_delete : to delete a row > type 'row_delete pos'\n");   
     printf("________________________________________________________________________________\n");
 }
 
