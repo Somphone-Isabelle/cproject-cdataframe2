@@ -1,6 +1,8 @@
 #ifndef CMD_H
 #define CMD_H
 
+extern CDATAFRAME   *CDF;
+
 int cmd_test(Command* cmd);
 
 int cmd_csv_import(Command* cmd);

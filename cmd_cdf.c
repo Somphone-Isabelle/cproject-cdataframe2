@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+
 #include "cdataframe.h"
 #include "column.h"
 #include "list.h"
@@ -15,6 +16,7 @@
 //Command to initialize a new cdataframe
 int cmd_cdf_new(Command* cmd) {
     cdf_log("cmd_cdf_new()");
+
 //    print_header("cmd_cdf_new");
     if (cmd != NULL && cmd->size > 0) {
             ENUM_TYPE *cdftype = malloc(cmd->size * sizeof(ENUM_TYPE));
@@ -38,12 +40,10 @@ int cmd_cdf_new(Command* cmd) {
                 }
             }
             CDF = create_cdataframe(cdftype, cmd->size);
-
     }
     else {
         char *usage = "cdf_new INT CHAR STRING DOUBLE INT";
         printf("ERROR : %s", usage);
-
     }
     return 0;
 }
@@ -55,7 +55,6 @@ int cmd_cdf_display(Command* cmd) {
 
     cdf_print_line(CDF, 0);
 //    display_cdf(CDF);
-
     return 0;
 }
 
@@ -66,7 +65,5 @@ int cmd_cdf_delete(Command* cmd) {
 
 //    lst_delete_list
 //    delete_cdataframe(*CDF);
-
     return 0;
 }
-

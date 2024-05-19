@@ -3,8 +3,7 @@
 #define BUFFER_SIZE 255
 #define MAX_PARAMS 100
 
-static CDATAFRAME   *CDF;
-static unsigned int INDEX = 0; // TODO controle de la taille de colone < index
+// static unsigned int INDEX = 0; // TODO controle de la taille de colone < index
 
 struct command {
     char name[BUFFER_SIZE];

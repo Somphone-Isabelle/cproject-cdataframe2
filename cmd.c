@@ -12,6 +12,8 @@
 #include "cmd_col.h"
 #include "cmd_row.h"
 
+CDATAFRAME   *CDF;
+
 //Command to run a test 
 int cmd_test(Command* cmd) {
     cdf_log("cmd_test()");
@@ -60,7 +62,7 @@ int read_exec_command(Command* cmd) {
         cmd_clear(cmd);
     } else if (strcmp(cmd->name, "test") == 0) {
         cmd_test(cmd);
-    } else if (strcmp(cmd->name, "cdf_new") == 0) {
+    } else if (strcmp(cmd->name, "cdf_new") == 0 || strcmp(cmd->name, "new") == 0) {
         cmd_cdf_new(cmd);
     } else if (strcmp(cmd->name, "cdf_display") == 0 || strcmp(cmd->name, "display") == 0) {
         cmd_cdf_display(cmd);
@@ -70,8 +72,6 @@ int read_exec_command(Command* cmd) {
         cmd_col_new(cmd);
     } else if (strcmp(cmd->name, "col_delete") == 0) {
         cmd_col_delete(cmd);
-    } else if (strcmp(cmd->name, "col_insert") == 0) {
-        cmd_col_insert(cmd);
     } else if (strcmp(cmd->name, "col_title") == 0) {
         cmd_col_title(cmd);
     } else if (strcmp(cmd->name, "col_edit") == 0) {
@@ -82,7 +82,7 @@ int read_exec_command(Command* cmd) {
         cmd_col_sort(cmd);
     } else if (strcmp(cmd->name, "csv_import") == 0) {
         cmd_csv_import(cmd);
-    } else if (strcmp(cmd->name, "row_insert") == 0) {
+    } else if (strcmp(cmd->name, "row_insert") == 0 || strcmp(cmd->name, "row_new") == 0) {
         cmd_row_insert(cmd);
     } else if (strcmp(cmd->name, "row_delete") == 0) {
         cmd_row_delete(cmd);

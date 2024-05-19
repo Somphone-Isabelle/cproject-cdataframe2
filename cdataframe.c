@@ -6,8 +6,6 @@
 #include "list.h"
 #include "tools.h"
 
-#define TITLE_MAX_LENGTH 50
-
 //Creating the cdataframe in function of the type of data and the size we want
 CDATAFRAME *create_cdataframe(ENUM_TYPE *cdftype, int size) {
     CDATAFRAME *cdf = (CDATAFRAME *)lst_create_list();
@@ -95,16 +93,16 @@ int get_cdataframe_cols_size(CDATAFRAME *cdf) {
 }
 
 //Function to test all commands and other functions linked to the cdtaframe
-void    run_cdf_test() {
+void    run_cdf_test(CDATAFRAME *_cdf) {
     cdf_log("run_cdf_test()");
 
     ENUM_TYPE cdftype [] = {INT,CHAR,INT};
     // CDATAFRAME *cdf = create_cdataframe(cdftype, 3);
-    CDF = create_cdataframe(cdftype, 3);
+    _cdf = create_cdataframe(cdftype, 3);
     
     int i = 1;
     printf("\n\nINSERT DATA\n\n");
-    lnode *node = (lnode *)get_first_node(CDF);
+    lnode *node = (lnode *)get_first_node(_cdf);
     while (node != NULL) {
         COLUMN *col = (COLUMN *)node->data;
         if (i == 1) {
@@ -129,7 +127,7 @@ void    run_cdf_test() {
             insert_value(col, &v32);
             insert_value(col, &v33);
         }
-        node = (lnode *)get_next_node(CDF, node);
+        node = (lnode *)get_next_node(_cdf, node);
         i++;
     }
 
@@ -145,22 +143,22 @@ void    run_cdf_test() {
     cdf_print_line(2);
 
 */
-    cdf_print_line(CDF, 0);
+    cdf_print_line(_cdf, 0);
     printf("\n");
 
-    cdf_print_line(CDF, 3);
+    cdf_print_line(_cdf, 3);
     printf("\n");
 
-    cdf_col_title(CDF, 2, "XXX");
+    cdf_col_title(_cdf, 2, "XXX");
     printf("\n");
 
-    cdf_print_line(CDF, 1);
+    cdf_print_line(_cdf, 1);
     printf("\n");
 
-    cdf_print_line(CDF, 2);
+    cdf_print_line(_cdf, 2);
     printf("\n");
 
-    cdf_print_line(CDF, 4);
+    cdf_print_line(_cdf, 4);
     printf("\n");
 
     //    display_cdf(CDF);

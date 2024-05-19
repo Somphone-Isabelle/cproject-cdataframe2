@@ -1,7 +1,9 @@
 #include "column.h"
+#include "tools.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #define REALLOC_SIZE 256
 #define TITLE_MAX_LENGTH 50
 
@@ -426,5 +428,65 @@ void col_value(COLUMN *_col, unsigned int _index, void *_data) {
     }
 }
 */
+
+//Inserting a new value in a column
+int insert_value2(COLUMN *col, char *value){
+    cdf_log("log : int insert_value2()");
+
+    if (col->size >= col->max_size){
+        COL_TYPE **new_data = (COL_TYPE **)realloc(col->data, (col->max_size + REALLOC_SIZE) * sizeof(COL_TYPE *));
+        if (new_data == NULL){
+            return 0;
+        }
+        col->data = new_data;
+        col->max_size += REALLOC_SIZE;
+    }
+    col->data[col->size] = (COL_TYPE *)malloc(sizeof(COL_TYPE));
+    if (value == NULL){
+        col->data[col->size] = NULL;
+    } else {
+    switch (col->column_type){
+        case UINT:
+            col->data[col->size]->uint_value = atoi(value);
+//            *((unsigned int *)(col->data[col->size])) = *((unsigned int *)value);
+            break;
+        case INT:
+            col->data[col->size]->int_value = atoi(value);
+//            *((signed int *)(col->data[col->size])) = *((signed int *)value);
+            break;
+        case CHAR:
+            *((char *)(col->data[col->size])) = *((char *)value);
+            break;
+        case FLOAT:
+            col->data[col->size]->float_value = atof(value);
+//            *((float *)(col->data[col->size])) = *((float *)value);
+	    //            printf("> FLOAT : %f\n", col->data[col->size]);
+            break;
+        case DOUBLE:
+            col->data[col->size]->double_value = atof(value);
+//            *((double *)(col->data[col->size])) = *((double *)value);
+            break;
+        case STRING:{
+            col->data[col->size]->string_value = value;
+            break;
+        }
+        case STRUCTURE:
+            break;
+        default:
+            return 0;    
+    }}
+    
+    long  long unsigned int *index = malloc(sizeof(int) + 1);
+    for (int i = 0; i < col->size; i++) {
+        index[i] = col->index[i];
+    }
+    index[col->size] = col->size;
+    col->index = index;
+
+    printf("index : %i\n", col->index[col->size]);
+    col->size++;
+    return 1;
+}
+
 
 
