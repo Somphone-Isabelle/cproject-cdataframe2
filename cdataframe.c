@@ -257,28 +257,29 @@ void csv_to_cdataframe(CDATAFRAME *cdf, char *filename) {
     } 
 }
 
-void csv_from_cdataframe(CDATAFRAME *cdf, char *filename) {
+void csv_from_cdataframe(CDATAFRAME *_cdf, char *_filename) {
     cdf_log("csv_from_cdataframe");
 
-    FILE *file = fopen(filename, "r");
+    FILE *file = fopen(_filename, "w");
 
     if (file != NULL) {
-        char str[BUFFER_SIZE];
-        while(fgets(str, BUFFER_SIZE, file)) {
-            char **data = malloc(100000);
-            char* token = strtok(str, ",");
-            int i = 0;
-            while (token != NULL) {
-                char *tmp = malloc(BUFFER_SIZE);
-                stpcpy(tmp, token);
-                // printf("%s - %s", str, tmp);
-                data[i++] = tmp;
-                token = (char *)strtok(NULL, ",");
+        if (_cdf != NULL && _cdf->tail != NULL) {
+            lnode *node = (lnode *)get_first_node(_cdf);
+            COLUMN *col = (COLUMN *)node->data;
+            for (int i = 0; i < col->size; i++) {
+                node = (lnode *)get_first_node(_cdf);
+                while (node != NULL) {
+                    col = (COLUMN *)node->data;
+                    if (col != NULL) {
+                        char str[BUFFER_SIZE];
+                        convert_value(col, i, str, BUFFER_SIZE);
+                        fprintf(file, "%s,", str);  
+                    }
+                    node = (lnode *)get_next_node(_cdf, node);
+                }
+                fprintf(file, "\n");
             }
-            row_add(cdf, data);
         }
-        // Store the content of the file
-        // Close the file
         fclose(file); 
     } 
 }
