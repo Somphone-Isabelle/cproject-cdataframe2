@@ -27,6 +27,7 @@ int cmd_test(Command* cmd) {
 int cmd_csv_import(Command* cmd) {
     cdf_log("cmd_csv_import()");
     print_header("cmd_csv_import");
+
     printf("TODO\n");
     return 0;
 }
@@ -68,7 +69,7 @@ int read_exec_command(Command* cmd) {
         cmd_cdf_display(cmd);
     } else if (strcmp(cmd->name, "cdf_delete") == 0) {
         cmd_cdf_delete(cmd);
-    } else if (strcmp(cmd->name, "cdf_colums") == 0) {
+    } else if (strcmp(cmd->name, "cdf_cols_name") == 0) {
         cmd_cdf_colums(cmd);
     } else if (strcmp(cmd->name, "col_new") == 0 || strcmp(cmd->name, "col_add") == 0) {
         cmd_col_add(cmd);

@@ -67,11 +67,12 @@ void display_cdf_titles(CDATAFRAME *cdf) {
     cdf_log("display_cdf");
 
     if (cdf != NULL) {        
+        printf("Columns :\n");
         lnode *node = (lnode *)get_first_node(cdf);
         node = (lnode *)get_first_node(cdf);
         while (node != NULL) {
             COLUMN *col = (COLUMN *)node->data;
-            print_col(col);
+            printf("- %s\n", col->title);
             node = (lnode *)get_next_node(cdf, node);
         }
     }
@@ -199,7 +200,7 @@ void cdf_col_title(CDATAFRAME *_cdf, unsigned int _pos, char *_title) {
     }
 }
 
-//Display one or several lines of the cdataframe
+// Display one line of the cdataframe if _line = 0 display all 
 void cdf_print_line(CDATAFRAME *_cdf, int _line) {
     cdf_log("cdf_print_line()");
 
@@ -251,64 +252,19 @@ void cdf_print_line(CDATAFRAME *_cdf, int _line) {
     }
 }
 
-//Returning the size of a line in the cdataframe
+// Returning the number of line in the cdataframe
 int cdf_line_size(CDATAFRAME *_cdf) {
+    cdf_log("cdf_line_size()");
+
+    int nb = 0;
     if (_cdf != NULL) {
         lnode *node = (lnode *)get_first_node(_cdf);
-        COLUMN *col = (COLUMN *)node->data;        
-        return col->size;
+        COLUMN *col = (COLUMN *)node->data;       
+        while (node != NULL) {
+            node = (lnode *)get_next_node(_cdf, node);
+            nb++;
+        }
+        printf("lines : %d", nb);
     }
     return 0;
 }
-
-/*
-void print_col_data_by_index(COLUMN *_col, unsigned int _index) {
-    cdf_log("print_col_data_by_index()");
-    if (_col != NULL && _col->column_type != NULLVAL) {
-        convert_value();
-        print_data_by_enum(_col->column_type, _col->data[_index]);
-        printf("\t|\t");
-    }
-}
-char *print_data_by_enum(ENUM_TYPE _type, void *_data) {
-    if (_data != NULL && _type != NULLVAL) {
-        if (_type == INT) {
-            cdf_log("INT");
-            printf("%i", _data);
-        } else if (_type == UINT) {
-            cdf_log("UINT");
-            printf("%u", _data);
-        } else if (_type == FLOAT) {
-            cdf_log("FLOAT");
-            printf("%f", _data);
-        } else if (_type == DOUBLE) {
-            cdf_log("DOUBLE");
-            printf("%f", _data);
-        } else if (_type == CHAR) {
-            cdf_log("CHAR");
-            printf("%c", _data);
-        } else if (_type == STRING) {
-            cdf_log("STRING");
-            printf("%s", _data);
-        } else if (_type == STRUCTURE) {
-            cdf_log("STRUCTURE");
-            printf("TODO", _data);
-        } 
-    }
-}
-
-*/
-
-
-/*
-
-    if (_cdf != null) {
-        lnode *node = (lnode *)get_first_node(_cdf);
-        while (node != NULL) {
-            COLUMN *col = (COLUMN *)node->data;        
-            node = (lnode *)get_next_node(_cdf, node);
-        }
-    }
-
-
-*/
