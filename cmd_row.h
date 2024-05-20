@@ -1,3 +1,5 @@
+//Cdataframe project led by Isabelle and Ambre - Commands for the rows of the cdataframe - header file
+
 #ifndef CMD_ROW_H
 #define CMD_ROW_H
 

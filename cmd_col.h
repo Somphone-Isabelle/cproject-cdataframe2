@@ -1,3 +1,5 @@
+//Cdataframe project led by Isabelle and Ambre - Commands for the columns of the cdataframe - header file
+
 #ifndef CMD_COL_H
 #define CMD_COL_H
 

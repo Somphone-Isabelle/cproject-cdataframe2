@@ -1,3 +1,4 @@
+//Cdataframe project led by Isabelle and Ambre - functions for the columns - header file
 #ifndef COLUMN_H
 #define COLUMN_H
 #define REALLOC_SIZE 256

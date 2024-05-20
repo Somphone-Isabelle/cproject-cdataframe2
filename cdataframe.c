@@ -1,4 +1,4 @@
-//Cdataframe project led by Isabelle and Ambre - File for the cdataframe functions
+//Cdataframe project led by Isabelle and Ambre - File for the cdataframe functions - source file
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

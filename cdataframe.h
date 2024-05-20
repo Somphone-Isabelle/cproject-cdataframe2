@@ -1,3 +1,4 @@
+//Cdataframe project led by Isabelle and Ambre - Commands for the cdataframe - header file
 #ifndef CDATAFRAME_H
 #define CDATAFRAME_H
 

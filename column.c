@@ -1,3 +1,5 @@
+//Cdataframe project led by Isabelle and Ambre - functions for the columns - source file
+
 #include "column.h"
 #include "tools.h"
 #include <stdio.h>

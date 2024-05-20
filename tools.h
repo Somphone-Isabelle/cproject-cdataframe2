@@ -1,3 +1,5 @@
+//Cdataframe project led by Isabelle and Ambre - functions for the tools - header file
+
 #ifndef TOOLS_H
 #define TOOLS_H
 #define BUFFER_SIZE 255

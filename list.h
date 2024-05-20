@@ -1,3 +1,5 @@
+//Cdataframe project led by Isabelle and Ambre - functions for the list - header file
+
 #ifndef _LIST_H_
 #define _LIST_H_
 /**
