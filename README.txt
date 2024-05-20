@@ -1,9 +1,8 @@
 # cproject-cdataframe2
-test 13/05/2024 19h05
 
 'CDataframe' project for EFREI Algorithmmics and Data Structure Course
 
-SOMPHONE Isabelle - BERDERY Ambre test
+SOMPHONE Isabelle - BERDERY Ambre 
 
 For windows user:
     Install Cygwin64 Terminal in order to compile and execute the code.
@@ -14,8 +13,6 @@ For windows user:
             -$ ./main.exe
 
 
-
-
 Git Repository url: https://github.com/Somphone-Isabelle/cproject-cdataframe2.git
 
 The goal of this project is to create a CDataFrame.
@@ -24,36 +21,47 @@ So in order to do, we first create an colomn.c and colomn.h file that allow us t
 
 Then next, we created a cdataframe.c and a cdataframe.h that will have all the main functions that are the fondation of the project and that will be use for the functionalities that will called in main.c thanks to a menu.
 
-Thank you for reading ! :
+We first started with the integer type only then we declined the functions to every types(string, char, float, etc).
+We tried with arrays but it turned out that we switched in SLL.
+To read the code, here is the order of the files:
+- main.c
+- tools.c
+- all the commands (cmd) files
+- list.c
+- cdataframee.c
+- column.c
 
 
-Liste des commandes :
+List of the commands :
 
 Cdataframe
 ----------------------------------------
 cdf_new : Create an empty cDataframe
-cdf_init : Remplissage du CDataframe à partir de saisies utilisateurs et remplissage en dur du CDataframe
+cdf_init : Filling of the CDataframe from the users inputs and hard fillig of the CDataframe
 cdf_display : Display the whole cDataframe
-cdf_search : Vérifier l’existence d’une valeur (recherche) dans le CDataframe
-cdf_edit : Accéder/remplacer la valeur se trouvant dans une cellule du CDataframe en utilisant son numéro de ligne et de colonne
-cdf_lines : Afficher le nombre de lignes
-cdf_colomns : Afficher le nombre de colonnes
-cdf_eq : Nombre de cellules égales à x (x donné en paramètre)
-cdf_gt : Nombre de cellules contenant une valeur supérieure à x (x donné en paramètre)
-cdf_lt : Nombre de cellules contenant une valeur inférieure à x(x donné en paramètre)
+cdf_search : Verify this existence of a value (search) in the CDataframe
+cdf_edit : Access/Replace a the value in a cell of the CDataframe using its number of line and column
+cdf_lines : Display the number of lines
+cdf_colomns : Display the number of columns
+cdf_eq :Number of cells containing a value equal to x (x given in parameter)
+cdf_gt : Number of cells containing a value greater than x(x given in parameter)
+cdf_lt : Number of cells containing a value less than x(x given in parameter)
 csv_export :
 csv_import : 
 
 Column
 ----------------------------------------
-col_display : Afficher une partie des colonnes du CDataframe selon une limite fournie par l’utilisateur
-col_add : Ajouter une colonne au CDataframe
-col_delete : Supprimer une colonne du CDataframe
-col_title : Renommer le titre d’une colonne du CDataframe
+col_display : Display a part of the columns of the CDataframe according to a limit defined by the user
+col_add : Add a column to the CDataframe
+col_delete : Delete a column from the CDataframe
+col_title : Rename the title of a column of the CDataframe
 col_sort : 
 
 Row
 ----------------------------------------
-row_display : Afficher une partie des lignes du CDataframe selon une limite fournie par l’utilisateur
-row_add : Ajouter une ligne de valeurs au CDataframe
-row_delete : Supprimer une ligne de valeurs du CDataframe
+row_display : Display a part of the lines of the CDataframe according to a limit defined by the user
+row_add : Add a line of values to the CDataframe
+row_delete : Delete a line of values to the CDataframe
+
+
+Thank you for reading!
