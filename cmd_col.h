@@ -3,6 +3,7 @@
 
 int cmd_col_add(Command* cmd);
 int cmd_col_delete(Command* cmd);
+int cmd_col_delete_by_int(Command* cmd);
 int cmd_col_display(Command* cmd);
 int cmd_col_insert(Command* cmd);
 int cmd_col_title(Command* cmd);

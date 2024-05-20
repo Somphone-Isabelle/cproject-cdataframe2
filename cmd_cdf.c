@@ -69,9 +69,7 @@ int cmd_cdf_display(Command* cmd) {
 int cmd_cdf_delete(Command* cmd) {
     cdf_log("cmd_cdf_delete()");
     print_header("cmd_cdf_delete");
-
     delete_cdataframe(CDF);
-
     return 0;
 }
 

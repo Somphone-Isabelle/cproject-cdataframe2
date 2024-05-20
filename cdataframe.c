@@ -14,17 +14,16 @@ CDATAFRAME *create_expty_cdataframe() {
     return cdf;
 }
 
-
 //Creating the cdataframe in function of the type of data and the size we want
 CDATAFRAME *create_cdataframe(ENUM_TYPE *cdftype, int size) {
     CDATAFRAME *cdf = (CDATAFRAME *)lst_create_list();
     if (size == 1) {
-        COLUMN *col = create_column(cdftype[0], "Nouveau");
+        COLUMN *col = create_column(cdftype[0], "Untitled");
         lnode *node = lst_create_lnode(col);
         lst_insert_head(cdf, node);
     } else {
         for (int i = 0; i < size; i++) {   
-            COLUMN *col = create_column(cdftype[i], "Nouveau");
+            COLUMN *col = create_column(cdftype[i], "Untitled");
             lnode *node = lst_create_lnode(col);
             
             if (cdf->head == NULL) {
@@ -55,6 +54,24 @@ void delete_column(CDATAFRAME *cdf, char *col_name) {
         while (node != NULL) {
             COLUMN *col = (COLUMN *)node->data;
             if (strcmp(col_name, col->title) == 0) {
+                lst_delete_lnode(cdf, node);
+                return;
+            }
+            node = (lnode *)get_next_node(cdf, node);
+        }
+    }
+}
+
+void delete_column2(CDATAFRAME *cdf, int pos) {
+    cdf_log("delete_column");
+
+    if (cdf != NULL) {
+        int ncol = 1;
+        lnode *node = (lnode *)get_first_node(cdf);
+        node = (lnode *)get_first_node(cdf);
+        while (node != NULL) {
+            if (ncol == pos) {
+                COLUMN *col = (COLUMN *)node->data;
                 lst_delete_lnode(cdf, node);
                 return;
             }

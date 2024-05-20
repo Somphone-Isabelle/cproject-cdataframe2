@@ -11,6 +11,7 @@ CDATAFRAME *create_expty_cdataframe();
 CDATAFRAME *create_cdataframe(ENUM_TYPE *cdftype, int size); //done
 void delete_cdataframe(CDATAFRAME *cdf);
 void delete_column(CDATAFRAME *cdf, char *col_name);
+void delete_column2(CDATAFRAME *cdf, int pos);
 int get_cdataframe_cols_size(CDATAFRAME *cdf);
 CDATAFRAME* load_from_csv(char *file_name, ENUM_TYPE *dftype, int size);
 

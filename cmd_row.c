@@ -45,8 +45,6 @@ int cmd_row_delete(Command* cmd) {
     } else {
         return cmd_error("Bad param, usage : row_delete pos");
     }
-    
-    printf("TODO\n");
     return 0;
 }
 

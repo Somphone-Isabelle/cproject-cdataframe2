@@ -60,6 +60,22 @@ int cmd_col_delete(Command* cmd) {
     return 0;
 }
 
+int cmd_col_delete_by_int(Command* cmd) {
+    cdf_log("cmd_col_delete()");
+    print_header("cmd_col_delete");
+
+    if (cmd != NULL && cmd->size == 1) {
+        if (isInt(cmd->params[0])) {
+            delete_column2(CDF, atoi(cmd->params[0]));
+        } else {
+            return cmd_error("Error not int");
+        }
+    } else {
+        return cmd_error("Error bad params. Usage : col_delete COL_NAME");
+    }
+    return 0;
+}
+
 //Command to display columns
 int cmd_col_display(Command* cmd) {
     cdf_log("cmd_col_display()");
@@ -136,6 +152,6 @@ int cmd_col_list(Command* cmd) {
     cdf_log("cmd_col_list()");
     print_header("cmd_col_list");
  
-        printf("TODO\n");
+    printf("TODO\n");
     return 0;
 }
