@@ -26,6 +26,7 @@ void cdf_col_title(CDATAFRAME *_cdf, unsigned int _pos, char *_title);
 int cdf_line_size(CDATAFRAME *_cdf);
 void display_cdf_titles(CDATAFRAME *cdf);
 void csv_to_cdataframe(CDATAFRAME *cdf, char *filename);
+void csv_from_cdataframe(CDATAFRAME *cdf, char *filename);
 int cdf_eq_test(CDATAFRAME *_cdf, float _val);
 void row_add(CDATAFRAME *cdf, char **data);
 void row_delete(CDATAFRAME *_cdf, int _line);
@@ -35,5 +36,6 @@ int cdf_search(CDATAFRAME *_cdf, void *_data);
 int cdf_eq(CDATAFRAME *_cdf, void *_data);
 int cdf_gt(CDATAFRAME *_cdf, void *_data);
 int cdf_lt(CDATAFRAME *_cdf, void *_data);
+
 
 #endif 

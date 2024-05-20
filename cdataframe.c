@@ -184,7 +184,8 @@ void    run_cdf_test(CDATAFRAME *_cdf) {
     cdf_print_line(_cdf, 0);
 
     csv_to_cdataframe(_cdf, "data.csv");
-//    row_delete(_cdf, 1);
+/*
+    row_delete(_cdf, 1);
 //    row_delete(_cdf, 5);
     cdf_print_line(_cdf, 0);
 
@@ -194,7 +195,8 @@ void    run_cdf_test(CDATAFRAME *_cdf) {
 
     
     edit(_cdf, "999", 4, 2);
-    edit(_cdf, "8", 1, 1);
+//    edit(_cdf, "8", 1, 1);
+*/
     cdf_print_line(_cdf, 0);
 //    delete_column2(_cdf, 2);
 //    cdf_print_line(_cdf, 0);
@@ -232,13 +234,48 @@ void row_delete(CDATAFRAME *_cdf, int _line) {
 void csv_to_cdataframe(CDATAFRAME *cdf, char *filename) {
     cdf_log("csv_to_cdataframe");
 
-    FILE *file = fopen("data.csv", "r");
+    FILE *file = fopen(filename, "r");
 
     if (file != NULL) {
         char str[BUFFER_SIZE];
-        while(fgets(str, 100, file)) {
-            printf("%s", str);
+        while(fgets(str, BUFFER_SIZE, file)) {
+            char **data = malloc(100000);
+            char* token = strtok(str, ",");
+            int i = 0;
+            while (token != NULL) {
+                char *tmp = malloc(BUFFER_SIZE);
+                stpcpy(tmp, token);
+                // printf("%s - %s", str, tmp);
+                data[i++] = tmp;
+                token = (char *)strtok(NULL, ",");
+            }
+            row_add(cdf, data);
+        }
+        // Store the content of the file
+        // Close the file
+        fclose(file); 
+    } 
+}
 
+void csv_from_cdataframe(CDATAFRAME *cdf, char *filename) {
+    cdf_log("csv_from_cdataframe");
+
+    FILE *file = fopen(filename, "r");
+
+    if (file != NULL) {
+        char str[BUFFER_SIZE];
+        while(fgets(str, BUFFER_SIZE, file)) {
+            char **data = malloc(100000);
+            char* token = strtok(str, ",");
+            int i = 0;
+            while (token != NULL) {
+                char *tmp = malloc(BUFFER_SIZE);
+                stpcpy(tmp, token);
+                // printf("%s - %s", str, tmp);
+                data[i++] = tmp;
+                token = (char *)strtok(NULL, ",");
+            }
+            row_add(cdf, data);
         }
         // Store the content of the file
         // Close the file

@@ -28,7 +28,11 @@ int cmd_csv_import(Command* cmd) {
     cdf_log("cmd_csv_import()");
     print_header("cmd_csv_import");
 
-    printf("TODO\n");
+    if (cmd != NULL && cmd->size == 1) {
+        csv_to_cdataframe(CDF, cmd->params[0]);
+    } else {
+        return cmd_error("Error bad params. Usage : csv_import COL_NAME");
+    }
     return 0;
 }
 
@@ -36,7 +40,12 @@ int cmd_csv_import(Command* cmd) {
 int cmd_csv_export(Command* cmd) {
     cdf_log("cmd_csv_export()");
     print_header("cmd_csv_export");
-    printf("TODO\n");
+
+    if (cmd != NULL && cmd->size == 1) {
+        csv_from_cdataframe(CDF, cmd->params[0]);
+    } else {
+        return cmd_error("Error bad params. Usage : csv_import COL_NAME");
+    }
     return 0;
 }
 
@@ -141,8 +150,8 @@ int cmd_help(Command* cmd) {
     printf("General commands\n");
     printf("\t- clear : To clear the screem > type 'clear' \n");
     printf("\t- test : To load a random test > type 'test' \n");
-    printf("\t- csv_import : \n");
-    printf("\t- csv_export : \n");
+    printf("\t- csv_import : import data from csv > type 'csv_import file.csv'\n");
+    printf("\t- csv_export : export date to csv > type 'csv_export file.csv'\n");
     printf("\t- help : \n");
     printf("\t- exit : exit\n");
     printf("Cdataframe's commands\n");
@@ -152,6 +161,11 @@ int cmd_help(Command* cmd) {
     printf("\t- cdf_search : cdf_search data\n"); 
     printf("\t- cdf_lines : display rows size\n"); 
     printf("\t- cdf_cols : display cols\n"); 
+    printf("\t- cdf_edit : edit > type 'cdf_edit data posx posy' \n"); 
+    printf("\t- cdf_search : search > type 'cdf_search data' \n"); 
+    printf("\t- cdf_eq : nb eq to data > type 'cdf_eq data'\n"); 
+    printf("\t- cdf_gt : nb great then data > type 'cdf_gt data'\n"); 
+    printf("\t- cdf_lt : nb less then data > type 'cdf_lt data'\n"); 
     printf("Column's commands\n");
     printf("\t- col_add : to add a column > type 'col_add TYPE title'\n");
     printf("\t- col_display : to display one collomn at POS > type 'col_display POS'\n");

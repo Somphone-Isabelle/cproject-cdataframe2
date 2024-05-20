@@ -29,7 +29,6 @@ int cmd_cdf_init(Command* cmd) {
             ENUM_TYPE *cdftype = malloc(cmd->size * sizeof(ENUM_TYPE));
             for (int i = 0; i < cmd->size; i++) {
                 char *param = cmd->params[i];
-//                printf("exec cdf_new with %s\n", param);
                 if (strcmp(param, "INT") == 0) {
                     cdftype[i] = INT;
                 } else if (strcmp(param, "UINT") == 0) {
