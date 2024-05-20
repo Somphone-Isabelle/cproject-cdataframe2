@@ -33,7 +33,7 @@ Cdataframe
 ----------------------------------------
 cdf_new : Create an empty cDataframe
 cdf_init : Remplissage du CDataframe à partir de saisies utilisateurs et remplissage en dur du CDataframe
-cdf_display : Afficher tout le CDataframe
+cdf_display : Display the whole cDataframe
 cdf_search : Vérifier l’existence d’une valeur (recherche) dans le CDataframe
 cdf_edit : Accéder/remplacer la valeur se trouvant dans une cellule du CDataframe en utilisant son numéro de ligne et de colonne
 cdf_lines : Afficher le nombre de lignes
