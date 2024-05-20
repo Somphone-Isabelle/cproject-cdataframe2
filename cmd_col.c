@@ -20,25 +20,30 @@ int cmd_col_add(Command* cmd) {
     if (cmd->size != 2) {
         return cmd_error("Error parametre incorrect !");
     }
-    char *title = cmd->params[1];
-    char *param = cmd->params[0];
-    ENUM_TYPE type = string_to_enumtype(param);
-    if (type == NULLVAL) {
-        return cmd_error("Error parametre incorrect !");
-    }
-    COLUMN *col = create_column(type, title);
-    for (int i = 0; i < cdf_line_size(CDF); i++) {
-        insert_value(col, NULL);
-    }
-    if (col != NULL) {
-        lnode *node = lst_create_lnode(col);
-        if (node != NULL) {
-            if (CDF->head == NULL) {
-                lst_insert_head(CDF, node);
-            }
-            lst_insert_tail(CDF, node);
+
+    if (CDF != NULL && CDF->tail != NULL) {
+        char *title = cmd->params[1];
+        char *param = cmd->params[0];
+        ENUM_TYPE type = string_to_enumtype(param);
+        if (type == NULLVAL) {
+            return cmd_error("Error parametre incorrect !");
         }
-    }        
+        COLUMN *col = create_column(type, title);
+        for (int i = 0; i < cdf_line_size(CDF); i++) {
+            insert_value(col, NULL);
+        }
+        if (col != NULL) {
+            lnode *node = lst_create_lnode(col);
+            if (node != NULL) {
+                if (CDF->head == NULL) {
+                    lst_insert_head(CDF, node);
+                }
+                lst_insert_tail(CDF, node);
+            }
+        }        
+    } else {
+        return cmd_error("Please init CDF"); 
+    }
     return 0;
 }
 
@@ -61,7 +66,34 @@ int cmd_col_display(Command* cmd) {
     print_header("cmd_col_display");
     char *usage = "cmd_col_display numero_colonne";
 
-    printf("TODO\n");
+    if (cmd != NULL && cmd->size == 1) {
+        if (isInt(cmd->params[0])) {
+            int i = atoi(cmd->params[0]);
+            if (i == 1) {
+                lnode *node = (lnode *)get_first_node(CDF);
+                if (node != NULL) {
+                    COLUMN *col = (COLUMN *)node->data;
+                    print_col(col);
+                }
+            } else {
+                int pos = 1;
+                lnode *node = (lnode *)get_first_node(CDF);
+                while (node != NULL) {
+                    COLUMN *col = (COLUMN *)node->data;
+                    if (i == pos) {
+                        print_col(col);
+                        return 0;
+                    }        
+                    node = (lnode *)get_next_node(CDF, node);
+                    pos++;
+                }
+            }
+        } else {
+            return cmd_error("Bad number param");
+        }
+    } else {
+        return cmd_error("Bad param");
+    }
     return 0;
 }
 

@@ -138,14 +138,14 @@ int cmd_help(Command* cmd) {
     printf("\t- cdf_display : display cdataframe\n"); 
     printf("\t- cdf_delete : delete\n");
     printf("Column's commands\n");
-    printf("\t- col_new : to add a column > type 'col_new TYPE title'\n");
+    printf("\t- col_add : to add a column > type 'col_new TYPE title'\n");
     printf("\t- col_delete : to delete column > type 'col_delete POS'\n");
     printf("\t- col_title : to replace a title > type 'col_title POS new_title'\n");
     printf("\t- cdf_edit : to replace a data at col and line > type 'cdf_edit data posx posy\n");
     printf("\t- col_sort : to sort a column > type 'col_sort colnb asc/desc\n");
     printf("Row's commands\n");
     printf("\t- row_display : to display a row > type 'row_display pos'\n"); 
-    printf("\t- row_new : to add a row > type 'row_new val1 val2 ...'\n");
+    printf("\t- row_add : to add a row > type 'row_new val1 val2 ...'\n");
     printf("\t- row_delete : to delete a row > type 'row_delete pos'\n");   
     printf("________________________________________________________________________________\n");
 }

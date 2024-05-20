@@ -9,23 +9,34 @@
 //Creating the cdataframe in function of the type of data and the size we want
 CDATAFRAME *create_cdataframe(ENUM_TYPE *cdftype, int size) {
     CDATAFRAME *cdf = (CDATAFRAME *)lst_create_list();
-    for (int i = 0; i < size; i++) {
-//        printf("NODE : %i", cdftype[i]);
-    
-        COLUMN *col = create_column(cdftype[i], "Nouveau");
+    if (size == 1) {
+        COLUMN *col = create_column(cdftype[0], "Nouveau");
         lnode *node = lst_create_lnode(col);
-        
-        if (cdf->head == NULL) {
-            lst_insert_head(cdf, node);
+        lst_insert_head(cdf, node);
+    } else {
+        for (int i = 0; i < size; i++) {   
+            COLUMN *col = create_column(cdftype[i], "Nouveau");
+            lnode *node = lst_create_lnode(col);
+            
+            if (cdf->head == NULL) {
+                lst_insert_head(cdf, node);
+            }
+            lst_insert_tail(cdf, node);
         }
-        lst_insert_tail(cdf, node);
     }
     return cdf;
 }
 
 //Delete the cdatafrme
-void delete_cdataframe(CDATAFRAME **cdf) {
-    free(cdf);
+void delete_cdataframe(CDATAFRAME *cdf) {
+    lst_erase(cdf);
+
+    cdf = (CDATAFRAME *)lst_create_list();
+    cdf->head = NULL;
+    cdf->tail = NULL;
+
+//    free(cdf);
+    printf("CDATAFRAME deleted");
 }
 
 //Delete a coulumn in the cdataframe
@@ -39,7 +50,6 @@ void delete_column(CDATAFRAME *cdf, char *col_name) {
             COLUMN *col = (COLUMN *)node->data;
             if (strcmp(col_name, col->title) == 0) {
                 lst_delete_lnode(cdf, node);
-//                cdf_log("lst_delete_lnode");
                 return;
             }
             node = (lnode *)get_next_node(cdf, node);
@@ -67,6 +77,7 @@ void display_cdf_titles(CDATAFRAME *cdf) {
     cdf_log("display_cdf");
 
     if (cdf != NULL) {        
+        int nb = 0;
         printf("Columns :\n");
         lnode *node = (lnode *)get_first_node(cdf);
         node = (lnode *)get_first_node(cdf);
@@ -75,6 +86,7 @@ void display_cdf_titles(CDATAFRAME *cdf) {
             printf("- %s\n", col->title);
             node = (lnode *)get_next_node(cdf, node);
         }
+        printf("\ntotal : %d columns\n", nb);
     }
 }
 
@@ -133,18 +145,6 @@ void    run_cdf_test(CDATAFRAME *_cdf) {
         i++;
     }
 
-/*
-    printf("\n\nDISPLAY\n");
-    display_cdf(cdf);
-
-    printf("\n\nDELETE col2\n");
-    delete_column(cdf, "col2");
-    
-    printf("\n\nDISPLAY\n");    
-    display_cdf(cdf);
-    cdf_print_line(2);
-
-*/
     cdf_print_line(_cdf, 0);
     printf("\n");
 
@@ -204,8 +204,7 @@ void cdf_col_title(CDATAFRAME *_cdf, unsigned int _pos, char *_title) {
 void cdf_print_line(CDATAFRAME *_cdf, int _line) {
     cdf_log("cdf_print_line()");
 
-    if (_cdf != NULL) {
-
+    if (_cdf != NULL && _cdf->tail != NULL) {
         lnode *node = (lnode *)get_first_node(_cdf);
         while (node != NULL) {
             COLUMN *col = (COLUMN *)node->data;
@@ -213,7 +212,6 @@ void cdf_print_line(CDATAFRAME *_cdf, int _line) {
             node = (lnode *)get_next_node(_cdf, node);
         }
         printf("|\n");
-
         if (_line != 0){
             int pos = _line - 1;
             int col_pos = 0;

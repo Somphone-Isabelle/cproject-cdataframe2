@@ -63,8 +63,8 @@ int cmd_cdf_delete(Command* cmd) {
     cdf_log("cmd_cdf_delete()");
     print_header("cmd_cdf_delete");
 
-//    lst_delete_list
-//    delete_cdataframe(*CDF);
+    delete_cdataframe(CDF);
+
     return 0;
 }
 
