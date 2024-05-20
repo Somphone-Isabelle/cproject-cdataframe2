@@ -55,7 +55,7 @@ col_display : Display a part of the columns of the CDataframe according to a lim
 col_add : Add a column to the CDataframe
 col_delete : Delete a column from the CDataframe
 col_title : Rename the title of a column of the CDataframe
-col_sort : 
+col_sort : Sorting the columns of the CDataframe
 
 Row
 ----------------------------------------
