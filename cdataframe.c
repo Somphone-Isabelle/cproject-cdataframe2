@@ -76,6 +76,7 @@ void delete_column2(CDATAFRAME *cdf, int pos) {
                 return;
             }
             node = (lnode *)get_next_node(cdf, node);
+            ncol++;
         }
     }
 }
@@ -190,9 +191,13 @@ void    run_cdf_test(CDATAFRAME *_cdf) {
     col_add(_cdf, "INT", "Integer");
     col_add(_cdf, "STRING", "Str");
     cdf_print_line(_cdf, 0);
+
     
     edit(_cdf, "44", 2, 2);
     cdf_print_line(_cdf, 0);
+    delete_column2(_cdf, 2);
+    cdf_print_line(_cdf, 0);
+
     //    display_cdf(CDF);
 }
 
@@ -373,7 +378,7 @@ int edit(CDATAFRAME *_cdf, void *_data, int _ncol, int _nline) {
                     if (col->column_type == INT) {
                         printf("\nval : %d\n", col->data[i]->int_value);
                         int tmp = atoi(_data);
-                        if (col->data[i]->int_value == tmp) {
+                        if (col->index[i] == _nline) {
                             col->data[i]->int_value = 999;
                         }
                     } else if (col->column_type == UINT) {
