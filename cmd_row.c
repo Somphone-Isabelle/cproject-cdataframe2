@@ -17,7 +17,7 @@ int cmd_row_add(Command* cmd) {
     cdf_log("cmd_row_new()");
     print_header("cmd_row_new");
 
-    if (CDF != NULL) {
+    if (CDF != NULL && CDF->tail != NULL) {
         lnode *node = (lnode *)get_first_node(CDF);
         int i = 0;
         while (node != NULL) {
@@ -33,6 +33,19 @@ int cmd_row_add(Command* cmd) {
 int cmd_row_delete(Command* cmd) {
     cdf_log("cmd_row_delete()");
     print_header("cmd_row_delete");
+
+    if (cmd != NULL && cmd->size == 1) {
+        if (CDF != NULL && CDF->tail != NULL) {
+            if (isInt(cmd->params[0])) {
+                row_delete(CDF, atoi(cmd->params[0]));
+            }
+        } else {
+            return cmd_error("CDF not init");
+        }
+    } else {
+        return cmd_error("Bad param, usage : row_delete pos");
+    }
+    
     printf("TODO\n");
     return 0;
 }
@@ -41,7 +54,18 @@ int cmd_row_delete(Command* cmd) {
 int cmd_row_display(Command* cmd) {
     cdf_log("cmd_row_display()");
     print_header("cmd_row_display");
-    printf("TODO\n");
+
+    if (cmd != NULL && cmd->size == 1) {
+        if (CDF != NULL && CDF->tail != NULL) {
+            if (isInt(cmd->params[0])) {
+                row_delete(CDF, atoi(cmd->params[0]));
+            }
+        } else {
+            return cmd_error("CDF not init");
+        }
+    } else {
+        return cmd_error("Bad param, usage : row_delete pos");
+    }
     return 0;
 }
 

@@ -3,8 +3,6 @@
 #define BUFFER_SIZE 255
 #define MAX_PARAMS 100
 
-// static unsigned int INDEX = 0; // TODO controle de la taille de colone < index
-
 struct command {
     char name[BUFFER_SIZE];
     int size;
@@ -12,14 +10,7 @@ struct command {
 };
 
 typedef struct command Command;
-int isNull(char* str);
 int isInt(char* str);
-int isUInt(char* str);
-int isDouble(char* str);
-int isFloat(char* str);
-int isChar(char* str);
-int isString(char* str);
-int isStruct(char* str);
 void print_header(char *title);
 
 Command* create_commande();

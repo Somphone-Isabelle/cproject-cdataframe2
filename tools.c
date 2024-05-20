@@ -8,7 +8,10 @@
 #include "tools.h"
 
 void cdf_log(char *str) {
-    puts(str);
+    int LOG_MODE = 0;
+    if (LOG_MODE == 1) {
+        puts(str);
+    }
 }
 
 Command* create_commande() {
@@ -20,7 +23,7 @@ Command* create_commande() {
 
 //Add a parameter
 void add_param(Command* cmd, char* p) {
-    printf("arg : %s\n", p);
+//    printf("arg : %s\n", p);
     char *str = malloc(BUFFER_SIZE);
     stpcpy(str, p);
     cmd->params[cmd->size] = str;
@@ -29,8 +32,8 @@ void add_param(Command* cmd, char* p) {
 
 void print_header(char *title) {
 //    printf("\033[2J\033[1;1H"); // clean screen
-    printf("%s\n", title); // title
-    printf("help to list command\n");
+    printf("%s [help to list command]\n", title); // title
+    printf("\n");
     printf("________________________________________________________________________________\n");
 }
 
@@ -43,7 +46,7 @@ void read_from_stdin(Command* cmd) {
     if (strlen(texte) == 0) {
         return;
     }
-    printf("> cmd : %s\n", texte);
+//    printf("> cmd : %s\n", texte);
     char* token = strtok(texte, " ");
     strcpy(cmd->name, token);
     while (token != NULL) {
@@ -65,25 +68,6 @@ int isInt(char* str) {
         if (!isdigit(str[i])) {
             return 0; 
         }
-    }
-    return 1; 
-}
-
-int isFloat(char* str) {
-    // todo
-    return 1; 
-}
-
-int isDouble(char* str) {
-    // todo
-    return 1; 
-}
-
-int isChar(char* str) {
-    int len = strlen(str);
-    // empty = not
-    if (len != 1) {
-        return 0;
     }
     return 1; 
 }

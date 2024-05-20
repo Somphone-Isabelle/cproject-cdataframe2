@@ -65,6 +65,8 @@ int read_exec_command(Command* cmd) {
         cmd_test(cmd);
     } else if (strcmp(cmd->name, "cdf_new") == 0 || strcmp(cmd->name, "new") == 0) {
         cmd_cdf_new(cmd);
+    } else if (strcmp(cmd->name, "cdf_init") == 0 || strcmp(cmd->name, "init") == 0) {
+        cmd_cdf_init(cmd);
     } else if (strcmp(cmd->name, "cdf_display") == 0 || strcmp(cmd->name, "display") == 0) {
         cmd_cdf_display(cmd);
     } else if (strcmp(cmd->name, "cdf_delete") == 0) {

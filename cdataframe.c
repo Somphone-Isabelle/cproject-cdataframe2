@@ -6,6 +6,15 @@
 #include "list.h"
 #include "tools.h"
 
+//Creating empty cdataframe
+CDATAFRAME *create_expty_cdataframe() {
+    CDATAFRAME *cdf = (CDATAFRAME *)lst_create_list();
+    cdf->head = NULL;
+    cdf->tail = NULL;
+    return cdf;
+}
+
+
 //Creating the cdataframe in function of the type of data and the size we want
 CDATAFRAME *create_cdataframe(ENUM_TYPE *cdftype, int size) {
     CDATAFRAME *cdf = (CDATAFRAME *)lst_create_list();
@@ -30,10 +39,7 @@ CDATAFRAME *create_cdataframe(ENUM_TYPE *cdftype, int size) {
 //Delete the cdatafrme
 void delete_cdataframe(CDATAFRAME *cdf) {
     lst_erase(cdf);
-
-    cdf = (CDATAFRAME *)lst_create_list();
-    cdf->head = NULL;
-    cdf->tail = NULL;
+    cdf = create_expty_cdataframe();
 
 //    free(cdf);
     printf("CDATAFRAME deleted");
@@ -148,38 +154,66 @@ void    run_cdf_test(CDATAFRAME *_cdf) {
     cdf_print_line(_cdf, 0);
     printf("\n");
 
-    cdf_print_line(_cdf, 3);
-    printf("\n");
+    char *r1[BUFFER_SIZE];
+    r1[0] = "42", r1[1] = "43", r1[2] = "44", r1[3] = NULL; 
+    char *r2[BUFFER_SIZE];
+    r2[0] = "55", r2[1] = "56", r2[2] = "57", r2[3] = NULL; 
+    row_add(_cdf, r1);
+    cdf_print_line(_cdf, 0);
 
-    cdf_col_title(_cdf, 2, "XXX");
-    printf("\n");
+    row_add(_cdf, r2);
+    cdf_print_line(_cdf, 0);
 
-    cdf_print_line(_cdf, 1);
-    printf("\n");
-
-    cdf_print_line(_cdf, 2);
-    printf("\n");
-
-    cdf_print_line(_cdf, 4);
-    printf("\n");
+    csv_to_cdataframe(_cdf, "data.csv");
+    row_delete(_cdf, 1);
+    row_delete(_cdf, 5);
+    cdf_print_line(_cdf, 0);
 
     //    display_cdf(CDF);
+}
+
+// Add row
+void row_add(CDATAFRAME *_cdf, char **_data) {
+    if (_cdf != NULL) {
+        lnode *node = (lnode *)get_first_node(_cdf);
+        int i = 0;
+        while (node != NULL) {
+            COLUMN *col = (COLUMN *)node->data;
+            insert_value2(col, _data[i++]);
+            node = (lnode *)get_next_node(_cdf, node);
+        }
+    }
+}
+
+// Delete row at line
+void row_delete(CDATAFRAME *_cdf, int _line) {
+    if (_cdf != NULL) {
+        lnode *node = (lnode *)get_first_node(_cdf);
+        int i = 0;
+        while (node != NULL) {
+            COLUMN *col = (COLUMN *)node->data;            
+            remove_value(col, _line);
+            node = (lnode *)get_next_node(_cdf, node);
+        }
+    }
 }
 
 //Taking the content of a 'csv' file to store its data in the cdataframe
 void csv_to_cdataframe(CDATAFRAME *cdf, char *filename) {
     cdf_log("csv_to_cdataframe");
 
-    FILE *fptr;
-    // Open a file in read mode
-    fptr = fopen("data.csv", "r");
-    // Store the content of the file
-    char myString[100];
-    while(fgets(myString, 100, fptr)) {
-        printf("%s", myString);
-    }
-    // Close the file
-    fclose(fptr); 
+    FILE *file = fopen("data.csv", "r");
+
+    if (file != NULL) {
+        char str[BUFFER_SIZE];
+        while(fgets(str, 100, file)) {
+            printf("%s", str);
+
+        }
+        // Store the content of the file
+        // Close the file
+        fclose(file); 
+    } 
 }
 
 //Define a title for a specific column in the cdataframe
@@ -223,7 +257,7 @@ void cdf_print_line(CDATAFRAME *_cdf, int _line) {
                     if (col->index[pos] == pos) {
                         char str[BUFFER_SIZE];
                         convert_value(col, pos, str, BUFFER_SIZE);
-                        printf("|\t%s\t", str);
+                        printf("|\t[%u] %s\t", col->index[pos], str);
                     }
                 }
                 node = (lnode *)get_next_node(_cdf, node);
@@ -240,11 +274,12 @@ void cdf_print_line(CDATAFRAME *_cdf, int _line) {
                     if (col != NULL) {
                         char str[BUFFER_SIZE];
                         convert_value(col, i, str, BUFFER_SIZE);
-                        printf("|\t%s\t", str);
+//                        printf("|\t%s\t", str);
+                        printf("|\t[%u] %s\t", col->index[i], str);
                     }
                     node = (lnode *)get_next_node(_cdf, node);
                 }
-            printf("|\n");
+                printf("|\n");
             }
         }
     }
@@ -265,4 +300,24 @@ int cdf_line_size(CDATAFRAME *_cdf) {
         printf("lines : %d", nb);
     }
     return 0;
+}
+
+int cdf_eq_test(CDATAFRAME *_cdf, float _val) {
+    int res = 0;
+    if (_cdf != NULL && _cdf->tail != NULL) {
+        lnode *node = (lnode *)get_first_node(_cdf);
+        while (node != NULL) {
+            COLUMN *col = (COLUMN *)node->data;
+            if (col->column_type == INT) {
+                for (int i = 0; i < col->size; i++) {
+                    int x = col->data[i]->int_value;
+                    if (x == _val) {
+                        res++;
+                    }
+                }
+            }
+            node = (lnode *)get_next_node(_cdf, node);
+        }
+        return res;
+    }
 }

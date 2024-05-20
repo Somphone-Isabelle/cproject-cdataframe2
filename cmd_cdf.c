@@ -16,13 +16,20 @@
 //Command to initialize a new cdataframe
 int cmd_cdf_new(Command* cmd) {
     cdf_log("cmd_cdf_new()");
+    print_header("New cdf");
 
-//    print_header("cmd_cdf_new");
+    CDF = create_expty_cdataframe();    
+}
+
+int cmd_cdf_init(Command* cmd) {
+    cdf_log("cmd_cdf_int()");
+    print_header("Init cdf");
+
     if (cmd != NULL && cmd->size > 0) {
             ENUM_TYPE *cdftype = malloc(cmd->size * sizeof(ENUM_TYPE));
             for (int i = 0; i < cmd->size; i++) {
                 char *param = cmd->params[i];
-                printf("exec cdf_new with %s\n", param);
+//                printf("exec cdf_new with %s\n", param);
                 if (strcmp(param, "INT") == 0) {
                     cdftype[i] = INT;
                 } else if (strcmp(param, "UINT") == 0) {
@@ -75,3 +82,28 @@ int cmd_cdf_colums(Command* cmd) {
     display_cdf_titles(CDF);
     return 0;
 }
+
+int cdf_eq(Command* cmd) {
+    cdf_log("cdf_eq()");
+    print_header("cdf_eq");
+
+    display_cdf_titles(CDF);
+    return 0;
+}
+
+int cdf_gt(Command* cmd) {
+    cdf_log("cdf_gt()");
+    print_header("cdf_gt");
+
+    display_cdf_titles(CDF);
+    return 0;
+}
+
+int cdf_lt(Command* cmd) {
+    cdf_log("cdf_lt()");
+    print_header("cdf_lt");
+
+    display_cdf_titles(CDF);
+    return 0;
+}
+

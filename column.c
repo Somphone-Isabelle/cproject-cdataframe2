@@ -442,6 +442,14 @@ int insert_value2(COLUMN *col, char *value){
         col->max_size += REALLOC_SIZE;
     }
     col->data[col->size] = (COL_TYPE *)malloc(sizeof(COL_TYPE));
+            
+    long  long unsigned int *index = malloc(sizeof(int) * BUFFER_SIZE);
+    for (int i = 0; i < col->size; i++) {
+        index[i] = col->index[i];
+    }
+    index[col->size] = col->size;
+    col->index = index;
+    
     if (value == NULL){
         col->data[col->size] = NULL;
     } else {
@@ -476,16 +484,30 @@ int insert_value2(COLUMN *col, char *value){
             return 0;    
     }}
     
-    long  long unsigned int *index = malloc(sizeof(int) + 1);
-    for (int i = 0; i < col->size; i++) {
-        index[i] = col->index[i];
-    }
-    index[col->size] = col->size;
-    col->index = index;
-
-    printf("index : %i\n", col->index[col->size]);
     col->size++;
     return 1;
 }
+
+//Inserting a new value in a column
+int remove_value(COLUMN *col, int pos){
+    cdf_log("log : remove_value");
+
+    if (pos > 0) {
+        pos--;
+    } else {
+        printf("Error bad argument cannot remove");
+    }
+    if (col != NULL && col->size > 0) {
+        for (int i = 0; i < col->size; i++) {
+            if (col->index[i] >= pos) {
+                col->data[i] = col->data[i + 1];
+                col->index[i] = i;
+            } 
+        }
+    }
+    col->size--;
+    return 0;
+}
+
 
 
