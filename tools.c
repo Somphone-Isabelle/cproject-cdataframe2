@@ -32,11 +32,11 @@ void add_param(Command* cmd, char* p) {
 
 void print_header(char *title) {
 //    printf("\033[2J\033[1;1H"); // clean screen
-    printf("%s [help to list command]\n", title); // title
+    printf("________________________________________________________________________________\n");
     printf("\n");
+    printf("%s [help to list command]\n", title); // title
     printf("________________________________________________________________________________\n");
 }
-
 
 void read_from_stdin(Command* cmd) {
     char texte[1000];
@@ -46,7 +46,6 @@ void read_from_stdin(Command* cmd) {
     if (strlen(texte) == 0) {
         return;
     }
-//    printf("> cmd : %s\n", texte);
     char* token = strtok(texte, " ");
     strcpy(cmd->name, token);
     while (token != NULL) {
@@ -93,5 +92,4 @@ ENUM_TYPE string_to_enumtype(char *_str) {
     }
     return type;
 }
-
 

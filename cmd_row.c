@@ -56,7 +56,9 @@ int cmd_row_display(Command* cmd) {
     if (cmd != NULL && cmd->size == 1) {
         if (CDF != NULL && CDF->tail != NULL) {
             if (isInt(cmd->params[0])) {
-                row_delete(CDF, atoi(cmd->params[0]));
+                cdf_print_line(CDF, atoi(cmd->params[0]));
+            } else {
+                return cmd_error("Error not int param");
             }
         } else {
             return cmd_error("CDF not init");
