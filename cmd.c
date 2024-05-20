@@ -138,6 +138,7 @@ int cmd_help(Command* cmd) {
     printf("\t- cdf_display : display cdataframe\n"); 
     printf("\t- cdf_delete : delete\n");
     printf("Column's commands\n");
+    printf("\t- col_display : to display one collomn at POS > type 'col_display POS'\n");
     printf("\t- col_add : to add a column > type 'col_new TYPE title'\n");
     printf("\t- col_delete : to delete column > type 'col_delete POS'\n");
     printf("\t- col_title : to replace a title > type 'col_title POS new_title'\n");
