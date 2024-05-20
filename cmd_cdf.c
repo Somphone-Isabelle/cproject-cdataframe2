@@ -91,30 +91,6 @@ int cmd_cdf_lines(Command* cmd) {
     return 0;
 }
 
-int cmd_cdf_eq(Command* cmd) {
-    cdf_log("cdf_eq()");
-    print_header("cdf_eq");
-
-    display_cdf_titles(CDF);
-    return 0;
-}
-
-int cmd_cdf_gt(Command* cmd) {
-    cdf_log("cdf_gt()");
-    print_header("cdf_gt");
-
-    display_cdf_titles(CDF);
-    return 0;
-}
-
-int cmd_cdf_lt(Command* cmd) {
-    cdf_log("cdf_lt()");
-    print_header("cdf_lt");
-
-    display_cdf_titles(CDF);
-    return 0;
-}
-
 int cmd_cdf_edit(Command* cmd) {
     cdf_log("cdf_edit()");
     print_header("cdf_edit");
@@ -130,8 +106,8 @@ int cmd_cdf_edit(Command* cmd) {
 }
 
 int cmd_cdf_search(Command* cmd) {
-    cdf_log("cdf_edit()");
-    print_header("cdf_edit");
+    cdf_log("cdf_search()");
+    print_header("cdf_search");
 
     if (cmd != NULL && cmd->size == 1) {
         cdf_search(CDF, cmd->params[0]);
@@ -140,3 +116,43 @@ int cmd_cdf_search(Command* cmd) {
     }
     return 0;
 }
+
+int cmd_cdf_eq(Command* cmd) {
+    cdf_log("cdf_eq()");
+    print_header("cdf_eq");
+
+    if (cmd != NULL && cmd->size == 1) {
+        cdf_eq(CDF, cmd->params[0]);
+    } else {
+        return cmd_error("Bad params, usage cdf_edt data posx posy");
+    }
+    return 0;
+}
+
+int cmd_cdf_gt(Command* cmd) {
+    cdf_log("cdf_gt()");
+    print_header("cdf_gt");
+
+    if (cmd != NULL && cmd->size == 1) {
+        cdf_gt(CDF, cmd->params[0]);
+    } else {
+        return cmd_error("Bad params, usage cdf_edt data posx posy");
+    }
+    return 0;
+}
+
+int cmd_cdf_lt(Command* cmd) {
+    cdf_log("cdf_lt()");
+    print_header("cdf_lt");
+
+    if (cmd != NULL && cmd->size == 1) {
+        cdf_lt(CDF, cmd->params[0]);
+    } else {
+        return cmd_error("Bad params, usage cdf_edt data posx posy");
+    }
+    return 0;
+}
+
+
+
+

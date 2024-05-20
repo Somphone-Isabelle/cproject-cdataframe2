@@ -9,6 +9,9 @@ int cmd_cdf_colums(Command* cmd);
 int cmd_cdf_lines(Command* cmd);
 int cmd_cdf_edit(Command* cmd);
 int cmd_cdf_search(Command* cmd);
+int cmd_cdf_eq(Command* cmd);
+int cmd_cdf_gt(Command* cmd);
+int cmd_cdf_lt(Command* cmd);
 
 #endif
 

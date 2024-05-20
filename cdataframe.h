@@ -32,5 +32,8 @@ void row_delete(CDATAFRAME *_cdf, int _line);
 int col_add(CDATAFRAME *_cdf, char *_type, char *_title);
 int edit(CDATAFRAME *_cdf, void *_data, int _ncol, int _nline);
 int cdf_search(CDATAFRAME *_cdf, void *_data);
+int cdf_eq(CDATAFRAME *_cdf, void *_data);
+int cdf_gt(CDATAFRAME *_cdf, void *_data);
+int cdf_lt(CDATAFRAME *_cdf, void *_data);
 
 #endif 

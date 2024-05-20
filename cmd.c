@@ -77,6 +77,12 @@ int read_exec_command(Command* cmd) {
         cmd_cdf_edit(cmd);
     } else if (strcmp(cmd->name, "cdf_search") == 0) {
         cmd_cdf_search(cmd);
+    } else if (strcmp(cmd->name, "cdf_eq") == 0) {
+        cmd_cdf_eq(cmd);
+    } else if (strcmp(cmd->name, "cdf_gt") == 0) {
+        cmd_cdf_gt(cmd);
+    } else if (strcmp(cmd->name, "cdf_lt") == 0) {
+        cmd_cdf_lt(cmd);
     } else if (strcmp(cmd->name, "col_new") == 0 || strcmp(cmd->name, "col_add") == 0) {
         cmd_col_add(cmd);
     } else if (strcmp(cmd->name, "col_delete") == 0) {

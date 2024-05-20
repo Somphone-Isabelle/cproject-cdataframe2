@@ -473,3 +473,121 @@ int cdf_search(CDATAFRAME *_cdf, void *_data) {
     return 0;
 }
 
+int cdf_eq(CDATAFRAME *_cdf, void *_data) {
+    if (_cdf != NULL && _cdf->tail != NULL) {
+        lnode *node = (lnode *)get_first_node(_cdf);
+        int nb = 0;
+        while (node != NULL) {
+            COLUMN *col = (COLUMN *)node->data;
+            for (int i = 0; i < col->size; i++) {
+                if (col->column_type == INT) {
+                    int tmp = atoi(_data);
+                    if (col->data[i]->int_value == tmp) {
+                        nb++;
+                    }
+                } else if (col->column_type == UINT) {
+                    int tmp = atoi(_data);
+                    if (col->data[i]->uint_value == tmp) {
+                        nb++;
+                    }
+                } else if (col->column_type == FLOAT) {
+                    float tmp = atof(_data);
+                    if (col->data[i]->float_value == tmp) {
+                        nb++;
+                    }
+                } else if (col->column_type == DOUBLE) {
+                    double tmp = atof(_data);
+                    if (col->data[i]->double_value == tmp) {
+                        nb++;
+                    }
+                } else if (col->column_type == CHAR) {
+                    char *str=(char *)_data;
+                    if (col->data[i]->char_value == str[0]) {
+                        nb++;
+                    }
+                } else {
+                    char *str=(char *)_data;
+                    if (strcmp(col->data[i]->string_value,str) == 0) {
+                        nb++;
+                    }
+                }
+            }
+            node = (lnode *)get_next_node(_cdf, node);
+        }
+        printf("eq : %d", nb);
+    }
+    return 0;
+}
+
+int cdf_gt(CDATAFRAME *_cdf, void *_data) {
+    if (_cdf != NULL && _cdf->tail != NULL) {
+        lnode *node = (lnode *)get_first_node(_cdf);
+        int nb = 0;
+        while (node != NULL) {
+            COLUMN *col = (COLUMN *)node->data;
+            for (int i = 0; i < col->size; i++) {
+                if (col->column_type == INT) {
+                    int tmp = atoi(_data);
+                    if (col->data[i]->int_value > tmp) {
+                        nb++;
+                    }
+                } else if (col->column_type == UINT) {
+                    int tmp = atoi(_data);
+                    if (col->data[i]->uint_value > tmp) {
+                        nb++;
+                    }
+                } else if (col->column_type == FLOAT) {
+                    float tmp = atof(_data);
+                    if (col->data[i]->float_value > tmp) {
+                        nb++;
+                    }
+                } else if (col->column_type == DOUBLE) {
+                    double tmp = atof(_data);
+                    if (col->data[i]->double_value > tmp) {
+                        nb++;
+                    }
+                }
+            }
+            node = (lnode *)get_next_node(_cdf, node);
+        }
+        printf("gt : %d", nb);
+    }
+    return 0;
+}
+
+int cdf_lt(CDATAFRAME *_cdf, void *_data) {
+    if (_cdf != NULL && _cdf->tail != NULL) {
+        lnode *node = (lnode *)get_first_node(_cdf);
+        int nb = 0;
+        while (node != NULL) {
+            COLUMN *col = (COLUMN *)node->data;
+            for (int i = 0; i < col->size; i++) {
+                if (col->column_type == INT) {
+                    int tmp = atoi(_data);
+                    if (col->data[i]->int_value < tmp) {
+                        nb++;
+                    }
+                } else if (col->column_type == UINT) {
+                    int tmp = atoi(_data);
+                    if (col->data[i]->uint_value < tmp) {
+                        nb++;
+                    }
+                } else if (col->column_type == FLOAT) {
+                    float tmp = atof(_data);
+                    if (col->data[i]->float_value < tmp) {
+                        nb++;
+                    }
+                } else if (col->column_type == DOUBLE) {
+                    double tmp = atof(_data);
+                    if (col->data[i]->double_value < tmp) {
+                        nb++;
+                    }
+                }
+            }
+            node = (lnode *)get_next_node(_cdf, node);
+        }
+        printf("lt : %d", nb);
+    }
+    return 0;
+}
+
