@@ -31,7 +31,7 @@ Liste des commandes :
 
 Cdataframe
 ----------------------------------------
-cdf_new : Création d’un CDataframe vide
+cdf_new : Create an empty cDataframe
 cdf_init : Remplissage du CDataframe à partir de saisies utilisateurs et remplissage en dur du CDataframe
 cdf_display : Afficher tout le CDataframe
 cdf_search : Vérifier l’existence d’une valeur (recherche) dans le CDataframe
