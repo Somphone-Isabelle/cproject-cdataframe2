@@ -119,8 +119,10 @@ int cdf_edit(Command* cmd) {
     cdf_log("cdf_edit()");
     print_header("cdf_edit");
 
-    if (cmd != NULL) {
+    if (cmd != NULL && cmd->size == 3) {
         
+    } else {
+        return cmd_error("Bad params, usage cdf_edt data posx posy");
     }
     return 0;
 }
