@@ -6,6 +6,7 @@ int cmd_cdf_init(Command* cmd);
 int cmd_cdf_display(Command* cmd);
 int cmd_cdf_delete(Command* cmd);
 int cmd_cdf_colums(Command* cmd);
+int cmd_cdf_lines(Command* cmd);
 
 #endif
 

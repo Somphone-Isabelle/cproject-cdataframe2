@@ -108,6 +108,7 @@ void display_cdf_titles(CDATAFRAME *cdf) {
             COLUMN *col = (COLUMN *)node->data;
             printf("- %s\n", col->title);
             node = (lnode *)get_next_node(cdf, node);
+            nb++;
         }
         printf("\ntotal : %d columns\n", nb);
     }
@@ -314,9 +315,9 @@ int cdf_line_size(CDATAFRAME *_cdf) {
             node = (lnode *)get_next_node(_cdf, node);
             nb++;
         }
-        printf("lines : %d", nb);
+//        printf("lines : %d", nb);
     }
-    return 0;
+    return nb;
 }
 
 int cdf_eq_test(CDATAFRAME *_cdf, float _val) {
@@ -338,3 +339,8 @@ int cdf_eq_test(CDATAFRAME *_cdf, float _val) {
         return res;
     }
 }
+
+int col_add(CDATAFRAME *_cdf, char *_type, char *_title) {
+    
+}
+

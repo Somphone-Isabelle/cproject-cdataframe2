@@ -14,8 +14,8 @@
  
  //Command to initialize a new column
 int cmd_col_add(Command* cmd) {
-    cdf_log("cmd_col_new()");
-    print_header("cmd_col_new");
+    cdf_log("cmd_col_add()");
+    print_header("cmd_col_add");
 
     if (cmd->size != 2) {
         return cmd_error("Error parametre incorrect !");
@@ -24,13 +24,14 @@ int cmd_col_add(Command* cmd) {
     if (CDF != NULL && CDF->tail != NULL) {
         char *title = cmd->params[1];
         char *param = cmd->params[0];
+        
         ENUM_TYPE type = string_to_enumtype(param);
         if (type == NULLVAL) {
             return cmd_error("Error parametre incorrect !");
         }
         COLUMN *col = create_column(type, title);
         for (int i = 0; i < cdf_line_size(CDF); i++) {
-            insert_value(col, NULL);
+            insert_value2(col, " ");
         }
         if (col != NULL) {
             lnode *node = lst_create_lnode(col);

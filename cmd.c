@@ -69,10 +69,10 @@ int read_exec_command(Command* cmd) {
         cmd_cdf_init(cmd);
     } else if (strcmp(cmd->name, "cdf_display") == 0 || strcmp(cmd->name, "display") == 0) {
         cmd_cdf_display(cmd);
-    } else if (strcmp(cmd->name, "cdf_colomns") == 0) {
+    } else if (strcmp(cmd->name, "cdf_cols") == 0) {
         cmd_cdf_colums(cmd);
     } else if (strcmp(cmd->name, "cdf_lines") == 0) {
-        cmd_cdf_colums(cmd);
+        cmd_cdf_lines(cmd);
     } else if (strcmp(cmd->name, "col_new") == 0 || strcmp(cmd->name, "col_add") == 0) {
         cmd_col_add(cmd);
     } else if (strcmp(cmd->name, "col_delete") == 0) {
@@ -138,11 +138,12 @@ int cmd_help(Command* cmd) {
     printf("\t- help : \n");
     printf("\t- exit : exit\n");
     printf("Cdataframe's commands\n");
-    printf("\t- cdf_new : to create a cdataframe: type 'cdf_new TYPE TYPE ...'\n");
+//    printf("\t- cdf_new : to create a cdataframe: type 'cdf_new TYPE TYPE ...'\n");
     printf("\t- cdf_init : to create a cdataframe: type 'cdf_init TYPE TYPE ...'\n");
     printf("\t- cdf_display : display cdataframe\n"); 
     printf("\t- cdf_search : cdf_search data\n"); 
-    printf("\t- cdf_display : display cdataframe\n"); 
+    printf("\t- cdf_lines : display rows size\n"); 
+    printf("\t- cdf_cols : display cols\n"); 
     printf("Column's commands\n");
     printf("\t- col_add : to add a column > type 'col_add TYPE title'\n");
     printf("\t- col_display : to display one collomn at POS > type 'col_display POS'\n");

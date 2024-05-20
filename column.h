@@ -48,4 +48,5 @@ int equal_val(COLUMN* col, void* x);
 int run_column_test();
 int remove_value(COLUMN *col, int pos);
 
+
 #endif 

@@ -29,6 +29,7 @@ void csv_to_cdataframe(CDATAFRAME *cdf, char *filename);
 int cdf_eq_test(CDATAFRAME *_cdf, float _val);
 void row_add(CDATAFRAME *cdf, char **data);
 void row_delete(CDATAFRAME *_cdf, int _line);
+int col_add(CDATAFRAME *_cdf, char *_type, char *_title);
 
 
 #endif 

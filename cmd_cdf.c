@@ -81,6 +81,16 @@ int cmd_cdf_colums(Command* cmd) {
     return 0;
 }
 
+int cmd_cdf_lines(Command* cmd) {
+    cdf_log("cmd_cdf_lines()");
+    print_header("cmd_cdf_lines");
+    
+    if (cmd != NULL) {
+        printf("lines : %d", cdf_line_size(CDF));
+    }    
+    return 0;
+}
+
 int cdf_eq(Command* cmd) {
     cdf_log("cdf_eq()");
     print_header("cdf_eq");
