@@ -187,6 +187,10 @@ void    run_cdf_test(CDATAFRAME *_cdf) {
     row_delete(_cdf, 5);
     cdf_print_line(_cdf, 0);
 
+    col_add(_cdf, "INT", "Integer");
+    cdf_print_line(_cdf, 0);
+    
+
     //    display_cdf(CDF);
 }
 
@@ -310,12 +314,8 @@ int cdf_line_size(CDATAFRAME *_cdf) {
     int nb = 0;
     if (_cdf != NULL) {
         lnode *node = (lnode *)get_first_node(_cdf);
-        COLUMN *col = (COLUMN *)node->data;       
-        while (node != NULL) {
-            node = (lnode *)get_next_node(_cdf, node);
-            nb++;
-        }
-//        printf("lines : %d", nb);
+        COLUMN *col = (COLUMN *)node->data;
+        return col->size;
     }
     return nb;
 }
@@ -341,6 +341,20 @@ int cdf_eq_test(CDATAFRAME *_cdf, float _val) {
 }
 
 int col_add(CDATAFRAME *_cdf, char *_type, char *_title) {
+    ENUM_TYPE type = string_to_enumtype(_type);
     
+    COLUMN *col = create_column(type, _title);
+    for (int i = 0; i < cdf_line_size(_cdf); i++) {
+        insert_value2(col, " ");
+    }
+    if (col != NULL) {
+        lnode *node = lst_create_lnode(col);
+        if (node != NULL) {
+            if (_cdf->head == NULL) {
+                lst_insert_head(_cdf, node);
+            }
+            lst_insert_tail(_cdf, node);
+        }
+    }            
 }
 

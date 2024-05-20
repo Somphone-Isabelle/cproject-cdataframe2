@@ -115,3 +115,12 @@ int cdf_lt(Command* cmd) {
     return 0;
 }
 
+int cdf_edit(Command* cmd) {
+    cdf_log("cdf_edit()");
+    print_header("cdf_edit");
+
+    if (cmd != NULL) {
+        
+    }
+    return 0;
+}
