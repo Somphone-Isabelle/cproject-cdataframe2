@@ -91,7 +91,7 @@ int cmd_cdf_lines(Command* cmd) {
     return 0;
 }
 
-int cdf_eq(Command* cmd) {
+int cmd_cdf_eq(Command* cmd) {
     cdf_log("cdf_eq()");
     print_header("cdf_eq");
 
@@ -99,7 +99,7 @@ int cdf_eq(Command* cmd) {
     return 0;
 }
 
-int cdf_gt(Command* cmd) {
+int cmd_cdf_gt(Command* cmd) {
     cdf_log("cdf_gt()");
     print_header("cdf_gt");
 
@@ -107,7 +107,7 @@ int cdf_gt(Command* cmd) {
     return 0;
 }
 
-int cdf_lt(Command* cmd) {
+int cmd_cdf_lt(Command* cmd) {
     cdf_log("cdf_lt()");
     print_header("cdf_lt");
 
@@ -115,12 +115,26 @@ int cdf_lt(Command* cmd) {
     return 0;
 }
 
-int cdf_edit(Command* cmd) {
+int cmd_cdf_edit(Command* cmd) {
     cdf_log("cdf_edit()");
     print_header("cdf_edit");
 
     if (cmd != NULL && cmd->size == 3) {
-        
+        if (isInt(cmd->params[1]) && isInt(cmd->params[2])) {
+            edit(CDF, cmd->params[0], atoi(cmd->params[1]), atoi(cmd->params[2]));
+        } else cmd_error("Bad params, usage cdf_edt data posx posy");
+    } else {
+        return cmd_error("Bad params, usage cdf_edt data posx posy");
+    }
+    return 0;
+}
+
+int cmd_cdf_search(Command* cmd) {
+    cdf_log("cdf_edit()");
+    print_header("cdf_edit");
+
+    if (cmd != NULL && cmd->size == 1) {
+        cdf_search(CDF, cmd->params[0]);
     } else {
         return cmd_error("Bad params, usage cdf_edt data posx posy");
     }

@@ -7,6 +7,8 @@ int cmd_cdf_display(Command* cmd);
 int cmd_cdf_delete(Command* cmd);
 int cmd_cdf_colums(Command* cmd);
 int cmd_cdf_lines(Command* cmd);
+int cmd_cdf_edit(Command* cmd);
+int cmd_cdf_search(Command* cmd);
 
 #endif
 

@@ -73,6 +73,10 @@ int read_exec_command(Command* cmd) {
         cmd_cdf_colums(cmd);
     } else if (strcmp(cmd->name, "cdf_lines") == 0) {
         cmd_cdf_lines(cmd);
+    } else if (strcmp(cmd->name, "cdf_edit") == 0) {
+        cmd_cdf_edit(cmd);
+    } else if (strcmp(cmd->name, "cdf_search") == 0) {
+        cmd_cdf_search(cmd);
     } else if (strcmp(cmd->name, "col_new") == 0 || strcmp(cmd->name, "col_add") == 0) {
         cmd_col_add(cmd);
     } else if (strcmp(cmd->name, "col_delete") == 0) {
@@ -83,8 +87,6 @@ int read_exec_command(Command* cmd) {
         cmd_col_display(cmd);
     } else if (strcmp(cmd->name, "col_title") == 0) {
         cmd_col_title(cmd);
-    } else if (strcmp(cmd->name, "col_edit") == 0) {
-        cmd_col_edit(cmd);
     } else if (strcmp(cmd->name, "col_sort") == 0) {
         cmd_col_sort(cmd);
     } else if (strcmp(cmd->name, "row_new") == 0 || strcmp(cmd->name, "row_add") == 0) {

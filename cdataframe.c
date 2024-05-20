@@ -184,8 +184,8 @@ void    run_cdf_test(CDATAFRAME *_cdf) {
     cdf_print_line(_cdf, 0);
 
     csv_to_cdataframe(_cdf, "data.csv");
-    row_delete(_cdf, 1);
-    row_delete(_cdf, 5);
+//    row_delete(_cdf, 1);
+//    row_delete(_cdf, 5);
     cdf_print_line(_cdf, 0);
 
     col_add(_cdf, "INT", "Integer");
@@ -193,10 +193,11 @@ void    run_cdf_test(CDATAFRAME *_cdf) {
     cdf_print_line(_cdf, 0);
 
     
-    edit(_cdf, "44", 2, 2);
+    edit(_cdf, "999", 4, 2);
+    edit(_cdf, "8", 1, 1);
     cdf_print_line(_cdf, 0);
-    delete_column2(_cdf, 2);
-    cdf_print_line(_cdf, 0);
+//    delete_column2(_cdf, 2);
+//    cdf_print_line(_cdf, 0);
 
     //    display_cdf(CDF);
 }
@@ -369,34 +370,105 @@ int edit(CDATAFRAME *_cdf, void *_data, int _ncol, int _nline) {
     printf("edit");
     if (_cdf != NULL && _cdf->tail != NULL) {
         lnode *node = (lnode *)get_first_node(_cdf);
-        int ncol = 0;
+        int ncol = 1;
+        _nline--;
         while (node != NULL) {
             if (ncol == _ncol) {
-                printf("%d / %d", ncol, _ncol);
                 COLUMN *col = (COLUMN *)node->data;
                 for (int i = 0; i < col->size; i++) {
                     if (col->column_type == INT) {
-                        printf("\nval : %d\n", col->data[i]->int_value);
+                        // printf("\nint : %d\n", col->data[i]->int_value);
                         int tmp = atoi(_data);
                         if (col->index[i] == _nline) {
-                            col->data[i]->int_value = 999;
+                            col->data[i]->int_value = tmp;
                         }
                     } else if (col->column_type == UINT) {
-                        printf("\nval : %i\n", col->data[i]->uint_value);
+                        printf("\nuint : %i\n", col->data[i]->uint_value);
+                        int tmp = atoi(_data);
+                        if (col->index[i] == _nline) {
+                            col->data[i]->uint_value = tmp;
+                        }
                     } else if (col->column_type == FLOAT) {
-                        printf("\nval : %f\n", col->data[i]->float_value);
+                        printf("\nfloat : %f\n", col->data[i]->float_value);
+                        float tmp = atof(_data);
+                        if (col->index[i] == _nline) {
+                            col->data[i]->float_value = tmp;
+                        }
                     } else if (col->column_type == DOUBLE) {
-                        printf("\nval : %f\n", col->data[i]->double_value);
+                        printf("\ndouble : %f\n", col->data[i]->double_value);
+                        double tmp = atof(_data);
+                        if (col->index[i] == _nline) {
+                            col->data[i]->double_value = tmp;
+                        }
                     } else if (col->column_type == CHAR) {
-                        printf("\nval : %c\n", col->data[i]->char_value);
+                        if (col->index[i] == _nline) {
+                            printf("\nchar : %c\n", col->data[i]->char_value);
+                            char *str=(char *)_data;
+                            col->data[i]->char_value = str[0];
+                        }
                     } else {
-                        printf("\nval : %s\n", col->data[i]->string_value);
+                        printf("\nstring : %s\n", col->data[i]->string_value);
+                        if (col->index[i] == _nline) {
+                            char *str=(char *)_data;
+                            col->data[i]->string_value = str;
+                        }
                     }
                 }
             }
             node = (lnode *)get_next_node(_cdf, node);
             ncol++;
         }
+    }
+    return 0;
+}
+
+
+int cdf_search(CDATAFRAME *_cdf, void *_data) {
+    if (_cdf != NULL && _cdf->tail != NULL) {
+        lnode *node = (lnode *)get_first_node(_cdf);
+        int nb = 0;
+        while (node != NULL) {
+            COLUMN *col = (COLUMN *)node->data;
+            for (int i = 0; i < col->size; i++) {
+                if (col->column_type == INT) {
+//                    printf("\nint : %d\n", col->data[i]->int_value);
+                    int tmp = atoi(_data);
+                    if (col->data[i]->int_value == tmp) {
+                        nb++;
+                    }
+                } else if (col->column_type == UINT) {
+                    printf("\nuint : %i\n", col->data[i]->uint_value);
+                    int tmp = atoi(_data);
+                    if (col->data[i]->uint_value == tmp) {
+                        nb++;
+                    }
+                } else if (col->column_type == FLOAT) {
+                    printf("\nfloat : %f\n", col->data[i]->float_value);
+                    float tmp = atof(_data);
+                    if (col->data[i]->float_value == tmp) {
+                        nb++;
+                    }
+                } else if (col->column_type == DOUBLE) {
+                    printf("\ndouble : %f\n", col->data[i]->double_value);
+                    double tmp = atof(_data);
+                    if (col->data[i]->double_value == tmp) {
+                        nb++;
+                    }
+                } else if (col->column_type == CHAR) {
+                    char *str=(char *)_data;
+                    if (col->data[i]->char_value == str[0]) {
+                        nb++;
+                    }
+                } else {
+                    char *str=(char *)_data;
+                    if (strcmp(col->data[i]->string_value,str) == 0) {
+                        nb++;
+                    }
+                }
+            }
+            node = (lnode *)get_next_node(_cdf, node);
+        }
+        printf("find : %d", nb);
     }
     return 0;
 }
