@@ -10,7 +10,7 @@ For windows user:
         To compile it:
             -$ ./run.sh
         To execute it:
-            -$ ./maintest.exe
+            -$ ./cdf.exe
 
 For mac user:
     Go to your terminal.
@@ -18,7 +18,7 @@ For mac user:
         To compile it:
             -$ ./run.sh
         To execute it:
-            -$ ./maintest.exe
+            -$ ./cdf.exe
 
 
 Git Repository url: https://github.com/Somphone-Isabelle/cproject-cdataframe2.git
@@ -36,7 +36,10 @@ To read the code, here is the order of the files:
 - run.sh
 - main.c
 - tools.c
-- all the commands (cmd) files
+- cmd.c
+- cmd_cdf.c
+- cmd_col.c
+- cmd_row.c
 - list.c
 - cdataframe.c
 - column.c 
@@ -55,8 +58,8 @@ cdf_colomns : Display the number of columns -> type 'cdf_colomns'
 cdf_eq : Number of cells containing a value equal to x (x given in parameter) -> type 'cdf_eq val'
 cdf_gt : Number of cells containing a value greater than x(x given in parameter) -> type 'cdf_gt val'
 cdf_lt : Number of cells containing a value less than x(x given in parameter) -> type 'cdf_lt val' 
-csv_export : 
-csv_import : 
+csv_export : Import data from csv file -> type 'csv_import data.csv
+csv_import : Export date to csv file -> type 'csv_export out.csv
 
 Column
 ----------------------------------------
