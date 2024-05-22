@@ -2,7 +2,7 @@
 
 'CDataframe' project for EFREI Algorithmmics and Data Structure Course
 
-# SOMPHONE Isabelle - BERDERY Ambre 
+## SOMPHONE Isabelle - BERDERY Ambre 
 
 ## For windows user:
     Install Cygwin64 Terminal in order to compile and execute the code.

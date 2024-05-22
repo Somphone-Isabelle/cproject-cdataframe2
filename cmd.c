@@ -146,9 +146,11 @@ int cmd_help(Command* cmd) {
     printf("\033[2J\033[1;1H");
     printf("HELP\n");
     printf("\n");
-    printf("List of commands\n");
+    printf("*********************************************************************************\n");
+    printf("\t\t\t\tLIST OF COMMANDS\n");
+    printf("*********************************************************************************\n");
     printf("General commands\n");
-    printf("\t- clear : To clear the screem > type 'clear' \n");
+    printf("\t- clear : To clear the screen > type 'clear' \n");
     printf("\t- test : To load a random test > type 'test' \n");
     printf("\t- csv_import : import data from csv > type 'csv_import file.csv'\n");
     printf("\t- csv_export : export date to csv > type 'csv_export file.csv'\n");
