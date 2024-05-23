@@ -123,7 +123,7 @@ int read_exec_command(Command* cmd) {
 }
 
 int cmd_exit(Command* cmd) {
-    cdf_log("cmd_clear()");
+    cdf_log("cmd_exit()");
     print_header("exit");
     exit(0);
 }
@@ -137,6 +137,7 @@ int cmd_error(char *msg) {
 int cmd_clear(Command* cmd) {
     cdf_log("cmd_clear()");
     print_header("clear");
+    printf("\033[2J\033[1;1H"); // clean screen
     return 0;
 }
 

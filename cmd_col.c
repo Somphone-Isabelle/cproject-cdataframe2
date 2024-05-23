@@ -18,7 +18,7 @@ int cmd_col_add(Command* cmd) {
     print_header("cmd_col_add");
 
     if (cmd->size != 2) {
-        return cmd_error("Error parametre incorrect !");
+        return cmd_error("Error incorrect parameter !");
     }
 
     if (CDF != NULL && CDF->tail != NULL) {
@@ -27,7 +27,7 @@ int cmd_col_add(Command* cmd) {
         
         ENUM_TYPE type = string_to_enumtype(param);
         if (type == NULLVAL) {
-            return cmd_error("Error parametre incorrect !");
+            return cmd_error("Error incorrect parameter !");
         }
         COLUMN *col = create_column(type, title);
         for (int i = 0; i < cdf_line_size(CDF); i++) {

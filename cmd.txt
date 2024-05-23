@@ -1,0 +1,29 @@
+cdf_init INT CHAR STRING
+col_title 1 Test1
+col_title 2 Test2
+col_title 3 Test3
+row_add 1 a banane
+row_add 2 c fraise
+row_add 3 a banane
+cdf_display
+cdf_search a 
+cdf_lines
+cdf_cols
+cdf_edit peche 3 2
+cdf_eq 2
+cdf_gt 1
+cdf_lt 3
+col_add INT Test4
+cdf_display
+clear
+col_delete 4
+col_delete_by_title Test2
+col_display 1
+row_display 2
+row_delete 3
+cdf_display
+cdf_init INT INT
+csv_import data.csv 
+csv_export test.csv
+
+

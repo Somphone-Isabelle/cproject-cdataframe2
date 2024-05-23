@@ -57,7 +57,6 @@ int insert_value(COLUMN *col, void *value){
             break;
         case FLOAT:
             *((float *)(col->data[col->size])) = *((float *)value);
-	    //            printf("> FLOAT : %f\n", col->data[col->size]);
             break;
         case DOUBLE:
             *((double *)(col->data[col->size])) = *((double *)value);
@@ -257,7 +256,6 @@ int great_val(COLUMN* col, void* x) {
                 // TO WORK AGAIN
                 break;
             default:
-                // TO WORK AGAIN
                 break;
         }
     }
@@ -349,7 +347,6 @@ int count = 0;
                 // TO WORK AGAIN
                 break;
             default:
-                // TO WORK AGAIN
                 break;
         }
     }
@@ -415,21 +412,6 @@ int run_column_test() {
     print_col(colFloat);
 }
 
-/*
-void col_title(COLUMN *_col, char *_title) {
-    if (_col != NULL && _title != NULL){
-        _col->title = _title;
-    }
-}
-
-void col_value(COLUMN *_col, unsigned int _index, void *_data) {
-    if (_col != NULL && _data != NULL && _index < _col->size) {
-        _col->data[_index - 1] = _data;
-    } else {
-        cmd_error("Error update colomn value");
-    }
-}
-*/
 
 //Inserting a new value in a column
 int insert_value2(COLUMN *col, char *value){
@@ -456,25 +438,21 @@ int insert_value2(COLUMN *col, char *value){
         col->data[col->size] = NULL;
     } else {
     switch (col->column_type){
+        //convert the data from the columns 
         case UINT:
             col->data[col->size]->uint_value = atoi(value);
-//            *((unsigned int *)(col->data[col->size])) = *((unsigned int *)value);
             break;
         case INT:
             col->data[col->size]->int_value = atoi(value);
-//            *((signed int *)(col->data[col->size])) = *((signed int *)value);
             break;
         case CHAR:
             *((char *)(col->data[col->size])) = *((char *)value);
             break;
         case FLOAT:
             col->data[col->size]->float_value = atof(value);
-//            *((float *)(col->data[col->size])) = *((float *)value);
-	    //            printf("> FLOAT : %f\n", col->data[col->size]);
             break;
         case DOUBLE:
             col->data[col->size]->double_value = atof(value);
-//            *((double *)(col->data[col->size])) = *((double *)value);
             break;
         case STRING:{
             col->data[col->size]->string_value = value;
@@ -490,7 +468,7 @@ int insert_value2(COLUMN *col, char *value){
     return 1;
 }
 
-//Inserting a new value in a column
+//remove a value in a column
 int remove_value(COLUMN *col, int pos){
     cdf_log("log : remove_value");
 
