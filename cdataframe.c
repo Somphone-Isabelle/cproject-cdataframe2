@@ -342,7 +342,6 @@ void cdf_print_line(CDATAFRAME *_cdf, int _line) {
                     if (col != NULL) {
                         char str[BUFFER_SIZE];
                         convert_value(col, i, str, BUFFER_SIZE);
-//                        printf("|\t%s\t", str);
                         printf("|\t[%u] %s\t", col->index[i], str);
                     }
                     node = (lnode *)get_next_node(_cdf, node);
@@ -415,7 +414,6 @@ int edit(CDATAFRAME *_cdf, void *_data, int _ncol, int _nline) {
                 COLUMN *col = (COLUMN *)node->data;
                 for (int i = 0; i < col->size; i++) {
                     if (col->column_type == INT) {
-                        // printf("\nint : %d\n", col->data[i]->int_value);
                         int tmp = atoi(_data);
                         if (col->index[i] == _nline) {
                             col->data[i]->int_value = tmp;

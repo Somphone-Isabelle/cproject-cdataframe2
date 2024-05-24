@@ -175,7 +175,7 @@ int cmd_help(Command* cmd) {
     printf("\t- col_delete : to delete column > type 'col_delete POS'\n");
     printf("\t- col_delete_by_title : to delete column > type 'col_delete_by_title'\n");
     printf("\t- col_title : to replace a title > type 'col_title POS new_title'\n");
-    printf("\t- cdf_edit : to replace a data at col and line > type 'cdf_edit data posx posy\n");
+    printf("\t- cdf_edit : to replace a data > type 'cdf_edit data posx posy\n");
     printf("\t- col_sort : to sort a column > type 'col_sort colnb asc/desc\n");
     printf("Row's commands\n");
     printf("\t- row_display : to display a row > type 'row_display pos'\n"); 

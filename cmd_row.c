@@ -18,6 +18,7 @@ int cmd_row_add(Command* cmd) {
     print_header("cmd_row_new");
 
     if (CDF != NULL && CDF->tail != NULL) {
+        //first node being the first column
         lnode *node = (lnode *)get_first_node(CDF);
         int i = 0;
         while (node != NULL) {

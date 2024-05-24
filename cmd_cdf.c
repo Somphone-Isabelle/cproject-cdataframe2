@@ -29,6 +29,7 @@ int cmd_cdf_init(Command* cmd) {
             ENUM_TYPE *cdftype = malloc(cmd->size * sizeof(ENUM_TYPE));
             for (int i = 0; i < cmd->size; i++) {
                 char *param = cmd->params[i];
+                //compare the parameter string and assign ENUM_TYPE
                 if (strcmp(param, "INT") == 0) {
                     cdftype[i] = INT;
                 } else if (strcmp(param, "UINT") == 0) {
@@ -42,7 +43,7 @@ int cmd_cdf_init(Command* cmd) {
                 } else if (strcmp(param, "STRING") == 0) {
                     cdftype[i] = STRING;
                 } else {
-                    cmd_error("Error parametre incorrect !");
+                    cmd_error("Error incorrect parameter !");
                 }
             }
             CDF = create_cdataframe(cdftype, cmd->size);
@@ -59,7 +60,7 @@ int cmd_cdf_display(Command* cmd) {
     cdf_log("cmd_cdf_display()");
     print_header("cmd_cdf_display");
 
-    /* Display all lines */
+    // Display all lines
     cdf_print_line(CDF, 0);
     return 0;
 }
